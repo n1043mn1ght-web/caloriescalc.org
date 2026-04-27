@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Macro Calculator — Daily Protein, Carbs & Fat Targets</title>
+<meta name="description" content="Free macro calculator. Get your exact daily protein, carbohydrate, and fat targets in grams based on your goal — cutting, bulking, or maintenance. Instant results, no sign-up."/>
+<link rel="canonical" href="https://tdee-calculator-dad.pages.dev/macro-calculator.html"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
+<meta name="theme-color" content="#2d6a4f"/>
+<meta property="og:title" content="Macro Calculator — Protein, Carbs & Fat"/>
+<meta property="og:description" content="Get your daily macro targets in grams for cutting, bulking, or maintenance. Free and instant."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://tdee-calculator-dad.pages.dev/macro-calculator.html"/>
+<meta name="robots" content="index, follow"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Macro Calculator","url":"https://tdee-calculator-dad.pages.dev/macro-calculator.html","description":"Free macro calculator for protein, carbohydrates and fat targets.","applicationCategory":"HealthApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tdee-calculator-dad.pages.dev/"},{"@type":"ListItem","position":2,"name":"Macro Calculator","item":"https://tdee-calculator-dad.pages.dev/macro-calculator.html"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What are macros?","acceptedAnswer":{"@type":"Answer","text":"Macros (macronutrients) are the three major nutrients providing calories: protein (4 kcal/g), carbohydrates (4 kcal/g), and fat (9 kcal/g). Tracking them gives precise control over body composition."}},
+{"@type":"Question","name":"How much protein do I need per day?","acceptedAnswer":{"@type":"Answer","text":"For active individuals, 1.6–2.2g of protein per kg bodyweight (0.7–1g per lb) is supported by research. This calculator uses 0.85g per lb as a practical target covering most active people."}},
+{"@type":"Question","name":"What is the best macro ratio for fat loss?","acceptedAnswer":{"@type":"Answer","text":"High protein (35–40% of calories) combined with a calorie deficit is most effective for fat loss while preserving muscle. The carb/fat split is less critical — choose whichever ratio you can sustain."}},
+{"@type":"Question","name":"Should I track macros or just calories?","acceptedAnswer":{"@type":"Answer","text":"Calories control weight change. Macros control body composition. At minimum, track protein daily — carbs and fat can be flexible once protein is consistently hit."}},
+{"@type":"Question","name":"Do I need to hit my macros exactly every day?","acceptedAnswer":{"@type":"Answer","text":"No. Being within 10–15% of your targets consistently across a week produces essentially the same result as hitting exact numbers daily. Weekly averages matter more than daily precision."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#f7f6f2;--surface:#fff;--surface2:#f0ede8;--border:#e4e0d8;--text:#1a1916;--text2:#6b6760;--text3:#9b9790;--accent:#2d6a4f;--accent-d:#1e4d38;--accent-light:#d8f3dc;--blue:#2563eb;--amber:#d97706;--coral:#e76f51;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+.wrap{max-width:780px;margin:0 auto;padding:0 20px}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
+.hdr{display:flex;align-items:center;gap:10px;max-width:780px;margin:0 auto;padding:0 20px}
+.logo{font-size:17px;font-weight:600;letter-spacing:-.3px;color:var(--text);text-decoration:none}
+.logo span{color:var(--accent)}
+nav.site-nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+nav.site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:5px 8px;border-radius:6px;transition:background .15s,color .15s;white-space:nowrap}
+nav.site-nav a:hover{background:var(--surface2);color:var(--text)}
+nav.site-nav a.active{color:var(--accent);background:var(--accent-light)}
+.hero{padding:44px 0 28px;text-align:center}
+h1{font-size:clamp(23px,5vw,36px);font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 20px}
+.anav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-bottom:24px}
+.anav a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+.anav a:hover{border-bottom-color:var(--accent)}
+.unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:28px;border:1px solid var(--border)}
+.unit-toggle button{padding:6px 18px;border-radius:999px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .18s}
+.unit-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
+.card-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:500px){.fg{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+label{font-size:13px;font-weight:500;color:var(--text2)}
+input[type=number],select{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
+input[type=number]:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,106,79,.1)}
+.iw{position:relative}
+.ul{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none;font-family:'DM Mono',monospace}
+.rg{display:flex;gap:8px}
+.rg label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s;user-select:none}
+.rg input[type=radio]{display:none}
+.rg input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
+.gtabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:16px}
+@media(max-width:560px){.gtabs{grid-template-columns:repeat(3,1fr)}}
+.gtab{padding:9px 4px;border:1.5px solid var(--border);border-radius:8px;background:transparent;cursor:pointer;text-align:center;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text2);transition:all .15s;line-height:1.3}
+.gtab.active{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
+.btn{width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:6px}
+.btn:hover{background:var(--accent-d)}
+.btn:disabled{opacity:.65;cursor:not-allowed}
+#results{display:none}
+.macro-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:480px){.macro-hero{grid-template-columns:1fr}}
+.mcard{border-radius:var(--radius);padding:20px 16px;text-align:center;color:#fff}
+.mcard.p{background:linear-gradient(135deg,#e76f51,#c4533b)}
+.mcard.c{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+.mcard.f{background:linear-gradient(135deg,#d97706,#b45309)}
+.mg-num{font-family:'DM Mono',monospace;font-size:52px;font-weight:300;letter-spacing:-2px;line-height:1}
+.mg-name{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.85;margin-top:6px}
+.mg-cal{font-size:12px;opacity:.65;margin-top:3px}
+.cal-box{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.cal-num{font-family:'DM Mono',monospace;font-size:36px;font-weight:300;color:var(--accent);letter-spacing:-1px;flex-shrink:0}
+.cal-lbl{font-size:14px;font-weight:600;color:var(--accent-d)}
+.cal-sub{font-size:13px;color:var(--accent-d);opacity:.7;margin-top:2px}
+.br{margin-bottom:13px}
+.brh{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.brn{font-size:14px;font-weight:500}
+.brg{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;margin-left:auto}
+.brc{font-size:12px;color:var(--text3)}
+.brbg{height:7px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.brf{height:100%;border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.bp{background:var(--coral)}.bc{background:var(--blue)}.bf{background:var(--amber)}
+.goals-g{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.goals-g{grid-template-columns:1fr}}
+.grow{padding:12px 14px;border-radius:9px;border:1.5px solid var(--border)}
+.grow.hl{border-color:var(--accent);background:var(--accent-light)}
+.gn{font-size:13px;font-weight:500;margin-bottom:5px}
+.gm{display:flex;gap:10px;font-size:12px;font-family:'DM Mono',monospace}
+.tips{display:flex;flex-direction:column;gap:7px}
+.tip{display:flex;gap:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;font-size:13px;color:var(--text2);line-height:1.5}
+.tip-i{font-size:16px;flex-shrink:0;margin-top:1px}
+.section{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+.section h2{font-size:21px;font-weight:600;letter-spacing:-.3px;margin-bottom:12px}
+.section h3{font-size:15px;font-weight:600;margin:18px 0 6px}
+.section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px}
+.section p:last-child{margin-bottom:0}
+.infobox{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--accent-d);line-height:1.6}
+.faq-item{margin-bottom:18px}
+.faq-item h3{font-size:14px;font-weight:600;margin-bottom:5px}
+.faq-item p{font-size:14px;color:var(--text2);line-height:1.7}
+.tools-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 14px;text-decoration:none;transition:border-color .15s}
+.tool-card:hover{border-color:var(--accent)}
+.tc-n{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.tc-d{font-size:12px;color:var(--text3)}
+.skip{position:absolute;top:-40px;left:0;background:var(--accent);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
+.skip:focus{top:0}
+footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text3)}
+footer a{color:var(--text3);text-decoration:underline}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;overflow-y:auto;padding:20px}
+.modal-box{max-width:580px;margin:40px auto;background:#fff;border-radius:16px;padding:28px;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text2);line-height:1}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fu .3s ease both}
+</style>
+</head>
+<body>
+<a href="#calculator" class="skip">Skip to calculator</a>
+<header>
+  <div class="hdr">
+    <a href="/" class="logo">tdee<span>calc</span></a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/">TDEE</a>
+      <a href="/bmr-calculator.html">BMR</a>
+      <a href="/macro-calculator.html" class="active">Macros</a>
+      <a href="/bmi-calculator.html">BMI</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+<div class="wrap">
+<section class="hero" aria-labelledby="h1">
+  <h1 id="h1"><em>Macro Calculator</em> —<br>Protein, Carbs & Fat Targets</h1>
+  <p class="hero-sub">Enter your stats and fitness goal to get precise daily macro targets in grams — backed by evidence-based protein recommendations.</p>
+  <nav class="anav" aria-label="Page sections">
+    <a href="#calculator">Calculator</a>
+    <a href="#what-are-macros">What are macros?</a>
+    <a href="#how-to-use">How to use</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="unit-toggle" role="group">
+    <button class="active" id="btn-imp" onclick="setUnit('imperial')">Imperial (lbs, ft)</button>
+    <button id="btn-met" onclick="setUnit('metric')">Metric (kg, cm)</button>
+  </div>
+</section>
+
+<div class="card" id="calculator" role="region" aria-label="Macro Calculator">
+  <p class="card-title">Your stats</p>
+  <div class="fg" style="margin-bottom:12px">
+    <div class="field" style="grid-column:1/-1">
+      <label>Biological sex</label>
+      <div class="rg">
+        <input type="radio" name="sex" id="sm" value="male" checked/><label for="sm">Male</label>
+        <input type="radio" name="sex" id="sf" value="female"/><label for="sf">Female</label>
+      </div>
+    </div>
+    <div class="field">
+      <label for="age">Age</label>
+      <div class="iw"><input type="number" id="age" min="15" max="80" value="28"/><span class="ul">yrs</span></div>
+    </div>
+    <div class="field">
+      <label for="weight">Weight</label>
+      <div class="iw"><input type="number" id="weight" min="1" value="175"/><span class="ul" id="wunit">lbs</span></div>
+    </div>
+    <div class="field" id="h-imp">
+      <label>Height</label>
+      <div style="display:flex;gap:7px">
+        <div class="iw" style="flex:1"><input type="number" id="hft" min="3" max="8" value="5"/><span class="ul">ft</span></div>
+        <div class="iw" style="flex:1"><input type="number" id="hin" min="0" max="11" value="11"/><span class="ul">in</span></div>
+      </div>
+    </div>
+    <div class="field" id="h-met" style="display:none">
+      <label for="hcm">Height</label>
+      <div class="iw"><input type="number" id="hcm" min="100" max="250" value="180"/><span class="ul">cm</span></div>
+    </div>
+    <div class="field">
+      <label for="bf">Body fat % <span style="font-weight:400;color:var(--text3)">(optional)</span></label>
+      <div class="iw"><input type="number" id="bf" min="3" max="60" placeholder="e.g. 18"/><span class="ul">%</span></div>
+    </div>
+  </div>
+  <div class="field" style="margin-bottom:16px">
+    <label for="act">Activity level</label>
+    <select id="act">
+      <option value="1.2">Sedentary — desk job, little or no exercise</option>
+      <option value="1.375">Lightly active — exercise 1–2 days/week</option>
+      <option value="1.55" selected>Moderately active — exercise 3–5 days/week</option>
+      <option value="1.725">Very active — exercise 6–7 days/week</option>
+      <option value="1.9">Athlete — twice-a-day training or physical job</option>
+    </select>
+  </div>
+  <div class="field" style="margin-bottom:10px"><label>Goal</label></div>
+  <div class="gtabs" id="gtabs">
+    <button class="gtab" data-g="acut" onclick="setGoal(this)">Aggressive cut<br><small style="opacity:.65;font-weight:400">−750 kcal</small></button>
+    <button class="gtab active" data-g="cut" onclick="setGoal(this)">Cut<br><small style="opacity:.65;font-weight:400">−500 kcal</small></button>
+    <button class="gtab" data-g="main" onclick="setGoal(this)">Maintain<br><small style="opacity:.65;font-weight:400">TDEE</small></button>
+    <button class="gtab" data-g="lbulk" onclick="setGoal(this)">Lean bulk<br><small style="opacity:.65;font-weight:400">+250 kcal</small></button>
+    <button class="gtab" data-g="bulk" onclick="setGoal(this)">Bulk<br><small style="opacity:.65;font-weight:400">+500 kcal</small></button>
+  </div>
+  <button class="btn" id="calcbtn" onclick="calculate()">Calculate My Macros</button>
+</div>
+
+<div id="results" role="region" aria-live="polite">
+  <div class="cal-box fu">
+    <div class="cal-num" id="r-cals">—</div>
+    <div>
+      <div class="cal-lbl" id="r-goal-lbl">Daily calorie target</div>
+      <div class="cal-sub" id="r-tdee-note">Based on your TDEE</div>
+    </div>
+  </div>
+  <div class="macro-hero fu" style="animation-delay:.06s">
+    <div class="mcard p"><div class="mg-num" id="r-prot">—</div><div class="mg-name">Protein</div><div class="mg-cal" id="r-prot-c">—</div></div>
+    <div class="mcard c"><div class="mg-num" id="r-carb">—</div><div class="mg-name">Carbohydrates</div><div class="mg-cal" id="r-carb-c">—</div></div>
+    <div class="mcard f"><div class="mg-num" id="r-fat">—</div><div class="mg-name">Fat</div><div class="mg-cal" id="r-fat-c">—</div></div>
+  </div>
+  <div class="card fu" style="animation-delay:.1s">
+    <p class="card-title">Macro breakdown</p>
+    <div id="bars"></div>
+  </div>
+  <div class="card fu" style="animation-delay:.13s">
+    <p class="card-title">All goals comparison</p>
+    <div class="goals-g" id="all-goals"></div>
+  </div>
+  <div class="card fu" style="animation-delay:.16s">
+    <p class="card-title">Practical tips</p>
+    <div class="tips" id="tips"></div>
+  </div>
+</div>
+
+<section class="section" id="what-are-macros" aria-labelledby="wam">
+  <h2 id="wam">What are macronutrients?</h2>
+  <p>Macronutrients — commonly called "macros" — are the three major nutrients that provide energy. Every calorie you consume comes from one of these sources:</p>
+  <p><strong style="color:var(--coral)">Protein (4 kcal/g)</strong> builds and repairs muscle tissue, produces enzymes and hormones, and is the most satiating macronutrient. It also has the highest thermic effect — your body burns more calories digesting protein than carbs or fat. For anyone resistance training, protein is the most critical macro to track consistently.</p>
+  <p><strong style="color:var(--blue)">Carbohydrates (4 kcal/g)</strong> are the body's preferred fuel for high-intensity exercise, stored as glycogen in muscles and the liver. Carbohydrates are not inherently fattening — excess total calories cause fat gain, regardless of the source.</p>
+  <p><strong style="color:var(--amber)">Fat (9 kcal/g)</strong> is essential for hormone production (including testosterone and oestrogen), fat-soluble vitamin absorption (A, D, E, K), and cellular membrane integrity. Adequate dietary fat supports metabolic health and hormonal function.</p>
+  <div class="infobox">Calories determine weight change. Macros determine whether that change is fat or muscle. You can be in a calorie deficit and still lose significant muscle if protein is too low.</div>
+</section>
+
+<section class="section" id="how-to-use" aria-labelledby="htu">
+  <h2 id="htu">How to use your macro targets</h2>
+  <h3>1. Prioritise protein above everything else</h3>
+  <p>Hit your protein target every day, regardless of carbs and fat. If you can only track one number, track protein. Carbs and fat are flexible — protein is not. This is the single most important habit for improving body composition.</p>
+  <h3>2. Use a food tracking app with a kitchen scale</h3>
+  <p>Apps like Cronometer, MacroFactor, or MyFitnessPal let you scan barcodes and log meals accurately. Use a food scale for the first 2–3 weeks — most people are surprised how far off their visual portion estimates are. After a few weeks, you'll develop accurate intuition.</p>
+  <h3>3. Adjust after two full weeks</h3>
+  <p>If your weight isn't moving as expected after 14 days of consistent tracking, adjust total calories by 100–150 kcal. Keep protein fixed and adjust carbs and fat proportionally. Recalculate your full TDEE every 4–8 weeks as your body weight changes.</p>
+  <div class="infobox"><strong>The 80% rule:</strong> Hitting within 10–15% of your targets consistently across a week produces essentially the same results as perfect daily accuracy. Consistency beats perfection.</div>
+</section>
+
+<article class="section" id="faq" aria-labelledby="faq-t">
+  <h2 id="faq-t">Frequently asked questions</h2>
+  <div class="faq-item">
+    <h3>What are macros and why do they matter?</h3>
+    <p>Macros are protein, carbohydrates, and fat — the three nutrients that provide all dietary calories. Tracking them gives you control over body composition: while total calorie intake determines whether you gain or lose weight, macro distribution determines whether that change is primarily fat or muscle.</p>
+  </div>
+  <div class="faq-item">
+    <h3>How much protein do I need per day?</h3>
+    <p>For active individuals, 1.6–2.2g per kg of bodyweight (0.7–1g per lb) is supported by meta-analyses on resistance-trained individuals. This calculator uses 0.85g per lb as a practical middle ground. Sedentary individuals need less — approximately 0.8g/kg is sufficient for basic health without training.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What is the best macro split for fat loss?</h3>
+    <p>High protein (35–40% of calories) combined with a calorie deficit is the most evidence-supported approach for losing fat while preserving muscle. The split between carbs and fat is less critical — both low-carb and moderate-carb approaches work equally well when protein and total calories are matched. Choose the ratio you can sustain.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Should I track macros or just calories?</h3>
+    <p>Calories control weight change. Macros control body composition. Tracking macros is especially important if you want to minimise muscle loss during a cut or maximise lean gains during a bulk. At minimum, track protein — carbs and fat can remain flexible once protein is consistently hit.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do I need to hit my macros exactly every day?</h3>
+    <p>No. Being within 10–15% of your targets consistently over a week produces essentially the same physiological outcome as hitting exact numbers daily. Weekly averages matter more than daily precision. Focus on consistency over perfection.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Why is fat set at 35% of remaining calories?</h3>
+    <p>After protein is allocated, remaining calories are split approximately 65% carbohydrates and 35% fat. This provides enough fat to support hormone production and fat-soluble vitamin absorption (minimum ~0.5g/kg bodyweight is recommended) while leaving a generous carbohydrate allocation for training performance. Adjust based on preference — many people prefer higher fat and lower carbs, and both approaches are valid.</p>
+  </div>
+</article>
+
+<section class="section" aria-labelledby="rt">
+  <h2 id="rt" style="font-size:17px">Related free calculators</h2>
+  <div class="tools-row">
+    <a href="/" class="tool-card"><div class="tc-n">TDEE Calculator</div><div class="tc-d">Total daily calorie burn</div></a>
+    <a href="/bmr-calculator.html" class="tool-card"><div class="tc-n">BMR Calculator</div><div class="tc-d">Calories burned at rest</div></a>
+    <a href="/bmi-calculator.html" class="tool-card"><div class="tc-n">BMI Calculator</div><div class="tc-d">Body mass index</div></a>
+    <a href="/calorie-deficit-calculator.html" class="tool-card"><div class="tc-n">Calorie Deficit</div><div class="tc-d">Fat loss timeline</div></a>
+    <a href="/macro-calculator.html" class="tool-card" style="border-color:var(--accent);background:var(--accent-light)"><div class="tc-n" style="color:var(--accent)">Macro Calculator</div><div class="tc-d" style="color:var(--accent)">You are here</div></a>
+  </div>
+</section>
+</div>
+</main>
+
+<div id="priv-modal" class="modal-bg" onclick="if(event.target===this)closePriv()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePriv()" aria-label="Close">&#x2715;</button>
+    <h2 style="font-size:19px;font-weight:600;margin-bottom:12px">Privacy Policy</h2>
+    <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Last updated: April 2026</p>
+    <div style="font-size:14px;line-height:1.8;display:flex;flex-direction:column;gap:12px">
+      <p><strong>Data we collect:</strong> None. All calculations happen in your browser. No personal data is transmitted.</p>
+      <p><strong>Advertising:</strong> Google AdSense may serve ads with personalised cookies. Opt out at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color:var(--accent)">Google Ad Settings</a>.</p>
+      <p><strong>Contact:</strong> <a href="mailto:n1043m.n1ght@gmail.com" style="color:var(--accent)">n1043m.n1ght@gmail.com</a></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Results are estimates based on validated formulas. Not medical advice.</p>
+    <div class="footer-links">
+      <a href="/about.html">About &amp; Methodology</a>
+      <a href="/terms.html">Terms of Use</a>
+      <a href="#" onclick="openPriv();return false">Privacy Policy</a>
+      <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
+    </div>
+    <p style="margin-top:10px">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</p>
+  </div>
+</footer>
+
+<script>
+let unit='imperial',goal='cut';
+const G={acut:{d:-750,l:'Aggressive cut'},cut:{d:-500,l:'Cut'},main:{d:0,l:'Maintain'},lbulk:{d:250,l:'Lean bulk'},bulk:{d:500,l:'Bulk'}};
+function setUnit(u){
+  unit=u;
+  document.getElementById('btn-imp').classList.toggle('active',u==='imperial');
+  document.getElementById('btn-met').classList.toggle('active',u==='metric');
+  document.getElementById('h-imp').style.display=u==='imperial'?'':'none';
+  document.getElementById('h-met').style.display=u==='metric'?'':'none';
+  document.getElementById('wunit').textContent=u==='imperial'?'lbs':'kg';
+  const w=parseFloat(document.getElementById('weight').value)||0;
+  if(u==='metric'&&w>0){document.getElementById('weight').value=Math.round(w/2.205);const ft=parseInt(document.getElementById('hft').value)||5,i=parseInt(document.getElementById('hin').value)||11;document.getElementById('hcm').value=Math.round((ft*12+i)*2.54);}
+  else if(u==='imperial'&&w>0){document.getElementById('weight').value=Math.round(w*2.205);const cm=parseFloat(document.getElementById('hcm').value)||180;document.getElementById('hft').value=Math.floor(cm/2.54/12);document.getElementById('hin').value=Math.round((cm/2.54)%12);}
+}
+function setGoal(el){document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));el.classList.add('active');goal=el.dataset.g;}
+function fmt(n){return Math.round(n).toLocaleString()}
+function getMacros(cals,wkg){
+  const wlbs=wkg*2.205;
+  const protG=Math.round(Math.max(wlbs*0.85,wkg*1.8));
+  const rem=cals-protG*4;
+  const fatG=Math.round(Math.max(rem*0.35/9,wkg*0.5));
+  const carbG=Math.max(0,Math.round((cals-protG*4-fatG*9)/4));
+  return{protG,carbG,fatG};
+}
+function calculate(){
+  const btn=document.getElementById('calcbtn');
+  btn.disabled=true;btn.textContent='Calculating…';
+  setTimeout(()=>{_calc();btn.disabled=false;btn.textContent='Calculate My Macros';},30);
+}
+function _calc(){
+  const sex=document.querySelector('input[name=sex]:checked').value;
+  const age=parseFloat(document.getElementById('age').value);
+  const bf=parseFloat(document.getElementById('bf').value);
+  const act=parseFloat(document.getElementById('act').value);
+  let wkg,hcm;
+  if(unit==='imperial'){wkg=parseFloat(document.getElementById('weight').value)/2.205;const ft=parseFloat(document.getElementById('hft').value)||5,i=parseFloat(document.getElementById('hin').value)||11;hcm=(ft*12+i)*2.54;}
+  else{wkg=parseFloat(document.getElementById('weight').value);hcm=parseFloat(document.getElementById('hcm').value);}
+  if(!wkg||!hcm||!age){alert('Please fill in all required fields.');return;}
+  const bmr=(!isNaN(bf)&&bf>0)?370+21.6*(wkg*(1-bf/100)):(sex==='male'?10*wkg+6.25*hcm-5*age+5:10*wkg+6.25*hcm-5*age-161);
+  const tdee=bmr*act;
+  const gObj=G[goal];
+  const cals=tdee+gObj.d;
+  const {protG,carbG,fatG}=getMacros(cals,wkg);
+  const pc=protG*4,cc=carbG*4,fc=fatG*9;
+  const pp=Math.round(pc/cals*100),cp=Math.round(cc/cals*100),fp=Math.round(fc/cals*100);
+  document.getElementById('r-cals').textContent=fmt(cals);
+  document.getElementById('r-goal-lbl').textContent=gObj.l+' — '+fmt(cals)+' kcal/day';
+  document.getElementById('r-tdee-note').textContent='TDEE: '+fmt(tdee)+' kcal'+(gObj.d!==0?' · '+(gObj.d>0?'+':'')+gObj.d+' kcal':'');
+  document.getElementById('r-prot').textContent=protG;
+  document.getElementById('r-prot-c').textContent=fmt(pc)+' kcal · '+pp+'%';
+  document.getElementById('r-carb').textContent=carbG;
+  document.getElementById('r-carb-c').textContent=fmt(cc)+' kcal · '+cp+'%';
+  document.getElementById('r-fat').textContent=fatG;
+  document.getElementById('r-fat-c').textContent=fmt(fc)+' kcal · '+fp+'%';
+  document.getElementById('bars').innerHTML=[
+    {n:'Protein',g:protG,cal:pc,pct:pp,cls:'bp',clr:'#e76f51'},
+    {n:'Carbohydrates',g:carbG,cal:cc,pct:cp,cls:'bc',clr:'#2563eb'},
+    {n:'Fat',g:fatG,cal:fc,pct:fp,cls:'bf',clr:'#d97706'},
+  ].map(m=>`<div class="br"><div class="brh"><span class="brn" style="color:${m.clr}">${m.n}</span><span class="brc">${m.pct}% · ${fmt(m.cal)} kcal</span><span class="brg">${m.g}g</span></div><div class="brbg"><div class="brf ${m.cls}" style="width:${m.pct}%"></div></div></div>`).join('');
+  document.getElementById('all-goals').innerHTML=Object.entries(G).map(([k,g])=>{
+    const c=tdee+g.d,m=getMacros(c,wkg),hl=k===goal;
+    return`<div class="grow${hl?' hl':''}"><div class="gn">${g.l}${hl?' ✓':''} <span style="color:var(--text3);font-size:12px;font-weight:400">${fmt(c)} kcal</span></div><div class="gm"><span style="color:var(--coral)">P:${m.protG}g</span><span style="color:var(--blue)">C:${m.carbG}g</span><span style="color:var(--amber)">F:${m.fatG}g</span></div></div>`;
+  }).join('');
+  document.getElementById('tips').innerHTML=[
+    {i:'🥩',t:`Hit <strong>${protG}g protein</strong> first — every single day.`},
+    {i:'⚖️',t:'Weigh food raw on a kitchen scale for the first 2–3 weeks.'},
+    {i:'📱',t:'Use Cronometer or MacroFactor to scan barcodes and log accurately.'},
+    {i:'📅',t:'Track weekly averages, not daily perfection. Within 10–15% is fine.'},
+    {i:'🔄',t:'Recalculate after every 10+ lb weight change — your macros shift too.'},
+  ].map(t=>`<div class="tip"><span class="tip-i">${t.i}</span><span>${t.t}</span></div>`).join('');
+  document.getElementById('results').style.display='block';
+  setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),80);
+}
+function openPriv(){document.getElementById('priv-modal').style.display='block';document.body.style.overflow='hidden'}
+function closePriv(){document.getElementById('priv-modal').style.display='none';document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePriv();if(e.key==='Enter')calculate();});
+</script>
+</body>
+</html>
