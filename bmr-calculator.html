@@ -101,6 +101,11 @@ footer a{color:var(--text3);text-decoration:underline}
 .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text2);line-height:1}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fu .3s ease both}
+
+/* Input validation */
+input[type=number]:invalid,input[type=number].error{border-color:#dc2626!important;box-shadow:0 0 0 3px rgba(220,38,38,.1)!important}
+.field-error{font-size:12px;color:#dc2626;margin-top:3px;display:none}
+.field-error.show{display:block}
 </style>
 </head>
 <body>
@@ -131,6 +136,20 @@ footer a{color:var(--text3);text-decoration:underline}
   </div>
 </section>
 
+
+  <!-- AdSense slot — between hero and calculator -->
+  <!-- Replace data-ad-client and data-ad-slot with your values after AdSense approval -->
+  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;min-height:90px;background:transparent">
+    <!--
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
 <div class="card" id="calculator" role="region" aria-label="BMR Calculator">
   <p class="card-title">Your stats</p>
   <div class="fg" style="margin-bottom:12px">
@@ -203,6 +222,19 @@ footer a{color:var(--text3);text-decoration:underline}
     <p style="font-size:12px;color:var(--text3);margin-top:10px">Use the full <a href="/" style="color:var(--accent)">TDEE calculator</a> to select your activity level and get macro targets.</p>
   </div>
 </div>
+
+  <!-- AdSense slot — after results, before educational content -->
+  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;min-height:250px;background:transparent">
+    <!--
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    -->
+  </div>
 
 <!-- What is BMR -->
 <section class="section" id="what-is-bmr" aria-labelledby="wib-title">
@@ -309,7 +341,7 @@ footer a{color:var(--text3);text-decoration:underline}
       <a href="/bmi-calculator.html">BMI Calculator</a>
       <a href="/about.html">About &amp; Methodology</a>
       <a href="/terms.html">Terms of Use</a>
-      <a href="#" onclick="openPriv();return false">Privacy Policy</a>
+      <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
     </div>
     <p style="margin-top:10px">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</p>
@@ -384,6 +416,56 @@ function _calc(){
 function openPriv(){document.getElementById('priv-modal').style.display='block';document.body.style.overflow='hidden'}
 function closePriv(){document.getElementById('priv-modal').style.display='none';document.body.style.overflow=''}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closePriv()});
+
+// ── localStorage: save and restore inputs ─────────────────────
+const LS_KEY = 'tdee_calc_prefs';
+function savePrefs() {
+  const prefs = {};
+  ['age','weight','bf'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value) prefs[id] = el.value;
+  });
+  ['hft','hin','hcm'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value) prefs[id] = el.value;
+  });
+  const sexEl = document.querySelector('input[name=sex]:checked');
+  if (sexEl) prefs.sex = sexEl.value;
+  const actEl = document.getElementById('act');
+  if (actEl) prefs.act = actEl.value;
+  prefs.unit = unit;
+  prefs.goal = goal;
+  try { localStorage.setItem(LS_KEY, JSON.stringify(prefs)); } catch(e) {}
+}
+function loadPrefs() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return;
+    const prefs = JSON.parse(raw);
+    if (prefs.unit && prefs.unit !== unit) setUnit(prefs.unit);
+    ['age','weight','bf','hft','hin','hcm'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && prefs[id] !== undefined) el.value = prefs[id];
+    });
+    if (prefs.sex) {
+      const el = document.querySelector('input[name=sex][value="'+prefs.sex+'"]');
+      if (el) el.checked = true;
+    }
+    if (prefs.act) {
+      const el = document.getElementById('act');
+      if (el) el.value = prefs.act;
+    }
+    if (prefs.goal) {
+      const tab = document.querySelector('.gtab[data-g="'+prefs.goal+'"]');
+      if (tab) setGoal(tab);
+    }
+  } catch(e) {}
+}
+// Save on any input change
+document.addEventListener('change', savePrefs);
+document.addEventListener('input', savePrefs);
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadPrefs);
 </script>
 </body>
 </html>
