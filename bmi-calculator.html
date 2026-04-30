@@ -44,14 +44,14 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:1
 .site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:5px 9px;border-radius:6px;transition:background .15s,color .15s;white-space:nowrap}
 .site-nav a:hover{background:var(--surface2);color:var(--text)}
 .site-nav a.active{color:var(--accent);background:var(--accent-light)}
-.hero{padding:44px 0 28px;text-align:center}
+.hero{padding:36px 0 16px;text-align:center}
 h1{font-size:clamp(23px,5vw,36px);font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
 h1 em{font-style:normal;color:var(--accent)}
-.hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 20px}
-.anav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-bottom:24px}
+.hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 14px}
+.anav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-bottom:12px}
 .anav a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
 .anav a:hover{border-bottom-color:var(--accent)}
-.unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:28px;border:1px solid var(--border)}
+.unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:14px;border:1px solid var(--border)}
 .unit-toggle button{padding:6px 18px;border-radius:999px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .18s}
 .unit-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
@@ -163,7 +163,7 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 
   <!-- AdSense slot — between hero and calculator -->
   <!-- Replace data-ad-client and data-ad-slot with your values after AdSense approval -->
-  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;min-height:90px;background:transparent">
+  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;background:transparent">
     <!--
     <ins class="adsbygoogle"
          style="display:block"
@@ -255,7 +255,7 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 </div>
 
   <!-- AdSense slot — after results, before educational content -->
-  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;min-height:250px;background:transparent">
+  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;background:transparent">
     <!--
     <ins class="adsbygoogle"
          style="display:block"
@@ -338,18 +338,6 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 </div>
 </main>
 
-<div id="priv-modal" class="modal-bg" onclick="if(event.target===this)closePriv()">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closePriv()" aria-label="Close">&#x2715;</button>
-    <h2 style="font-size:19px;font-weight:600;margin-bottom:12px">Privacy Policy</h2>
-    <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Last updated: April 2026</p>
-    <div style="font-size:14px;line-height:1.8;display:flex;flex-direction:column;gap:12px">
-      <p><strong>Data we collect:</strong> None. All calculations happen in your browser. No personal data is transmitted.</p>
-      <p><strong>Advertising:</strong> Google AdSense may serve ads with personalised cookies. Opt out at <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" style="color:var(--accent)">Google Ad Settings</a>.</p>
-      <p><strong>Contact:</strong> <a href="mailto:n1043m.n1ght@gmail.com" style="color:var(--accent)">n1043m.n1ght@gmail.com</a></p>
-    </div>
-  </div>
-</div>
 
 <footer>
   <div class="wrap">
@@ -471,15 +459,13 @@ function _calc(){
   setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),80);
 }
 
-function openPriv(){document.getElementById('priv-modal').style.display='block';document.body.style.overflow='hidden'}
-function closePriv(){document.getElementById('priv-modal').style.display='none';document.body.style.overflow=''}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePriv();if(e.key==='Enter')calculate();});
+document.addEventListener('keydown',e=>{if(e.key==='Enter')calculate();});
 
 // ── localStorage: save and restore inputs ─────────────────────
-const LS_KEY = 'tdee_calc_prefs';
+const LS_KEY = 'bmi_calc_prefs';
 function savePrefs() {
-  const prefs = {};
-  ['age','weight','bf'].forEach(id => {
+  const prefs = { unit };
+  ['weight','age'].forEach(id => {
     const el = document.getElementById(id);
     if (el && el.value) prefs[id] = el.value;
   });
@@ -487,12 +473,8 @@ function savePrefs() {
     const el = document.getElementById(id);
     if (el && el.value) prefs[id] = el.value;
   });
-  const sexEl = document.querySelector('input[name=sex]:checked');
+  const sexEl = document.getElementById('sex');
   if (sexEl) prefs.sex = sexEl.value;
-  const actEl = document.getElementById('act');
-  if (actEl) prefs.act = actEl.value;
-  prefs.unit = unit;
-  prefs.goal = goal;
   try { localStorage.setItem(LS_KEY, JSON.stringify(prefs)); } catch(e) {}
 }
 function loadPrefs() {
@@ -501,28 +483,18 @@ function loadPrefs() {
     if (!raw) return;
     const prefs = JSON.parse(raw);
     if (prefs.unit && prefs.unit !== unit) setUnit(prefs.unit);
-    ['age','weight','bf','hft','hin','hcm'].forEach(id => {
+    ['weight','age','hft','hin','hcm'].forEach(id => {
       const el = document.getElementById(id);
       if (el && prefs[id] !== undefined) el.value = prefs[id];
     });
     if (prefs.sex) {
-      const el = document.querySelector('input[name=sex][value="'+prefs.sex+'"]');
-      if (el) el.checked = true;
-    }
-    if (prefs.act) {
-      const el = document.getElementById('act');
-      if (el) el.value = prefs.act;
-    }
-    if (prefs.goal) {
-      const tab = document.querySelector('.gtab[data-g="'+prefs.goal+'"]');
-      if (tab) setGoal(tab);
+      const el = document.getElementById('sex');
+      if (el) el.value = prefs.sex;
     }
   } catch(e) {}
 }
-// Save on any input change
 document.addEventListener('change', savePrefs);
 document.addEventListener('input', savePrefs);
-// Load on page ready
 document.addEventListener('DOMContentLoaded', loadPrefs);
 </script>
 </body>
