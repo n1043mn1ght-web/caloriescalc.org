@@ -518,6 +518,19 @@ document.addEventListener('click', function(e) {
     tip.classList.remove('show');
   }
 });
+
+// ── Activity tooltip ───────────────────────────────────────────
+function toggleActTip() {
+  const tip = document.getElementById('act-tip');
+  if (tip) tip.classList.toggle('show');
+}
+document.addEventListener('click', function(e) {
+  const help = document.getElementById('act-help');
+  const tip  = document.getElementById('act-tip');
+  if (tip && help && !help.contains(e.target) && !tip.contains(e.target)) {
+    tip.classList.remove('show');
+  }
+});
 </script>
 </body>
 </html>
