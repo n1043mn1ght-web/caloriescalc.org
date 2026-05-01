@@ -136,6 +136,20 @@ footer a{color:var(--text3);text-decoration:underline}
 input[type=number]:invalid,input[type=number].error{border-color:#dc2626!important;box-shadow:0 0 0 3px rgba(220,38,38,.1)!important}
 .field-error{font-size:12px;color:#dc2626;margin-top:3px;display:none}
 .field-error.show{display:block}
+
+/* Activity level tooltip */
+.act-wrap{position:relative}
+.act-info{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);font-size:10px;font-weight:600;color:var(--text3);cursor:pointer;margin-left:6px;flex-shrink:0;vertical-align:middle;transition:background .15s}
+.act-info:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
+.act-tooltip{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--text);color:var(--surface);border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.6;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.act-tooltip.show{display:block}
+.act-tooltip::before{content:'';position:absolute;top:-6px;left:20px;width:12px;height:12px;background:var(--text);transform:rotate(45deg);border-radius:2px}
+.act-tooltip ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.act-tooltip li{display:flex;gap:8px;align-items:flex-start}
+.act-tooltip .act-dot{font-size:11px;opacity:.5;flex-shrink:0;margin-top:2px}
+.act-tooltip .act-lbl{font-weight:600;font-size:12px;display:block;margin-bottom:1px}
+.act-tooltip .act-ex{opacity:.75;font-size:12px}
+@media(max-width:520px){.act-tooltip{position:fixed;left:16px;right:16px;top:auto;bottom:80px}}
 </style>
 </head>
 <body>
@@ -218,14 +232,28 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
     </div>
   </div>
   <div class="field" style="margin-bottom:16px">
-    <label for="act">Activity level</label>
-    <select id="act">
-      <option value="1.2">Sedentary — desk job, little or no exercise</option>
-      <option value="1.375">Lightly active — exercise 1–2 days/week</option>
-      <option value="1.55" selected>Moderately active — exercise 3–5 days/week</option>
-      <option value="1.725">Very active — exercise 6–7 days/week</option>
-      <option value="1.9">Athlete — twice-a-day training or physical job</option>
-    </select>
+    <label for="act" style="display:flex;align-items:center">Activity level
+      <span class="act-info" id="act-help" onclick="toggleActTip()" aria-label="Activity level guide">?</span>
+    </label>
+    <div class="act-wrap">
+      <select id="act" onchange="savePrefs&&savePrefs()">
+        <option value="1.2">Sedentary — desk job, little or no exercise</option>
+        <option value="1.375">Lightly active — exercise 1–2 days/week</option>
+        <option value="1.55" selected>Moderately active — exercise 3–5 days/week</option>
+        <option value="1.725">Very active — exercise 6–7 days/week</option>
+        <option value="1.9">Athlete — twice-a-day training or physical job</option>
+      </select>
+      <div class="act-tooltip" id="act-tip" role="tooltip">
+        <ul>
+          <li><span class="act-dot">→</span><div><span class="act-lbl">Sedentary (×1.2)</span><span class="act-ex">Desk job, no planned exercise, under 5,000 steps/day</span></div></li>
+          <li><span class="act-dot">→</span><div><span class="act-lbl">Lightly active (×1.375)</span><span class="act-ex">Office job + 1–2 gym sessions/week or daily 30-min walks</span></div></li>
+          <li><span class="act-dot">→</span><div><span class="act-lbl">Moderately active (×1.55)</span><span class="act-ex">3–5 workouts/week, ~8,000–10,000 steps/day — most gym-goers</span></div></li>
+          <li><span class="act-dot">→</span><div><span class="act-lbl">Very active (×1.725)</span><span class="act-ex">Daily training, physically demanding job, or competitive sport</span></div></li>
+          <li><span class="act-dot">→</span><div><span class="act-lbl">Athlete (×1.9)</span><span class="act-ex">Twice-a-day training, manual labour job, or elite sport</span></div></li>
+        </ul>
+        <p style="margin-top:10px;font-size:11px;opacity:.6;border-top:1px solid rgba(255,255,255,.15);padding-top:8px">⚠ Most people overestimate their activity. When in doubt, choose one level lower.</p>
+      </div>
+    </div>
   </div>
   <div class="field" style="margin-bottom:10px"><label>Goal</label></div>
   <div class="gtabs" id="gtabs">
@@ -481,6 +509,15 @@ document.addEventListener('change', savePrefs);
 document.addEventListener('input', savePrefs);
 // Load on page ready
 document.addEventListener('DOMContentLoaded', loadPrefs);
+
+// Close tooltip when clicking outside
+document.addEventListener('click', function(e) {
+  const help = document.getElementById('act-help');
+  const tip = document.getElementById('act-tip');
+  if (tip && help && !help.contains(e.target) && !tip.contains(e.target)) {
+    tip.classList.remove('show');
+  }
+});
 </script>
 </body>
 </html>
