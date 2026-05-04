@@ -407,7 +407,7 @@ function _calc(){
 // ── localStorage: save and restore inputs ─────────────────────
 const LS_KEY = 'tdee_calc_prefs';
 function savePrefs() {
-  const prefs = {};
+  const prefs = { unit };
   ['age','weight','bf'].forEach(id => {
     const el = document.getElementById(id);
     if (el && el.value) prefs[id] = el.value;
@@ -418,10 +418,6 @@ function savePrefs() {
   });
   const sexEl = document.querySelector('input[name=sex]:checked');
   if (sexEl) prefs.sex = sexEl.value;
-  const actEl = document.getElementById('act');
-  if (actEl) prefs.act = actEl.value;
-  prefs.unit = unit;
-  prefs.goal = goal;
   try { localStorage.setItem(LS_KEY, JSON.stringify(prefs)); } catch(e) {}
 }
 function loadPrefs() {
@@ -438,14 +434,6 @@ function loadPrefs() {
       const el = document.querySelector('input[name=sex][value="'+prefs.sex+'"]');
       if (el) el.checked = true;
     }
-    if (prefs.act) {
-      const el = document.getElementById('act');
-      if (el) el.value = prefs.act;
-    }
-    if (prefs.goal) {
-      const tab = document.querySelector('.gtab[data-g="'+prefs.goal+'"]');
-      if (tab) setGoal(tab);
-    }
   } catch(e) {}
 }
 // Save on any input change
@@ -454,18 +442,6 @@ document.addEventListener('input', savePrefs);
 // Load on page ready
 document.addEventListener('DOMContentLoaded', loadPrefs);
 
-function toggleActTip() {
-  const tip = document.getElementById('act-tip');
-  tip.classList.toggle('show');
-}
-// Close tooltip when clicking outside
-document.addEventListener('click', function(e) {
-  const help = document.getElementById('act-help');
-  const tip = document.getElementById('act-tip');
-  if (tip && help && !help.contains(e.target) && !tip.contains(e.target)) {
-    tip.classList.remove('show');
-  }
-});
 </script>
 </body>
 </html>
