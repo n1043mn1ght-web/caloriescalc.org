@@ -6,415 +6,414 @@
 <title>Protein Calculator — How Much Protein Do I Need Per Day?</title>
 <meta name="description" content="Free protein calculator. Find your exact daily protein intake in grams for fat loss, muscle gain, or maintenance — with per-meal targets and high-protein food sources. No sign-up required."/>
 <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
-<meta name="theme-color" content="#2d6a4f"/>
-<meta property="og:title" content="Protein Calculator — Daily Protein Intake"/>
-<meta property="og:description" content="Calculate how much protein you need per day based on your weight, goal and activity level. Free, instant, no sign-up."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
-<meta property="og:locale" content="en_US"/>
-<meta name="robots" content="index, follow"/>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Protein Calculator","url":"https://tdee-calculator-dad.pages.dev/protein-calculator.html","description":"Free protein calculator for daily protein intake based on weight, body fat and fitness goal.","applicationCategory":"HealthApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tdee-calculator-dad.pages.dev/"},{"@type":"ListItem","position":2,"name":"Protein Calculator","item":"https://tdee-calculator-dad.pages.dev/protein-calculator.html"}]}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How much protein do I need per day?","acceptedAnswer":{"@type":"Answer","text":"For active individuals seeking to build or preserve muscle, research supports 1.6-2.2g of protein per kg of bodyweight per day (0.7-1g per lb). Sedentary adults need approximately 0.8g/kg for basic health."}},
-{"@type":"Question","name":"Should I eat more protein when cutting?","acceptedAnswer":{"@type":"Answer","text":"Yes. During a calorie deficit, protein needs increase to preserve lean muscle mass. Higher protein intake (up to 2.2-2.4g/kg) helps your body preferentially burn fat rather than muscle."}},
-{"@type":"Question","name":"Is it better to spread protein across meals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Research suggests consuming protein across 3-5 meals maximises muscle protein synthesis compared to eating it all at once. Aim for 30-50g of protein per meal for most people."}},
-{"@type":"Question","name":"What are the best high-protein foods?","acceptedAnswer":{"@type":"Answer","text":"Top animal sources: chicken breast (31g/100g), canned tuna (25g/100g), lean beef (26g/100g), eggs (13g/100g), Greek yogurt (10g/100g). Top plant sources: seitan (25g/100g), tempeh (19g/100g), edamame (11g/100g)."}},
-{"@type":"Question","name":"Can you eat too much protein?","acceptedAnswer":{"@type":"Answer","text":"For healthy individuals with normal kidney function, high protein intakes up to 3g/kg/day have not been shown to cause harm in research. Those with kidney disease should consult a doctor before significantly increasing protein intake."}}
-]}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
 <style>
-:root{
-  --bg:#f7f6f2;--surface:#fff;--surface2:#f0ede8;--border:#e4e0d8;
-  --text:#1a1916;--text2:#6b6760;--text3:#9b9790;
-  --accent:#2d6a4f;--accent-d:#1e4d38;--accent-light:#d8f3dc;
-  /* Protein accent — muted teal, easy on eyes */
-  --pro:#0f766e;--pro-d:#0d5c56;--pro-light:#ccfbf1;--pro-mid:#14b8a6;
-  --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f5f5;
+  margin:0;
+  padding:40px 20px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
-.wrap{max-width:780px;margin:0 auto;padding:0 20px}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
-.hdr{display:flex;align-items:center;gap:10px;max-width:780px;margin:0 auto;padding:0 20px}
-.logo{font-size:17px;font-weight:600;letter-spacing:-.3px;color:var(--text);text-decoration:none}
-.logo span{color:var(--accent)}
-.site-nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
-.site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:5px 9px;border-radius:6px;transition:background .15s,color .15s;white-space:nowrap}
-.site-nav a:hover{background:var(--surface2);color:var(--text)}
-.site-nav a.active{color:var(--pro);background:var(--pro-light)}
-.hero{padding:36px 0 16px;text-align:center}
-h1{font-size:clamp(22px,5vw,34px);font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
-h1 em{font-style:normal;color:var(--pro)}
-.hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 14px}
-.anav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-bottom:12px}
-.anav a{font-size:13px;font-weight:500;color:var(--pro);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
-.anav a:hover{border-bottom-color:var(--pro)}
-.unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:28px;border:1px solid var(--border)}
-.unit-toggle button{padding:6px 18px;border-radius:999px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .18s}
-.unit-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
-.card-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-@media(max-width:500px){.fg{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:5px}
-label{font-size:13px;font-weight:500;color:var(--text2)}
-input[type=number],select{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
-input[type=number]:focus,select:focus{outline:none;border-color:var(--pro);box-shadow:0 0 0 3px rgba(15,118,110,.1)}
-.iw{position:relative}
-.ul{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none;font-family:'DM Mono',monospace}
-.rg{display:flex;gap:8px}
-.rg label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s;user-select:none}
-.rg input[type=radio]{display:none}
-.rg input[type=radio]:checked+label{border-color:var(--pro);background:var(--pro-light);color:var(--pro)}
-.btn{width:100%;padding:15px;background:var(--pro);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:6px}
-.btn:hover{background:var(--pro-d)}
-.btn:disabled{opacity:.65;cursor:not-allowed}
-/* Results */
-#results{display:none}
-.prot-hero{background:linear-gradient(135deg,var(--pro),var(--pro-mid));border-radius:var(--radius);padding:28px 20px;text-align:center;margin-bottom:14px;color:#fff}
-.prot-num{font-family:'DM Mono',monospace;font-size:72px;font-weight:300;letter-spacing:-3px;line-height:1}
-.prot-label{font-size:14px;opacity:.85;margin-top:6px}
-.prot-sub{font-size:12px;opacity:.65;margin-top:4px}
-.goals-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-@media(max-width:480px){.goals-g{grid-template-columns:1fr}}
-.gbox{background:var(--surface2);border-radius:10px;padding:14px 12px;text-align:center;border:1.5px solid transparent}
-.gbox.hl{border-color:var(--pro);background:var(--pro-light)}
-.gb-g{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;letter-spacing:-.5px;color:var(--text)}
-.gb-g.hl{color:var(--pro)}
-.gb-lbl{font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
-.gb-note{font-size:11px;color:var(--text3);margin-top:2px}
-.meal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-@media(max-width:500px){.meal-grid{grid-template-columns:1fr 1fr}}
-.meal-box{background:var(--surface2);border-radius:9px;padding:12px 10px;text-align:center}
-.mb-num{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--text)}
-.mb-lbl{font-size:11px;color:var(--text3);margin-top:3px}
-.ftable{width:100%;border-collapse:collapse;font-size:13px}
-.ftable th{text-align:left;padding:7px 10px;font-weight:500;color:var(--text3);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border)}
-.ftable td{padding:9px 10px;border-bottom:1px solid var(--border)}
-.ftable tr:last-child td{border-bottom:none}
-.pc{font-family:'DM Mono',monospace;text-align:right;color:var(--pro);font-weight:500}
-.kc{font-family:'DM Mono',monospace;text-align:right;color:var(--text3)}
-/* Sections */
-.section{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
-.section h2{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-bottom:12px}
-.section h3{font-size:15px;font-weight:600;margin:16px 0 6px}
-.section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px}
-.section p:last-child{margin-bottom:0}
-.infobox{background:var(--pro-light);border-left:3px solid var(--pro);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--pro-d);line-height:1.6}
-.infobox-green{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--accent-d);line-height:1.6}
-.faq-item{margin-bottom:16px}
-.faq-item h3{font-size:14px;font-weight:600;margin-bottom:5px}
-.faq-item p{font-size:14px;color:var(--text2);line-height:1.7}
-.tools-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
-.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:13px 14px;text-decoration:none;transition:border-color .15s}
-.tool-card:hover{border-color:var(--accent)}
-.tc-n{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.tc-d{font-size:12px;color:var(--text3)}
-.skip{position:absolute;top:-40px;left:0;background:var(--pro);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
-.skip:focus{top:0}
-footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text3)}
-footer a{color:var(--text3);text-decoration:underline}
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
-@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fu{animation:fu .3s ease both}
+
+.container{
+  max-width:700px;
+  margin:0 auto;
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+
+h1{
+  margin-top:0;
+  line-height:1.2;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+@media(max-width:600px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+input,
+select,
+button{
+  font-size:16px;
+}
+
+input,
+select{
+  padding:12px;
+  border:1px solid #ccc;
+  border-radius:10px;
+}
+
+button{
+  margin-top:20px;
+  width:100%;
+  border:none;
+  background:#0f766e;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+button:hover{
+  background:#0d5c56;
+}
+
+.result{
+  margin-top:30px;
+  display:none;
+  padding:24px;
+  border-radius:16px;
+  background:#0f766e;
+  color:white;
+  text-align:center;
+}
+
+.result-number{
+  font-size:64px;
+  font-weight:bold;
+}
+
+.small{
+  opacity:.8;
+  margin-top:10px;
+}
+
+.cards{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+@media(max-width:600px){
+  .cards{
+    grid-template-columns:1fr;
+  }
+}
+
+.card{
+  background:#f0f0f0;
+  border-radius:12px;
+  padding:16px;
+  text-align:center;
+  color:#111;
+}
+
+.card strong{
+  display:block;
+  font-size:28px;
+  margin-bottom:6px;
+}
 </style>
 </head>
+
 <body>
-<a href="#calculator" class="skip">Skip to calculator</a>
-<header>
-  <div class="hdr">
-    <a href="/" class="logo">tdee<span>calc</span></a>
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="/">TDEE</a>
-      <a href="/bmr-calculator.html">BMR</a>
-      <a href="/macro-calculator.html">Macros</a>
-      <a href="/protein-calculator.html" class="active">Protein</a>
-      <a href="/bmi-calculator.html">BMI</a>
-      <a href="/about.html">About</a>
-    </nav>
-  </div>
-</header>
-<main>
-<div class="wrap">
-<section class="hero" aria-labelledby="h1">
-  <h1 id="h1"><em>Protein Calculator</em> —<br>How Much Protein Per Day?</h1>
-  <p class="hero-sub">Get your exact daily protein target in grams for fat loss, muscle gain, or maintenance — with per-meal breakdowns and the best food sources.</p>
-  <nav class="anav" aria-label="Page sections">
-    <a href="#calculator">Calculator</a>
-    <a href="#why-protein">Why protein matters</a>
-    <a href="#protein-foods">Best food sources</a>
-    <a href="#faq">FAQ</a>
-  </nav>
-  <div class="unit-toggle" role="group" aria-label="Unit system">
-    <button class="active" id="btn-imp" onclick="setUnit('imperial')">Imperial (lbs)</button>
-    <button id="btn-met" onclick="setUnit('metric')">Metric (kg)</button>
-  </div>
-</section>
 
-<div class="card" id="calculator" role="region" aria-label="Protein Calculator">
-  <p class="card-title">Your stats</p>
-  <div class="fg" style="margin-bottom:12px">
-    <div class="field" style="grid-column:1/-1">
-      <label>Biological sex</label>
-      <div class="rg">
-        <input type="radio" name="sex" id="sm" value="male" checked/><label for="sm">Male</label>
-        <input type="radio" name="sex" id="sf" value="female"/><label for="sf">Female</label>
-      </div>
-    </div>
-    <div class="field">
-      <label for="weight">Body weight</label>
-      <div class="iw"><input type="number" id="weight" min="1" max="500" value="175"/><span class="ul" id="wunit">lbs</span></div>
-    </div>
-    <div class="field">
-      <label for="bf">Body fat % <span style="font-weight:400;color:var(--text3)">(optional)</span></label>
-      <div class="iw"><input type="number" id="bf" min="3" max="60" placeholder="e.g. 18"/><span class="ul">%</span></div>
-    </div>
-    <div class="field">
-      <label for="activity">Activity level</label>
-      <select id="activity">
-        <option value="sedentary">Sedentary — desk job, little exercise</option>
-        <option value="light">Lightly active — 1–2 workouts/week</option>
-        <option value="moderate" selected>Moderately active — 3–5 workouts/week</option>
-        <option value="very">Very active — 6–7 workouts/week</option>
-        <option value="athlete">Athlete — twice-a-day training</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="goal">Primary goal</label>
-      <select id="goal">
-        <option value="loss">Fat loss — preserve muscle while cutting</option>
-        <option value="maintain" selected>Maintenance — sustain current composition</option>
-        <option value="gain">Muscle gain — maximise protein synthesis</option>
-      </select>
-    </div>
-  </div>
-  <button class="btn" id="calcbtn" onclick="calculate()">Calculate My Protein Target</button>
+<div class="container">
+
+<h1>Protein Calculator</h1>
+
+<p>
+Calculate your ideal daily protein intake for muscle gain,
+fat loss, or maintenance.
+</p>
+
+<div style="margin-bottom:20px">
+  <button type="button" id="btn-imp">Imperial (lbs)</button>
+  <button type="button" id="btn-met">Metric (kg)</button>
 </div>
 
-<div id="results" role="region" aria-live="polite">
-  <div class="prot-hero fu">
-    <div class="prot-num" id="r-prot">—</div>
-    <div class="prot-label">grams of protein per day</div>
-    <div class="prot-sub" id="r-sub">—</div>
+<div class="grid">
+
+  <div class="field">
+    <label>Body Weight</label>
+    <input type="number" id="weight" value="175"/>
   </div>
-  <div class="card fu" style="animation-delay:.07s">
-    <p class="card-title">Protein targets by goal</p>
-    <div class="goals-g" id="goals-grid"></div>
+
+  <div class="field">
+    <label>Body Fat % (optional)</label>
+    <input type="number" id="bf" placeholder="e.g. 18"/>
   </div>
-  <div class="card fu" style="animation-delay:.10s">
-    <p class="card-title">Per-meal targets — <span id="meal-lbl" style="text-transform:none;font-weight:400;font-size:12px;letter-spacing:0;color:var(--text2)">spread across the day</span></p>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Spreading protein across 3–5 meals maximises muscle protein synthesis compared to eating it all at once.</p>
-    <div class="meal-grid" id="meal-grid"></div>
+
+  <div class="field">
+    <label>Activity</label>
+    <select id="activity">
+      <option value="sedentary">Sedentary</option>
+      <option value="light">Lightly active</option>
+      <option value="moderate" selected>Moderately active</option>
+      <option value="very">Very active</option>
+      <option value="athlete">Athlete</option>
+    </select>
   </div>
-  <div class="card fu" style="animation-delay:.13s">
-    <p class="card-title">Top protein sources to hit your target</p>
-    <table class="ftable" aria-label="High protein foods">
-      <thead><tr><th>Food</th><th>Serving</th><th style="text-align:right">Protein</th><th style="text-align:right">Calories</th></tr></thead>
-      <tbody id="food-body"></tbody>
-    </table>
+
+  <div class="field">
+    <label>Goal</label>
+    <select id="goal">
+      <option value="loss">Fat loss</option>
+      <option value="maintain" selected>Maintenance</option>
+      <option value="gain">Muscle gain</option>
+    </select>
   </div>
-  <div class="card fu" style="animation-delay:.16s">
-    <p class="card-title">Your action plan</p>
-    <div id="action-plan" style="font-size:14px;color:var(--text2);line-height:1.8"></div>
-  </div>
+
 </div>
 
-<section class="section" id="why-protein" aria-labelledby="wp">
-  <h2 id="wp">Why protein intake matters</h2>
-  <p>Protein is the only macronutrient that directly builds and repairs muscle tissue. While carbohydrates and fat provide energy, protein provides the amino acid building blocks your body uses to create and maintain muscle, enzymes, hormones, and immune cells.</p>
-  <h3>Protein during fat loss</h3>
-  <p>When eating below your TDEE, your body breaks down both fat and muscle for energy. High protein intake signals your body to preferentially burn fat and preserve muscle. Studies show dieters consuming 2.2–2.4g/kg protein retain significantly more lean muscle than those consuming 1.2g/kg at the same calorie deficit.</p>
-  <div class="infobox"><strong>Key insight:</strong> Protein needs are actually higher during a cut than during maintenance. The leaner you get, the more important adequate protein becomes for muscle preservation.</div>
-  <h3>Protein during muscle gain</h3>
-  <p>Muscle protein synthesis is maximised at around 1.6–2.2g/kg/day for most people. The effective upper limit appears to be around 3.1g/kg for advanced athletes with very high training volumes.</p>
-  <h3>Protein and satiety</h3>
-  <p>Protein is the most satiating macronutrient — gram for gram, it reduces hunger more than carbohydrates or fat. Your body also burns approximately 20–30% of protein calories during digestion, compared to 5–10% for carbs and 0–3% for fat.</p>
-</section>
+<button id="calcbtn">
+  Calculate Protein
+</button>
 
-<section class="section" id="protein-foods" aria-labelledby="pf">
-  <h2 id="pf">Best high-protein foods</h2>
-  <h3>Animal sources (complete proteins)</h3>
-  <div style="overflow-x:auto;margin-bottom:16px">
-  <table class="ftable">
-    <thead><tr><th>Food</th><th>Serving</th><th style="text-align:right">Protein</th><th style="text-align:right">Calories</th></tr></thead>
-    <tbody>
-      <tr><td>🍗 Chicken breast (cooked)</td><td>100g</td><td class="pc">31g</td><td class="kc">165</td></tr>
-      <tr><td>🦃 Turkey breast (cooked)</td><td>100g</td><td class="pc">29g</td><td class="kc">135</td></tr>
-      <tr><td>🐟 Canned tuna (in water)</td><td>100g</td><td class="pc">25g</td><td class="kc">116</td></tr>
-      <tr><td>🥩 Lean beef (93% lean)</td><td>100g</td><td class="pc">26g</td><td class="kc">172</td></tr>
-      <tr><td>🥚 Eggs (whole)</td><td>2 large</td><td class="pc">13g</td><td class="kc">156</td></tr>
-      <tr><td>🥛 Greek yogurt (0% fat)</td><td>170g</td><td class="pc">17g</td><td class="kc">100</td></tr>
-      <tr><td>🧀 Cottage cheese (low fat)</td><td>100g</td><td class="pc">11g</td><td class="kc">84</td></tr>
-      <tr><td>💪 Whey protein powder</td><td>1 scoop (30g)</td><td class="pc">24g</td><td class="kc">120</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <h3>Plant sources</h3>
-  <div style="overflow-x:auto">
-  <table class="ftable">
-    <thead><tr><th>Food</th><th>Serving</th><th style="text-align:right">Protein</th><th style="text-align:right">Calories</th></tr></thead>
-    <tbody>
-      <tr><td>🌾 Seitan (wheat gluten)</td><td>100g</td><td class="pc">25g</td><td class="kc">121</td></tr>
-      <tr><td>🫘 Tempeh</td><td>100g</td><td class="pc">19g</td><td class="kc">193</td></tr>
-      <tr><td>🫛 Edamame (cooked)</td><td>100g</td><td class="pc">11g</td><td class="kc">121</td></tr>
-      <tr><td>🟨 Tofu (firm)</td><td>100g</td><td class="pc">8g</td><td class="kc">76</td></tr>
-      <tr><td>🫘 Lentils (cooked)</td><td>100g</td><td class="pc">9g</td><td class="kc">116</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <div class="infobox-green" style="margin-top:14px">Plant proteins are often lower in leucine — the amino acid most important for triggering muscle protein synthesis. If eating mostly plant-based, aim for the higher end of the range (2.0–2.4g/kg) and prioritise leucine-rich sources like edamame, tempeh, and soy protein.</div>
-</section>
+<div class="result" id="results">
 
-<article class="section" id="faq" aria-labelledby="faq-t">
-  <h2 id="faq-t">Frequently asked questions</h2>
-  <div class="faq-item"><h3>How much protein do I need per day?</h3><p>For active individuals, 1.6–2.2g/kg bodyweight per day is supported by research. Sedentary adults need approximately 0.8g/kg for basic health. This calculator adjusts the target based on your activity level and goal using multipliers from meta-analyses on resistance-trained individuals.</p></div>
-  <div class="faq-item"><h3>Should I eat more protein when cutting?</h3><p>Yes — protein needs are higher during a calorie deficit. When eating below maintenance, your body increases protein breakdown for energy. Consuming higher protein (2.2–2.4g/kg) counteracts this, signalling your body to preserve muscle and burn fat preferentially.</p></div>
-  <div class="faq-item"><h3>Is it better to spread protein across meals?</h3><p>Spreading protein across 3–5 meals (around 0.4g/kg per meal) maximises muscle protein synthesis throughout the day. Each protein-rich meal triggers a pulse of synthesis lasting 3–5 hours — after that, another meal is needed to restimulate the process.</p></div>
-  <div class="faq-item"><h3>Can you eat too much protein?</h3><p>For healthy individuals with normal kidney function, intakes up to 3g/kg/day have not been shown to cause harm in research studies. The main practical risk is displacing other important nutrients. People with kidney disease should consult a doctor before significantly increasing protein intake.</p></div>
-  <div class="faq-item"><h3>Do protein needs change with age?</h3><p>Yes. Adults over 65 experience "anabolic resistance" — reduced sensitivity to the muscle-building signal of protein. Older adults need more protein per meal (35–40g) to trigger the same response younger adults get from 20–25g. For older adults, the recommended range rises to 1.8–2.4g/kg.</p></div>
-</article>
-
-<section class="section" aria-labelledby="rt">
-  <h2 id="rt" style="font-size:17px">Related free calculators</h2>
-  <div class="tools-row">
-    <a href="/" class="tool-card"><div class="tc-n">TDEE</div><div class="tc-d">Total daily calories</div></a>
-    <a href="/macro-calculator.html" class="tool-card"><div class="tc-n">Macros</div><div class="tc-d">Protein, carbs &amp; fat</div></a>
-    <a href="/bmr-calculator.html" class="tool-card"><div class="tc-n">BMR</div><div class="tc-d">Calories at rest</div></a>
-    <a href="/bmi-calculator.html" class="tool-card"><div class="tc-n">BMI</div><div class="tc-d">Body mass index</div></a>
-    <a href="/protein-calculator.html" class="tool-card" style="border-color:var(--pro);background:var(--pro-light)"><div class="tc-n" style="color:var(--pro)">Protein</div><div class="tc-d" style="color:var(--pro)">You are here</div></a>
-    <a href="/about.html" class="tool-card"><div class="tc-n">About</div><div class="tc-d">Methodology</div></a>
+  <div class="result-number" id="r-prot">
+    0
   </div>
-</section>
+
+  <div>
+    grams of protein per day
+  </div>
+
+  <div class="small" id="r-sub">
+    —
+  </div>
+
+  <div class="cards" id="goals-grid"></div>
+
 </div>
-</main>
-<footer>
-  <div class="wrap">
-    <p>Results are estimates based on validated research. Not medical advice.</p>
-    <div class="footer-links">
-      <a href="/">TDEE Calculator</a>
-      <a href="/bmr-calculator.html">BMR Calculator</a>
-      <a href="/macro-calculator.html">Macro Calculator</a>
-      <a href="/protein-calculator.html">Protein Calculator</a>
-      <a href="/bmi-calculator.html">BMI Calculator</a>
-      <a href="/about.html">About &amp; Methodology</a>
-      <a href="/terms.html">Terms of Use</a>
-      <a href="/privacy.html">Privacy Policy</a>
-      <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
-    </div>
-    <p style="margin-top:10px">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</p>
-  </div>
-</footer>
+
+</div>
+
 <script>
-var unit='imperial';
-var MULTS={
-  loss:    {sedentary:1.8,light:2.0,moderate:2.2,very:2.4,athlete:2.4},
-  maintain:{sedentary:1.4,light:1.6,moderate:1.8,very:2.0,athlete:2.2},
-  gain:    {sedentary:1.6,light:1.8,moderate:2.0,very:2.2,athlete:2.4}
+let unit = 'imperial';
+
+const MULTS = {
+  loss: {
+    sedentary: 1.8,
+    light: 2.0,
+    moderate: 2.2,
+    very: 2.4,
+    athlete: 2.4
+  },
+
+  maintain: {
+    sedentary: 1.4,
+    light: 1.6,
+    moderate: 1.8,
+    very: 2.0,
+    athlete: 2.2
+  },
+
+  gain: {
+    sedentary: 1.6,
+    light: 1.8,
+    moderate: 2.0,
+    very: 2.2,
+    athlete: 2.4
+  }
 };
-var GOAL_LABELS={loss:'Fat loss',maintain:'Maintenance',gain:'Muscle gain'};
-var FOODS=[
-  {n:'🍗 Chicken breast',s:'150g',  p:47,k:248},
-  {n:'🐟 Canned tuna',   s:'150g',  p:38,k:174},
-  {n:'🥚 Eggs (whole)',  s:'3 large',p:19,k:234},
-  {n:'🥛 Greek yogurt',  s:'200g',  p:20,k:118},
-  {n:'🧀 Cottage cheese',s:'200g',  p:22,k:168},
-  {n:'💪 Whey protein',  s:'1 scoop',p:24,k:120}
-];
+
+const GOAL_LABELS = {
+  loss: 'Fat loss',
+  maintain: 'Maintenance',
+  gain: 'Muscle gain'
+};
+
+const btnImp = document.getElementById('btn-imp');
+const btnMet = document.getElementById('btn-met');
+
+btnImp.addEventListener('click', () => {
+  setUnit('imperial');
+});
+
+btnMet.addEventListener('click', () => {
+  setUnit('metric');
+});
+
 function setUnit(u){
-  unit=u;
-  document.getElementById('btn-imp').classList.toggle('active',u==='imperial');
-  document.getElementById('btn-met').classList.toggle('active',u==='metric');
-  document.getElementById('wunit').textContent=u==='imperial'?'lbs':'kg';
-  var w=parseFloat(document.getElementById('weight').value)||0;
-  if(u==='metric'&&w>0)document.getElementById('weight').value=Math.round(w/2.205);
-  else if(u==='imperial'&&w>0)document.getElementById('weight').value=Math.round(w*2.205);
+
+  if(u === unit) return;
+
+  const weightInput = document.getElementById('weight');
+
+  let w = parseFloat(weightInput.value);
+
+  if(!isNaN(w) && w > 0){
+
+    if(u === 'metric' && unit === 'imperial'){
+      weightInput.value = Math.round(w / 2.205);
+    }
+
+    else if(u === 'imperial' && unit === 'metric'){
+      weightInput.value = Math.round(w * 2.205);
+    }
+
+  }
+
+  unit = u;
+
+  btnImp.style.opacity = u === 'imperial' ? '1' : '.6';
+  btnMet.style.opacity = u === 'metric' ? '1' : '.6';
 }
-function fmt(n){return Math.round(n).toLocaleString();}
+
+document.getElementById('calcbtn')
+.addEventListener('click', calculate);
+
 function calculate(){
-  var btn=document.getElementById('calcbtn');
-  btn.disabled=true;btn.textContent='Calculating…';
-  setTimeout(function(){_calc();btn.disabled=false;btn.textContent='Calculate My Protein Target';},30);
+
+  const btn = document.getElementById('calcbtn');
+
+  btn.disabled = true;
+  btn.textContent = 'Calculating...';
+
+  setTimeout(() => {
+
+    try{
+      doCalc();
+    }
+
+    catch(err){
+      console.error(err);
+      alert('Calculation error.');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Calculate Protein';
+
+  }, 50);
 }
-function _calc(){
-  var bf=parseFloat(document.getElementById('bf').value);
-  var act=document.getElementById('activity').value;
-  var goalKey=document.getElementById('goal').value;
-  var wkg=parseFloat(document.getElementById('weight').value);
-  if(!wkg){alert('Please enter your body weight.');return;}
-  if(unit==='imperial')wkg=wkg/2.205;
-  var usesBF=!isNaN(bf)&&bf>0;
-  var effKg=usesBF?wkg*(1-bf/100):wkg;
-  var mult=MULTS[goalKey][act];
-  var protG=Math.round(effKg*mult);
-  var effLabel=usesBF?mult.toFixed(1)+'g/kg lean mass ('+（protG/wkg).toFixed(1)+'g/kg total)':mult.toFixed(1)+'g/kg bodyweight';
-  document.getElementById('r-prot').textContent=protG;
-  document.getElementById('r-sub').textContent=GOAL_LABELS[goalKey]+' · '+effLabel;
-  /* Goals grid */
-  document.getElementById('goals-grid').innerHTML=['loss','maintain','gain'].map(function(gk){
-    var g=Math.round(effKg*MULTS[gk][act]);
-    var hl=gk===goalKey;
-    return '<div class="gbox'+(hl?' hl':'')+'">'+
-      '<div class="gb-g'+(hl?' hl':'')+'">'+g+'g</div>'+
-      '<div class="gb-lbl">'+GOAL_LABELS[gk]+'</div>'+
-      '<div class="gb-note">'+MULTS[gk][act].toFixed(1)+'g/kg</div></div>';
-  }).join('');
-  /* Meal grid */
-  document.getElementById('meal-lbl').textContent=GOAL_LABELS[goalKey].toLowerCase();
-  document.getElementById('meal-grid').innerHTML=[3,4,5,6].map(function(n){
-    return '<div class="meal-box"><div class="mb-num">'+Math.round(protG/n)+'g</div><div class="mb-lbl">'+n+' meals/day</div></div>';
-  }).join('');
-  /* Food table */
-  document.getElementById('food-body').innerHTML=FOODS.map(function(f){
-    return '<tr><td>'+f.n+'</td><td style="color:var(--text3)">'+f.s+'</td><td class="pc">'+f.p+'g</td><td class="kc">'+f.k+'</td></tr>';
-  }).join('');
-  /* Action plan */
-  document.getElementById('action-plan').innerHTML=
-    '<p><strong>Your target: '+protG+'g of protein per day</strong> for '+GOAL_LABELS[goalKey].toLowerCase()+'.</p>'+
-    '<ul style="padding-left:18px;margin-top:10px;display:flex;flex-direction:column;gap:6px">'+
-    '<li>Aim for <strong>'+Math.round(protG/4)+'g per meal</strong> across 4 meals to maximise muscle protein synthesis.</li>'+
-    '<li>Build every meal around a protein source first — then add carbs and fat around it.</li>'+
-    '<li>Prioritise protein at <strong>breakfast</strong>: most people under-eat protein in the morning.</li>'+
-    '<li>A <strong>protein shake</strong> (20–30g/scoop) is the easiest gap-filler if you struggle to hit the target.</li>'+
-    '<li>Recalculate if your body weight changes by <strong>10+ lbs (4.5 kg)</strong>.</li></ul>';
-  document.getElementById('results').style.display='block';
-  setTimeout(function(){document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});},80);
+
+function doCalc(){
+
+  let weight =
+    parseFloat(document.getElementById('weight').value);
+
+  const bf =
+    parseFloat(document.getElementById('bf').value);
+
+  const act =
+    document.getElementById('activity').value;
+
+  const goal =
+    document.getElementById('goal').value;
+
+  if(isNaN(weight) || weight <= 0){
+    alert('Please enter valid body weight.');
+    return;
+  }
+
+  let wkg =
+    unit === 'imperial'
+      ? weight / 2.205
+      : weight;
+
+  const usesBF =
+    !isNaN(bf) &&
+    bf > 0 &&
+    bf < 70;
+
+  const leanKg =
+    usesBF
+      ? wkg * (1 - bf / 100)
+      : wkg;
+
+  const mult =
+    MULTS[goal][act];
+
+  const protein =
+    Math.round(leanKg * mult);
+
+  let label;
+
+  if(usesBF){
+
+    label =
+      mult.toFixed(1) +
+      'g/kg lean mass (' +
+      (protein / wkg).toFixed(1) +
+      'g/kg total)';
+
+  }
+
+  else{
+
+    label =
+      mult.toFixed(1) +
+      'g/kg bodyweight';
+
+  }
+
+  document.getElementById('r-prot')
+    .textContent = protein;
+
+  document.getElementById('r-sub')
+    .textContent =
+      GOAL_LABELS[goal] +
+      ' · ' +
+      label;
+
+  document.getElementById('results')
+    .style.display = 'block';
+
+  const goalsGrid =
+    document.getElementById('goals-grid');
+
+  goalsGrid.innerHTML =
+    ['loss','maintain','gain']
+      .map(g => {
+
+        const val =
+          Math.round(
+            leanKg * MULTS[g][act]
+          );
+
+        return `
+          <div class="card">
+            <strong>${val}g</strong>
+            ${GOAL_LABELS[g]}
+          </div>
+        `;
+
+      })
+      .join('');
+
+  setTimeout(() => {
+
+    document.getElementById('results')
+      .scrollIntoView({
+        behavior:'smooth'
+      });
+
+  }, 100);
 }
-/* localStorage */
-var LS='protein_prefs';
-function savePrefs(){
-  var p={unit:unit};
-  ['weight','bf'].forEach(function(id){var el=document.getElementById(id);if(el&&el.value)p[id]=el.value;});
-  var s=document.querySelector('input[name=sex]:checked');if(s)p.sex=s.value;
-  var a=document.getElementById('activity');if(a)p.act=a.value;
-  var g=document.getElementById('goal');if(g)p.goal=g.value;
-  try{localStorage.setItem(LS,JSON.stringify(p));}catch(e){}
-}
-function loadPrefs(){
-  try{
-    var raw=localStorage.getItem(LS);if(!raw)return;
-    var p=JSON.parse(raw);
-    if(p.unit)setUnit(p.unit);
-    ['weight','bf'].forEach(function(id){var el=document.getElementById(id);if(el&&p[id]!==undefined)el.value=p[id];});
-    if(p.sex){var el=document.querySelector('input[name=sex][value="'+p.sex+'"]');if(el)el.checked=true;}
-    if(p.act){var el=document.getElementById('activity');if(el)el.value=p.act;}
-    if(p.goal){var el=document.getElementById('goal');if(el)el.value=p.goal;}
-  }catch(e){}
-}
-document.addEventListener('change',savePrefs);
-document.addEventListener('input',savePrefs);
-document.addEventListener('DOMContentLoaded',loadPrefs);
-document.addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+document.addEventListener('keydown', e => {
+
+  if(
+    e.key === 'Enter' &&
+    ['INPUT','SELECT']
+      .includes(document.activeElement.tagName)
+  ){
+    calculate();
+  }
+
+});
 </script>
+
 </body>
 </html>
