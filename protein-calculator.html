@@ -4,12 +4,12 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Protein Calculator — How Much Protein Do I Need Per Day?</title>
-<meta name="description" content="Free protein calculator. Find your exact daily protein intake in grams for fat loss, muscle gain, or maintenance — with per-meal targets and high-protein food sources. No sign-up required."/>
+<meta name="description" content="Free protein calculator. Find your exact daily protein intake in grams for fat loss, muscle gain, or maintenance — with per-meal targets and high-protein food sources."/>
 <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
 <meta name="theme-color" content="#2d6a4f"/>
 <meta property="og:title" content="Protein Calculator — Daily Protein Intake"/>
-<meta property="og:description" content="Calculate how much protein you need per day based on your weight, goal and activity level. Free, instant, no sign-up."/>
+<meta property="og:description" content="Calculate how much protein you need per day. Free, instant, no sign-up."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
 <meta property="og:locale" content="en_US"/>
@@ -22,11 +22,11 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How much protein do I need per day?","acceptedAnswer":{"@type":"Answer","text":"For active individuals seeking to build or preserve muscle, research supports 1.6-2.2g of protein per kg of bodyweight per day (0.7-1g per lb). Sedentary adults need approximately 0.8g/kg for basic health."}},
-{"@type":"Question","name":"Should I eat more protein when cutting?","acceptedAnswer":{"@type":"Answer","text":"Yes. During a calorie deficit, protein needs increase to preserve lean muscle mass. Higher protein intake (up to 2.2-2.4g/kg) helps your body preferentially burn fat rather than muscle."}},
-{"@type":"Question","name":"Is it better to spread protein across meals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Research suggests consuming protein across 3-5 meals maximises muscle protein synthesis compared to eating it all at once. Aim for 30-50g of protein per meal for most people."}},
-{"@type":"Question","name":"What are the best high-protein foods?","acceptedAnswer":{"@type":"Answer","text":"Top animal sources: chicken breast (31g/100g), canned tuna (25g/100g), lean beef (26g/100g), eggs (13g/100g), Greek yogurt (10g/100g). Top plant sources: seitan (25g/100g), tempeh (19g/100g), edamame (11g/100g)."}},
-{"@type":"Question","name":"Can you eat too much protein?","acceptedAnswer":{"@type":"Answer","text":"For healthy individuals with normal kidney function, high protein intakes up to 3g/kg/day have not been shown to cause harm in research. Those with kidney disease should consult a doctor before significantly increasing protein intake."}}
+{"@type":"Question","name":"How much protein do I need per day?","acceptedAnswer":{"@type":"Answer","text":"For active individuals, 1.6-2.2g of protein per kg bodyweight per day is supported by research. Sedentary adults need around 0.8g/kg for basic health."}},
+{"@type":"Question","name":"Should I eat more protein when cutting?","acceptedAnswer":{"@type":"Answer","text":"Yes. During a calorie deficit, protein needs increase to preserve lean muscle. Higher protein intake (2.2-2.4g/kg) helps your body preferentially burn fat rather than muscle."}},
+{"@type":"Question","name":"Is it better to spread protein across meals?","acceptedAnswer":{"@type":"Answer","text":"Yes. Spreading protein across 3-5 meals maximises muscle protein synthesis. Each meal triggers a pulse of synthesis lasting 3-5 hours. Aim for 30-50g per meal."}},
+{"@type":"Question","name":"What are the best high-protein foods?","acceptedAnswer":{"@type":"Answer","text":"Top sources: chicken breast (31g/100g), canned tuna (25g/100g), lean beef (26g/100g), Greek yogurt (10g/100g), eggs (13g/100g), seitan (25g/100g), tempeh (19g/100g)."}},
+{"@type":"Question","name":"Can you eat too much protein?","acceptedAnswer":{"@type":"Answer","text":"For healthy individuals with normal kidney function, intakes up to 3g/kg/day have not been shown to cause harm. The main risk is displacing other important nutrients."}}
 ]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -37,8 +37,7 @@
   --bg:#f7f6f2;--surface:#fff;--surface2:#f0ede8;--border:#e4e0d8;
   --text:#1a1916;--text2:#6b6760;--text3:#9b9790;
   --accent:#2d6a4f;--accent-d:#1e4d38;--accent-light:#d8f3dc;
-  /* Protein accent — muted teal, easy on eyes */
-  --pro:#0f766e;--pro-d:#0d5c56;--pro-light:#ccfbf1;--pro-mid:#14b8a6;
+  --prot:#2563eb;--prot-d:#1d4ed8;--prot-light:#dbeafe;--prot-dark:#1e3a8a;
   --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -52,14 +51,14 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:1
 .site-nav{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
 .site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:5px 9px;border-radius:6px;transition:background .15s,color .15s;white-space:nowrap}
 .site-nav a:hover{background:var(--surface2);color:var(--text)}
-.site-nav a.active{color:var(--pro);background:var(--pro-light)}
+.site-nav a.active{color:var(--prot);background:var(--prot-light)}
 .hero{padding:36px 0 16px;text-align:center}
 h1{font-size:clamp(22px,5vw,34px);font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
-h1 em{font-style:normal;color:var(--pro)}
+h1 em{font-style:normal;color:var(--prot)}
 .hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 14px}
 .anav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;margin-bottom:12px}
-.anav a{font-size:13px;font-weight:500;color:var(--pro);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
-.anav a:hover{border-bottom-color:var(--pro)}
+.anav a{font-size:13px;font-weight:500;color:var(--prot);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
+.anav a:hover{border-bottom-color:var(--prot)}
 .unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:28px;border:1px solid var(--border)}
 .unit-toggle button{padding:6px 18px;border-radius:999px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .18s}
 .unit-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
@@ -70,28 +69,27 @@ h1 em{font-style:normal;color:var(--pro)}
 .field{display:flex;flex-direction:column;gap:5px}
 label{font-size:13px;font-weight:500;color:var(--text2)}
 input[type=number],select{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
-input[type=number]:focus,select:focus{outline:none;border-color:var(--pro);box-shadow:0 0 0 3px rgba(15,118,110,.1)}
+input[type=number]:focus,select:focus{outline:none;border-color:var(--prot);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
 .iw{position:relative}
 .ul{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none;font-family:'DM Mono',monospace}
 .rg{display:flex;gap:8px}
 .rg label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s;user-select:none}
 .rg input[type=radio]{display:none}
-.rg input[type=radio]:checked+label{border-color:var(--pro);background:var(--pro-light);color:var(--pro)}
-.btn{width:100%;padding:15px;background:var(--pro);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:6px}
-.btn:hover{background:var(--pro-d)}
+.rg input[type=radio]:checked+label{border-color:var(--prot);background:var(--prot-light);color:var(--prot)}
+.btn{width:100%;padding:15px;background:var(--prot);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:6px}
+.btn:hover{background:var(--prot-d)}
 .btn:disabled{opacity:.65;cursor:not-allowed}
-/* Results */
 #results{display:none}
-.prot-hero{background:linear-gradient(135deg,var(--pro),var(--pro-mid));border-radius:var(--radius);padding:28px 20px;text-align:center;margin-bottom:14px;color:#fff}
+.prot-hero{background:linear-gradient(135deg,var(--prot),var(--prot-d));border-radius:var(--radius);padding:28px 24px;text-align:center;margin-bottom:16px;color:#fff}
 .prot-num{font-family:'DM Mono',monospace;font-size:72px;font-weight:300;letter-spacing:-3px;line-height:1}
 .prot-label{font-size:14px;opacity:.85;margin-top:6px}
 .prot-sub{font-size:12px;opacity:.65;margin-top:4px}
 .goals-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:480px){.goals-g{grid-template-columns:1fr}}
 .gbox{background:var(--surface2);border-radius:10px;padding:14px 12px;text-align:center;border:1.5px solid transparent}
-.gbox.hl{border-color:var(--pro);background:var(--pro-light)}
+.gbox.hl{border-color:var(--prot);background:var(--prot-light)}
 .gb-g{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;letter-spacing:-.5px;color:var(--text)}
-.gb-g.hl{color:var(--pro)}
+.gb-g.hl{color:var(--prot)}
 .gb-lbl{font-size:11px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
 .gb-note{font-size:11px;color:var(--text3);margin-top:2px}
 .meal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
@@ -103,15 +101,14 @@ input[type=number]:focus,select:focus{outline:none;border-color:var(--pro);box-s
 .ftable th{text-align:left;padding:7px 10px;font-weight:500;color:var(--text3);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border)}
 .ftable td{padding:9px 10px;border-bottom:1px solid var(--border)}
 .ftable tr:last-child td{border-bottom:none}
-.pc{font-family:'DM Mono',monospace;text-align:right;color:var(--pro);font-weight:500}
-.kc{font-family:'DM Mono',monospace;text-align:right;color:var(--text3)}
-/* Sections */
+.ftable .pc{font-family:'DM Mono',monospace;text-align:right;color:var(--prot);font-weight:500}
+.ftable .kc{font-family:'DM Mono',monospace;text-align:right;color:var(--text3)}
 .section{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
 .section h2{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-bottom:12px}
 .section h3{font-size:15px;font-weight:600;margin:16px 0 6px}
 .section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px}
 .section p:last-child{margin-bottom:0}
-.infobox{background:var(--pro-light);border-left:3px solid var(--pro);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--pro-d);line-height:1.6}
+.infobox{background:var(--prot-light);border-left:3px solid var(--prot);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--prot-dark);line-height:1.6}
 .infobox-green{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--accent-d);line-height:1.6}
 .faq-item{margin-bottom:16px}
 .faq-item h3{font-size:14px;font-weight:600;margin-bottom:5px}
@@ -121,7 +118,7 @@ input[type=number]:focus,select:focus{outline:none;border-color:var(--pro);box-s
 .tool-card:hover{border-color:var(--accent)}
 .tc-n{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
 .tc-d{font-size:12px;color:var(--text3)}
-.skip{position:absolute;top:-40px;left:0;background:var(--pro);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
+.skip{position:absolute;top:-40px;left:0;background:var(--prot);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
 .skip:focus{top:0}
 footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text3)}
 footer a{color:var(--text3);text-decoration:underline}
@@ -209,16 +206,16 @@ footer a{color:var(--text3);text-decoration:underline}
     <div class="prot-sub" id="r-sub">—</div>
   </div>
   <div class="card fu" style="animation-delay:.07s">
-    <p class="card-title">Protein targets by goal</p>
+    <p class="card-title">Targets by goal</p>
     <div class="goals-g" id="goals-grid"></div>
   </div>
   <div class="card fu" style="animation-delay:.10s">
     <p class="card-title">Per-meal targets — <span id="meal-lbl" style="text-transform:none;font-weight:400;font-size:12px;letter-spacing:0;color:var(--text2)">spread across the day</span></p>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Spreading protein across 3–5 meals maximises muscle protein synthesis compared to eating it all at once.</p>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:12px">Spreading protein across 3–5 meals maximises muscle protein synthesis throughout the day.</p>
     <div class="meal-grid" id="meal-grid"></div>
   </div>
   <div class="card fu" style="animation-delay:.13s">
-    <p class="card-title">Top protein sources to hit your target</p>
+    <p class="card-title">Top protein sources</p>
     <table class="ftable" aria-label="High protein foods">
       <thead><tr><th>Food</th><th>Serving</th><th style="text-align:right">Protein</th><th style="text-align:right">Calories</th></tr></thead>
       <tbody id="food-body"></tbody>
@@ -232,20 +229,20 @@ footer a{color:var(--text3);text-decoration:underline}
 
 <section class="section" id="why-protein" aria-labelledby="wp">
   <h2 id="wp">Why protein intake matters</h2>
-  <p>Protein is the only macronutrient that directly builds and repairs muscle tissue. While carbohydrates and fat provide energy, protein provides the amino acid building blocks your body uses to create and maintain muscle, enzymes, hormones, and immune cells.</p>
+  <p>Protein is the only macronutrient that directly builds and repairs muscle tissue. While carbohydrates and fat provide energy, protein provides the amino acid building blocks your body uses to create and maintain muscle, enzymes, and hormones.</p>
   <h3>Protein during fat loss</h3>
-  <p>When eating below your TDEE, your body breaks down both fat and muscle for energy. High protein intake signals your body to preferentially burn fat and preserve muscle. Studies show dieters consuming 2.2–2.4g/kg protein retain significantly more lean muscle than those consuming 1.2g/kg at the same calorie deficit.</p>
-  <div class="infobox"><strong>Key insight:</strong> Protein needs are actually higher during a cut than during maintenance. The leaner you get, the more important adequate protein becomes for muscle preservation.</div>
+  <p>When eating below your TDEE, your body breaks down both fat and muscle for energy. High protein intake signals your body to preferentially burn fat and preserve muscle. Studies show dieters consuming 2.2–2.4g/kg of protein retain significantly more lean muscle than those consuming 1.2g/kg at the same calorie deficit.</p>
+  <div class="infobox"><strong>Key insight:</strong> Protein needs are actually higher during a cut than maintenance. The leaner you get, the more important adequate protein becomes.</div>
   <h3>Protein during muscle gain</h3>
-  <p>Muscle protein synthesis is maximised at around 1.6–2.2g/kg/day for most people. The effective upper limit appears to be around 3.1g/kg for advanced athletes with very high training volumes.</p>
+  <p>Muscle protein synthesis is maximised at around 1.6–2.2g/kg/day for most people. Consuming above ~2.2g/kg provides diminishing returns for muscle building, though it causes no harm in healthy individuals.</p>
   <h3>Protein and satiety</h3>
-  <p>Protein is the most satiating macronutrient — gram for gram, it reduces hunger more than carbohydrates or fat. Your body also burns approximately 20–30% of protein calories during digestion, compared to 5–10% for carbs and 0–3% for fat.</p>
+  <p>Protein is the most satiating macronutrient and has the highest thermic effect — your body burns 20–30% of protein calories during digestion, compared to 5–10% for carbs and 0–3% for fat.</p>
 </section>
 
 <section class="section" id="protein-foods" aria-labelledby="pf">
   <h2 id="pf">Best high-protein foods</h2>
   <h3>Animal sources (complete proteins)</h3>
-  <div style="overflow-x:auto;margin-bottom:16px">
+  <div style="overflow-x:auto;margin-bottom:14px">
   <table class="ftable">
     <thead><tr><th>Food</th><th>Serving</th><th style="text-align:right">Protein</th><th style="text-align:right">Calories</th></tr></thead>
     <tbody>
@@ -255,7 +252,7 @@ footer a{color:var(--text3);text-decoration:underline}
       <tr><td>🥩 Lean beef (93% lean)</td><td>100g</td><td class="pc">26g</td><td class="kc">172</td></tr>
       <tr><td>🥚 Eggs (whole)</td><td>2 large</td><td class="pc">13g</td><td class="kc">156</td></tr>
       <tr><td>🥛 Greek yogurt (0% fat)</td><td>170g</td><td class="pc">17g</td><td class="kc">100</td></tr>
-      <tr><td>🧀 Cottage cheese (low fat)</td><td>100g</td><td class="pc">11g</td><td class="kc">84</td></tr>
+      <tr><td>🧀 Cottage cheese</td><td>100g</td><td class="pc">11g</td><td class="kc">84</td></tr>
       <tr><td>💪 Whey protein powder</td><td>1 scoop (30g)</td><td class="pc">24g</td><td class="kc">120</td></tr>
     </tbody>
   </table>
@@ -273,26 +270,26 @@ footer a{color:var(--text3);text-decoration:underline}
     </tbody>
   </table>
   </div>
-  <div class="infobox-green" style="margin-top:14px">Plant proteins are often lower in leucine — the amino acid most important for triggering muscle protein synthesis. If eating mostly plant-based, aim for the higher end of the range (2.0–2.4g/kg) and prioritise leucine-rich sources like edamame, tempeh, and soy protein.</div>
+  <div class="infobox-green" style="margin-top:14px">Plant proteins are lower in leucine — the amino acid most important for triggering muscle protein synthesis. If eating mostly plant-based, aim for the higher end of the range (2.0–2.4g/kg).</div>
 </section>
 
 <article class="section" id="faq" aria-labelledby="faq-t">
   <h2 id="faq-t">Frequently asked questions</h2>
-  <div class="faq-item"><h3>How much protein do I need per day?</h3><p>For active individuals, 1.6–2.2g/kg bodyweight per day is supported by research. Sedentary adults need approximately 0.8g/kg for basic health. This calculator adjusts the target based on your activity level and goal using multipliers from meta-analyses on resistance-trained individuals.</p></div>
-  <div class="faq-item"><h3>Should I eat more protein when cutting?</h3><p>Yes — protein needs are higher during a calorie deficit. When eating below maintenance, your body increases protein breakdown for energy. Consuming higher protein (2.2–2.4g/kg) counteracts this, signalling your body to preserve muscle and burn fat preferentially.</p></div>
-  <div class="faq-item"><h3>Is it better to spread protein across meals?</h3><p>Spreading protein across 3–5 meals (around 0.4g/kg per meal) maximises muscle protein synthesis throughout the day. Each protein-rich meal triggers a pulse of synthesis lasting 3–5 hours — after that, another meal is needed to restimulate the process.</p></div>
-  <div class="faq-item"><h3>Can you eat too much protein?</h3><p>For healthy individuals with normal kidney function, intakes up to 3g/kg/day have not been shown to cause harm in research studies. The main practical risk is displacing other important nutrients. People with kidney disease should consult a doctor before significantly increasing protein intake.</p></div>
-  <div class="faq-item"><h3>Do protein needs change with age?</h3><p>Yes. Adults over 65 experience "anabolic resistance" — reduced sensitivity to the muscle-building signal of protein. Older adults need more protein per meal (35–40g) to trigger the same response younger adults get from 20–25g. For older adults, the recommended range rises to 1.8–2.4g/kg.</p></div>
+  <div class="faq-item"><h3>How much protein do I need per day?</h3><p>For active individuals, 1.6–2.2g/kg bodyweight per day is supported by research. Sedentary adults need approximately 0.8g/kg for basic health. This calculator adjusts based on your activity level and goal.</p></div>
+  <div class="faq-item"><h3>Should I eat more protein when cutting?</h3><p>Yes — protein needs are higher during a calorie deficit. Consuming 2.2–2.4g/kg counteracts muscle breakdown, signalling your body to preserve muscle and burn fat preferentially.</p></div>
+  <div class="faq-item"><h3>Is it better to spread protein across meals?</h3><p>Yes. Spreading protein across 3–5 meals (around 0.4g/kg per meal) maximises muscle protein synthesis throughout the day. Each protein-rich meal triggers a pulse of synthesis lasting 3–5 hours. For most people: 30–50g per meal.</p></div>
+  <div class="faq-item"><h3>Can you eat too much protein?</h3><p>For healthy individuals with normal kidney function, intakes up to 3g/kg/day have not been shown to cause harm in research. The main practical risk is displacing other important nutrients. People with kidney disease should consult a doctor first.</p></div>
+  <div class="faq-item"><h3>Do protein needs change with age?</h3><p>Yes. Adults over 65 experience reduced sensitivity to protein's muscle-building signal. Older adults need more protein per meal (35–40g) to trigger the same response younger adults get from 20–25g. The recommended range rises to 1.8–2.4g/kg.</p></div>
 </article>
 
 <section class="section" aria-labelledby="rt">
   <h2 id="rt" style="font-size:17px">Related free calculators</h2>
   <div class="tools-row">
     <a href="/" class="tool-card"><div class="tc-n">TDEE</div><div class="tc-d">Total daily calories</div></a>
-    <a href="/macro-calculator.html" class="tool-card"><div class="tc-n">Macros</div><div class="tc-d">Protein, carbs &amp; fat</div></a>
     <a href="/bmr-calculator.html" class="tool-card"><div class="tc-n">BMR</div><div class="tc-d">Calories at rest</div></a>
+    <a href="/macro-calculator.html" class="tool-card"><div class="tc-n">Macros</div><div class="tc-d">Protein, carbs &amp; fat</div></a>
+    <a href="/protein-calculator.html" class="tool-card" style="border-color:var(--prot);background:var(--prot-light)"><div class="tc-n" style="color:var(--prot)">Protein</div><div class="tc-d" style="color:var(--prot)">You are here</div></a>
     <a href="/bmi-calculator.html" class="tool-card"><div class="tc-n">BMI</div><div class="tc-d">Body mass index</div></a>
-    <a href="/protein-calculator.html" class="tool-card" style="border-color:var(--pro);background:var(--pro-light)"><div class="tc-n" style="color:var(--pro)">Protein</div><div class="tc-d" style="color:var(--pro)">You are here</div></a>
     <a href="/about.html" class="tool-card"><div class="tc-n">About</div><div class="tc-d">Methodology</div></a>
   </div>
 </section>
@@ -324,12 +321,12 @@ var MULTS={
 };
 var GOAL_LABELS={loss:'Fat loss',maintain:'Maintenance',gain:'Muscle gain'};
 var FOODS=[
-  {n:'🍗 Chicken breast',s:'150g',  p:47,k:248},
-  {n:'🐟 Canned tuna',   s:'150g',  p:38,k:174},
-  {n:'🥚 Eggs (whole)',  s:'3 large',p:19,k:234},
-  {n:'🥛 Greek yogurt',  s:'200g',  p:20,k:118},
-  {n:'🧀 Cottage cheese',s:'200g',  p:22,k:168},
-  {n:'💪 Whey protein',  s:'1 scoop',p:24,k:120}
+  {name:'🍗 Chicken breast',  serving:'150g',    prot:47,kcal:248},
+  {name:'🐟 Canned tuna',    serving:'150g',    prot:38,kcal:174},
+  {name:'🥚 Eggs (whole)',   serving:'3 large', prot:19,kcal:234},
+  {name:'🥛 Greek yogurt',   serving:'200g',    prot:20,kcal:118},
+  {name:'🧀 Cottage cheese', serving:'200g',    prot:22,kcal:168},
+  {name:'💪 Whey shake',     serving:'1 scoop', prot:24,kcal:120}
 ];
 function setUnit(u){
   unit=u;
@@ -340,7 +337,6 @@ function setUnit(u){
   if(u==='metric'&&w>0)document.getElementById('weight').value=Math.round(w/2.205);
   else if(u==='imperial'&&w>0)document.getElementById('weight').value=Math.round(w*2.205);
 }
-function fmt(n){return Math.round(n).toLocaleString();}
 function calculate(){
   var btn=document.getElementById('calcbtn');
   btn.disabled=true;btn.textContent='Calculating…';
@@ -348,49 +344,50 @@ function calculate(){
 }
 function _calc(){
   var bf=parseFloat(document.getElementById('bf').value);
-  var act=document.getElementById('activity').value;
+  var activity=document.getElementById('activity').value;
   var goalKey=document.getElementById('goal').value;
   var wkg=parseFloat(document.getElementById('weight').value);
   if(!wkg){alert('Please enter your body weight.');return;}
   if(unit==='imperial')wkg=wkg/2.205;
   var usesBF=!isNaN(bf)&&bf>0;
-  var effKg=usesBF?wkg*(1-bf/100):wkg;
-  var mult=MULTS[goalKey][act];
-  var protG=Math.round(effKg*mult);
-  var effLabel=usesBF?mult.toFixed(1)+'g/kg lean mass ('+（protG/wkg).toFixed(1)+'g/kg total)':mult.toFixed(1)+'g/kg bodyweight';
+  var effectKg=usesBF?wkg*(1-bf/100):wkg;
+  var mult=MULTS[goalKey][activity];
+  var protG=Math.round(effectKg*mult);
+  var effLabel=usesBF?mult.toFixed(1)+'g/kg lean mass':mult.toFixed(1)+'g/kg bodyweight';
   document.getElementById('r-prot').textContent=protG;
-  document.getElementById('r-sub').textContent=GOAL_LABELS[goalKey]+' · '+effLabel;
+  document.getElementById('r-sub').textContent=GOAL_LABELS[goalKey]+' \u00b7 '+effLabel;
   /* Goals grid */
   document.getElementById('goals-grid').innerHTML=['loss','maintain','gain'].map(function(gk){
-    var g=Math.round(effKg*MULTS[gk][act]);
+    var g=Math.round(effectKg*MULTS[gk][activity]);
     var hl=gk===goalKey;
     return '<div class="gbox'+(hl?' hl':'')+'">'+
       '<div class="gb-g'+(hl?' hl':'')+'">'+g+'g</div>'+
       '<div class="gb-lbl">'+GOAL_LABELS[gk]+'</div>'+
-      '<div class="gb-note">'+MULTS[gk][act].toFixed(1)+'g/kg</div></div>';
+      '<div class="gb-note">'+MULTS[gk][activity].toFixed(1)+'g/kg</div></div>';
   }).join('');
-  /* Meal grid */
+  /* Meal targets */
   document.getElementById('meal-lbl').textContent=GOAL_LABELS[goalKey].toLowerCase();
   document.getElementById('meal-grid').innerHTML=[3,4,5,6].map(function(n){
-    return '<div class="meal-box"><div class="mb-num">'+Math.round(protG/n)+'g</div><div class="mb-lbl">'+n+' meals/day</div></div>';
+    return '<div class="meal-box"><div class="mb-num">'+Math.round(protG/n)+'g</div>'+
+      '<div class="mb-lbl">'+n+' meals/day</div></div>';
   }).join('');
   /* Food table */
   document.getElementById('food-body').innerHTML=FOODS.map(function(f){
-    return '<tr><td>'+f.n+'</td><td style="color:var(--text3)">'+f.s+'</td><td class="pc">'+f.p+'g</td><td class="kc">'+f.k+'</td></tr>';
+    return '<tr><td>'+f.name+'</td><td style="color:var(--text3)">'+f.serving+'</td>'+
+      '<td class="pc">'+f.prot+'g</td><td class="kc">'+f.kcal+'</td></tr>';
   }).join('');
   /* Action plan */
   document.getElementById('action-plan').innerHTML=
-    '<p><strong>Your target: '+protG+'g of protein per day</strong> for '+GOAL_LABELS[goalKey].toLowerCase()+'.</p>'+
+    '<p><strong>Your target: '+protG+'g protein/day</strong> for '+GOAL_LABELS[goalKey].toLowerCase()+'.</p>'+
     '<ul style="padding-left:18px;margin-top:10px;display:flex;flex-direction:column;gap:6px">'+
     '<li>Aim for <strong>'+Math.round(protG/4)+'g per meal</strong> across 4 meals to maximise muscle protein synthesis.</li>'+
-    '<li>Build every meal around a protein source first — then add carbs and fat around it.</li>'+
-    '<li>Prioritise protein at <strong>breakfast</strong>: most people under-eat protein in the morning.</li>'+
-    '<li>A <strong>protein shake</strong> (20–30g/scoop) is the easiest gap-filler if you struggle to hit the target.</li>'+
+    '<li>Build every meal around a protein source first — then add carbs and fat.</li>'+
+    '<li>Prioritise protein at <strong>breakfast</strong> — most people under-eat protein in the morning.</li>'+
+    '<li>If struggling to hit the target, a <strong>protein shake</strong> (20–30g/scoop) is the easiest gap-filler.</li>'+
     '<li>Recalculate if your body weight changes by <strong>10+ lbs (4.5 kg)</strong>.</li></ul>';
   document.getElementById('results').style.display='block';
   setTimeout(function(){document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
-/* localStorage */
 var LS='protein_prefs';
 function savePrefs(){
   var p={unit:unit};
