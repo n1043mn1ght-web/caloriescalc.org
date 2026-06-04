@@ -114,7 +114,20 @@ footer a{color:var(--text3);text-decoration:underline}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fu .3s ease both}
+
+/* Copy button and CTA */
+.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.res-person{font-size:13px;color:var(--text2);font-style:italic}
+.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:#c8ecd4}
+.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s}
+.next-cta:hover{background:#c8ecd4}
+.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
+.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
+.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
+<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
@@ -134,7 +147,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <main>
 <div class="wrap">
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1">Free <em>BMI Calculator</em> —<br>Body Mass Index for Adults</h1>
+  <h1 id="h1">Free <em>BMI Calculator</em> — Body Mass Index for Adults</h1>
   <p class="hero-sub">Calculate your Body Mass Index, weight category, and healthy weight range — with an honest explanation of what BMI can and cannot tell you.</p>
   <nav class="anav" aria-label="Page sections">
     <a href="#calculator">Calculator</a>
@@ -182,6 +195,7 @@ footer a{color:var(--text3);text-decoration:underline}
 </div>
 
 <div id="results" role="region" aria-live="polite">
+  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
   <div class="bmi-hero fu" id="bmi-hero">
     <div class="bmi-num" id="r-bmi">—</div>
     <div class="bmi-cat" id="r-cat">—</div>
@@ -221,6 +235,8 @@ footer a{color:var(--text3);text-decoration:underline}
   </div>
 </div>
 
+  <a href="/" class="next-cta"><div><div class="next-cta-text">Calculate your TDEE & macros →</div><div class="next-cta-sub">Get your daily calorie needs and exact macro targets</div></div><div class="next-cta-arrow">→</div></a>
+
 <section class="section" id="what-is-bmi" aria-labelledby="wib">
   <h2 id="wib">What is BMI?</h2>
   <p><strong>Body Mass Index (BMI)</strong> is a simple measure calculated from height and weight. It was developed by Belgian mathematician Adolphe Quetelet in the 1830s as a tool for studying population weight distributions — not as an individual health diagnostic.</p>
@@ -234,7 +250,7 @@ footer a{color:var(--text3);text-decoration:underline}
   <h3>BMI cannot distinguish muscle from fat</h3>
   <p>Muscle is denser than fat. A muscular athlete may have an "overweight" or "obese" BMI despite very low body fat and excellent metabolic health. Conversely, a sedentary person can have a "normal" BMI while carrying excessive body fat and low muscle mass.</p>
   <h3>BMI ignores fat distribution</h3>
-  <p>Where fat is stored matters more than how much. Visceral fat (around the abdomen and organs) carries significantly higher health risks than subcutaneous fat. Waist circumference is often a better predictor of metabolic disease risk than BMI.</p>
+  <p>Where fat is stored matters more than how much. Visceral fat (around the abdomen and organs) carries significantly higher health risks than subcutaneous fat. Waist circumference is often a better predictor of metabolic disease risk than BMI. For a more complete picture, combine BMI with your <a href="/" style="color:var(--accent)">TDEE</a> and <a href="/macro-calculator.html" style="color:var(--accent)">macro targets</a>.</p>
   <h3>BMI varies by population and age</h3>
   <p>Standard cut-off points were derived primarily from European populations. For Asian adults, some organisations use lower thresholds (e.g. overweight at BMI 23). For older adults, a slightly higher BMI (23–27) may be associated with better outcomes.</p>
   <div class="infobox">Use BMI alongside waist circumference, body fat percentage, blood markers, and fitness level for a more complete health picture.</div>
@@ -364,6 +380,12 @@ function _calc(){
   }else{
     ns.innerHTML='<p>Your BMI is in the <strong>obese</strong> range. To reach the healthy range, you would need to lose approximately <strong>'+fmtW(deficit)+'</strong>. Start with the <a href="/" style="color:var(--accent)">TDEE calculator</a> to establish your maintenance calories. A 500–750 kcal/day deficit is generally safe and sustainable. For losses of this magnitude, working with a registered dietitian or physician is recommended.</p>';
   }
+
+  var personEl=document.getElementById('res-person');
+  if(personEl){
+    var wDisp=unit==='imperial'?Math.round(wkg*2.205)+' lbs':Math.round(wkg)+' kg';
+    personEl.textContent='BMI result for '+wDisp+', '+Math.round(hcm)+'cm';
+  }
   document.getElementById('results').style.display='block';
   setTimeout(function(){document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
@@ -388,6 +410,25 @@ document.addEventListener('change',savePrefs);
 document.addEventListener('input',savePrefs);
 document.addEventListener('DOMContentLoaded',loadPrefs);
 document.addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+function copyResults() {
+  var bmi  = document.getElementById('r-bmi')  ? document.getElementById('r-bmi').textContent  : '';
+  var cat  = document.getElementById('r-cat')  ? document.getElementById('r-cat').textContent  : '';
+  var hwl  = document.getElementById('r-hwl')  ? document.getElementById('r-hwl').textContent  : '';
+  var hwh  = document.getElementById('r-hwh')  ? document.getElementById('r-hwh').textContent  : '';
+  var text = 'My BMI Results\n--------------\n' +
+             'BMI: ' + bmi + '\n' +
+             'Category: ' + cat + '\n' +
+             'Healthy weight range: ' + hwl + ' – ' + hwh + '\n' +
+             'Calculator: https://tdee-calculator-dad.pages.dev/bmi-calculator.html';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.getElementById('copy-btn');
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent='Copy results';},2000);
+    });
+  }
+}
 </script>
 </body>
 </html>

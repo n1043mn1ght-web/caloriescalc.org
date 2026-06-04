@@ -13,6 +13,8 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/"/>
 <meta property="og:locale" content="en_US"/>
+<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
+
 <meta name="robots" content="index, follow"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"TDEE & Macro Calculator","url":"https://tdee-calculator-dad.pages.dev/","description":"Free TDEE calculator with BMR, BMI, macros and goal timeline.","applicationCategory":"HealthApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -147,7 +149,20 @@ footer a{color:var(--text3);text-decoration:underline}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fu .3s ease both}
+
+/* Results personalized header */
+.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.res-person{font-size:13px;color:var(--text2);font-style:italic}
+.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:var(--accent-light)}
+/* Next step CTA */
+.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s}
+.next-cta:hover{background:#c8ecd4}
+.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
+.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
+.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
@@ -167,7 +182,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <main>
 <div class="wrap">
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1">Free <em>TDEE Calculator</em> —<br>Calories, Macros & BMI</h1>
+  <h1 id="h1">Free <em>TDEE Calculator</em> — Calories, Macros & BMI</h1>
   <p class="hero-sub">Enter your stats to get your daily calorie needs, exact macro targets, BMR, BMI, and weeks-to-goal timeline.</p>
   <nav class="anav" aria-label="Page sections">
     <a href="#calculator">Calculator</a>
@@ -251,6 +266,7 @@ footer a{color:var(--text3);text-decoration:underline}
 </div>
 
 <div id="results" role="region" aria-live="polite">
+  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
   <div class="res-hero fu">
     <div class="res-num" id="r-tdee">—</div>
     <div class="res-label">calories / day — your TDEE (maintenance)</div>
@@ -269,6 +285,7 @@ footer a{color:var(--text3);text-decoration:underline}
     <p class="card-title">Macros — <span id="macro-lbl" style="text-transform:none;font-weight:400;font-size:12px;letter-spacing:0;color:var(--text2)">for selected goal</span></p>
     <div id="macro-display"></div>
   </div>
+  <a href="/macro-calculator.html" class="next-cta fu" style="animation-delay:.14s"><div><div class="next-cta-text">Get detailed macro breakdown →</div><div class="next-cta-sub">See protein, carbs & fat targets for each goal side by side</div></div><div class="next-cta-arrow">→</div></a>
   <div class="card fu" style="animation-delay:.15s">
     <p class="card-title">Your timeline to goal</p>
     <div id="timeline-content"></div>
@@ -292,7 +309,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <section class="section" id="use-results" aria-labelledby="ur">
   <h2 id="ur">How to use your results</h2>
   <p><strong>Fat loss:</strong> Eat 300–500 kcal below TDEE. Never go below your BMR for extended periods — this causes muscle loss and metabolic slowdown.</p>
-  <p><strong>Muscle gain:</strong> Eat 200–350 kcal above TDEE (lean bulk). Hit your protein target every day to maximise muscle protein synthesis.</p>
+  <p><strong>Muscle gain:</strong> Eat 200–350 kcal above TDEE (lean bulk). Hit your protein target every day to maximise muscle protein synthesis — use the <a href="/protein-calculator.html" style="color:var(--accent)">protein calculator</a> for exact daily targets.</p>
   <p><strong>Maintenance:</strong> Eat at TDEE. If weight drifts unexpectedly after 2 weeks, adjust by ±150 kcal and reassess.</p>
   <div class="infobox">Hit your <strong>protein target first</strong>, then fill remaining calories with carbs and fat to preference.</div>
 </section>
@@ -410,6 +427,13 @@ function _calc(){
   var bmi=wkg/(hm*hm);
   var bmiCat=bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese';
   var hin2=hcm/2.54;
+
+  /* Personalized results header */
+  var age2  = document.getElementById('age')    ? document.getElementById('age').value    : '';
+  var sex2  = document.querySelector('input[name=sex]:checked') ? document.querySelector('input[name=sex]:checked').value : '';
+  var wDisp = unit==='imperial' ? Math.round(wkg*2.205)+' lbs' : Math.round(wkg)+' kg';
+  var personEl = document.getElementById('res-person');
+  if(personEl) personEl.textContent = 'Results for '+age2+'-year-old '+sex2+', '+wDisp;
   var idealKg=Math.max(40,sex==='male'?50+2.3*(hin2-60):45.5+2.3*(hin2-60));
   var gObj=GOALS[goal];
   var targetCals=tdee+gObj.d;
@@ -513,6 +537,27 @@ document.addEventListener('change',savePrefs);
 document.addEventListener('input',savePrefs);
 document.addEventListener('DOMContentLoaded',loadPrefs);
 document.addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+function copyResults() {
+  var tdee = document.getElementById('r-tdee') ? document.getElementById('r-tdee').textContent : '';
+  var bmr  = document.getElementById('r-bmr')  ? document.getElementById('r-bmr').textContent  : '';
+  var bmi  = document.getElementById('r-bmi')  ? document.getElementById('r-bmi').textContent  : '';
+  var macroEl = document.getElementById('macro-display');
+  var macroText = macroEl ? macroEl.textContent.replace(/\s+/g,' ').trim() : '';
+  var text = 'My TDEE Results\n--------------\n' +
+             'TDEE (maintenance): ' + tdee + ' kcal/day\n' +
+             'BMR (at rest): ' + bmr + ' kcal/day\n' +
+             'BMI: ' + bmi + '\n' +
+             'Macros: ' + macroText + '\n' +
+             'Calculator: https://tdee-calculator-dad.pages.dev/';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      var btn = document.getElementById('copy-btn');
+      btn.textContent = 'Copied!';
+      setTimeout(function(){ btn.textContent = 'Copy results'; }, 2000);
+    });
+  }
+}
 </script>
 </body>
 </html>

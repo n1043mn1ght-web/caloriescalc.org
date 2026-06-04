@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Protein Calculator — How Much Protein Do I Need Per Day?</title>
-<meta name="description" content="Free protein calculator. Find your exact daily protein intake in grams for fat loss, muscle gain, or maintenance — with per-meal targets and high-protein food sources."/>
+<meta name="description" content="Free protein calculator. Daily protein target in grams for fat loss, muscle gain or maintenance. Per-meal breakdowns and high-protein food sources included."/>
 <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
 <meta name="theme-color" content="#2d6a4f"/>
@@ -13,6 +13,8 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/protein-calculator.html"/>
 <meta property="og:locale" content="en_US"/>
+<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
+
 <meta name="robots" content="index, follow"/>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Protein Calculator","url":"https://tdee-calculator-dad.pages.dev/protein-calculator.html","description":"Free protein calculator for daily protein intake based on weight, body fat and fitness goal.","applicationCategory":"HealthApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -125,7 +127,19 @@ footer a{color:var(--text3);text-decoration:underline}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fu .3s ease both}
+
+/* Copy button and CTA */
+.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.res-person{font-size:13px;color:var(--text2);font-style:italic}
+.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:#c8ecd4}
+.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s}
+.next-cta:hover{background:#c8ecd4}
+.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
+.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
+.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
@@ -145,7 +159,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <main>
 <div class="wrap">
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1"><em>Protein Calculator</em> —<br>How Much Protein Per Day?</h1>
+  <h1 id="h1"><em>Protein Calculator</em> — How Much Protein Per Day?</h1>
   <p class="hero-sub">Get your exact daily protein target in grams for fat loss, muscle gain, or maintenance — with per-meal breakdowns and the best food sources.</p>
   <nav class="anav" aria-label="Page sections">
     <a href="#calculator">Calculator</a>
@@ -200,6 +214,7 @@ footer a{color:var(--text3);text-decoration:underline}
 </div>
 
 <div id="results" role="region" aria-live="polite">
+  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
   <div class="prot-hero fu">
     <div class="prot-num" id="r-prot">—</div>
     <div class="prot-label">grams of protein per day</div>
@@ -226,6 +241,8 @@ footer a{color:var(--text3);text-decoration:underline}
     <div id="action-plan" style="font-size:14px;color:var(--text2);line-height:1.8"></div>
   </div>
 </div>
+
+  <a href="/macro-calculator.html" class="next-cta"><div><div class="next-cta-text">Calculate your full macro split →</div><div class="next-cta-sub">Get protein, carbs and fat targets for your calorie goal</div></div><div class="next-cta-arrow">→</div></a>
 
 <section class="section" id="why-protein" aria-labelledby="wp">
   <h2 id="wp">Why protein intake matters</h2>
@@ -385,6 +402,14 @@ function _calc(){
     '<li>Prioritise protein at <strong>breakfast</strong> — most people under-eat protein in the morning.</li>'+
     '<li>If struggling to hit the target, a <strong>protein shake</strong> (20–30g/scoop) is the easiest gap-filler.</li>'+
     '<li>Recalculate if your body weight changes by <strong>10+ lbs (4.5 kg)</strong>.</li></ul>';
+
+  var personEl=document.getElementById('res-person');
+  if(personEl){
+    var wDisp=unit==='imperial'?Math.round(wkg*2.205)+' lbs':Math.round(wkg)+' kg';
+    var s2=document.querySelector('input[name=sex]:checked');
+    var gl=document.getElementById('goal');
+    personEl.textContent='Results for '+(s2?s2.value:'')+', '+wDisp+' — '+(gl?gl.options[gl.selectedIndex].text.split(' —')[0]:'');
+  }
   document.getElementById('results').style.display='block';
   setTimeout(function(){document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
@@ -412,6 +437,22 @@ document.addEventListener('change',savePrefs);
 document.addEventListener('input',savePrefs);
 document.addEventListener('DOMContentLoaded',loadPrefs);
 document.addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+function copyResults() {
+  var prot = document.getElementById('r-prot') ? document.getElementById('r-prot').textContent : '';
+  var sub  = document.getElementById('r-sub')  ? document.getElementById('r-sub').textContent  : '';
+  var text = 'My Protein Results\n------------------\n' +
+             'Daily protein target: ' + prot + 'g\n' +
+             sub + '\n' +
+             'Calculator: https://tdee-calculator-dad.pages.dev/protein-calculator.html';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.getElementById('copy-btn');
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent='Copy results';},2000);
+    });
+  }
+}
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>BMR Calculator — Free Basal Metabolic Rate Calculator</title>
-<meta name="description" content="Free BMR calculator. Find your Basal Metabolic Rate — the calories your body burns at complete rest — using the Mifflin–St Jeor and Katch–McArdle equations. Imperial and metric."/>
+<meta name="description" content="Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations. Imperial and metric. No sign-up required."/>
 <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/bmr-calculator.html"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
 <meta name="theme-color" content="#2d6a4f"/>
@@ -107,7 +107,20 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 .field-error{font-size:12px;color:#dc2626;margin-top:3px;display:none}
 .field-error.show{display:block}
 
+
+/* Copy button and CTA */
+.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.res-person{font-size:13px;color:var(--text2);font-style:italic}
+.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:#c8ecd4}
+.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s;cursor:pointer}
+.next-cta:hover{background:#c8ecd4}
+.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
+.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
+.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
+<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
@@ -192,6 +205,7 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 </div>
 
 <div id="results" role="region" aria-live="polite">
+  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
   <div class="res-hero fu">
     <div class="res-num" id="r-bmr">—</div>
     <div class="res-label">calories / day — your BMR (at rest)</div>
@@ -237,6 +251,8 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     -->
   </div>
+
+  <a href="/" class="next-cta"><div><div class="next-cta-text">Calculate your full TDEE →</div><div class="next-cta-sub">Use your BMR to get calories, macros and goal timeline</div></div><div class="next-cta-arrow">→</div></a>
 
 <!-- What is BMR -->
 <section class="section" id="what-is-bmr" aria-labelledby="wib-title">
@@ -402,6 +418,15 @@ function _calc(){
   document.getElementById('r-kma').textContent=kma?fmt(kma):'—';
   const acts=[{l:'Sedentary',m:1.2},{l:'Lightly active',m:1.375},{l:'Moderately active',m:1.55},{l:'Very active',m:1.725},{l:'Athlete',m:1.9}];
   document.getElementById('tdee-body').innerHTML=acts.map(a=>`<tr><td style="padding:8px 9px;border-bottom:1px solid var(--border)">${a.l}</td><td style="padding:8px 9px;border-bottom:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace">${fmt(bmr*a.m)}</td></tr>`).join('');
+
+  /* Personalized header */
+  var personEl = document.getElementById('res-person');
+  if(personEl){
+    var wDisp = unit==='imperial'?Math.round(wkg*2.205)+' lbs':Math.round(wkg)+' kg';
+    var sexEl2 = document.querySelector('input[name=sex]:checked');
+    var sexVal = sexEl2 ? sexEl2.value : '';
+    personEl.textContent = 'Results for '+document.getElementById('age').value+'-year-old '+sexVal+', '+wDisp;
+  }
   document.getElementById('results').style.display='block';
   setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),80);
 }
@@ -445,6 +470,24 @@ document.addEventListener('input', savePrefs);
 // Load on page ready
 document.addEventListener('DOMContentLoaded', loadPrefs);
 
+
+function copyResults() {
+  var bmr = document.getElementById('r-bmr') ? document.getElementById('r-bmr').textContent : '';
+  var msj = document.getElementById('r-msj') ? document.getElementById('r-msj').textContent : '';
+  var kma = document.getElementById('r-kma') ? document.getElementById('r-kma').textContent : '';
+  var text = 'My BMR Results\n--------------\n' +
+             'BMR: ' + bmr + ' kcal/day\n' +
+             'Mifflin-St Jeor: ' + msj + ' kcal\n' +
+             'Katch-McArdle: ' + kma + ' kcal\n' +
+             'Calculator: https://tdee-calculator-dad.pages.dev/bmr-calculator.html';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.getElementById('copy-btn');
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent='Copy results';},2000);
+    });
+  }
+}
 </script>
 </body>
 </html>

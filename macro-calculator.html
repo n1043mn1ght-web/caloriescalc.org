@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Macro Calculator — Daily Protein, Carbs & Fat Targets</title>
-<meta name="description" content="Free macro calculator. Get your exact daily protein, carbohydrate, and fat targets in grams based on your goal — cutting, bulking, or maintenance. Instant results, no sign-up."/>
+<meta name="description" content="Free macro calculator. Get exact daily protein, carbs and fat targets in grams for cutting, bulking or maintenance. Instant results, no sign-up required."/>
 <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/macro-calculator.html"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
 <meta name="theme-color" content="#2d6a4f"/>
@@ -142,7 +142,20 @@ footer a{color:var(--text3);text-decoration:underline}
 .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fu .3s ease both}
+
+/* Copy button and CTA */
+.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.res-person{font-size:13px;color:var(--text2);font-style:italic}
+.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
+.copy-btn:hover{background:#c8ecd4}
+.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s}
+.next-cta:hover{background:#c8ecd4}
+.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
+.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
+.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
+<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
+<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
@@ -162,7 +175,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <main>
 <div class="wrap">
 <section class="hero" aria-labelledby="h1">
-  <h1 id="h1"><em>Macro Calculator</em> —<br>Protein, Carbs & Fat Targets</h1>
+  <h1 id="h1"><em>Macro Calculator</em> — Protein, Carbs & Fat Targets</h1>
   <p class="hero-sub">Enter your stats and goal to get precise daily macro targets in grams, a weeks-to-goal timeline, and practical tips.</p>
   <nav class="anav" aria-label="Page sections">
     <a href="#calculator">Calculator</a>
@@ -246,6 +259,7 @@ footer a{color:var(--text3);text-decoration:underline}
 </div>
 
 <div id="results" role="region" aria-live="polite">
+  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
   <div class="cal-box fu">
     <div class="cal-num" id="r-cals">—</div>
     <div>
@@ -270,6 +284,7 @@ footer a{color:var(--text3);text-decoration:underline}
     <p class="card-title">All goals comparison</p>
     <div class="goals-g" id="all-goals"></div>
   </div>
+  <a href="/protein-calculator.html" class="next-cta fu" style="animation-delay:.18s"><div><div class="next-cta-text">Get detailed protein breakdown →</div><div class="next-cta-sub">See protein targets for fat loss, maintenance and muscle gain</div></div><div class="next-cta-arrow">→</div></a>
   <div class="card fu" style="animation-delay:.19s">
     <p class="card-title">Practical tips</p>
     <div class="tips" id="tips"></div>
@@ -285,7 +300,7 @@ footer a{color:var(--text3);text-decoration:underline}
 <section class="section" id="how-to-use" aria-labelledby="htu">
   <h2 id="htu">How to use your macro targets</h2>
   <h3>1. Protein first, always</h3>
-  <p>Hit your protein target every day regardless of carbs and fat. If you can only track one number, track protein. Carbs and fat are flexible — protein is not.</p>
+  <p>Hit your protein target every day regardless of carbs and fat — use the <a href="/protein-calculator.html" style="color:var(--accent)">protein calculator</a> for goal-specific targets. If you can only track one number, track protein. Carbs and fat are flexible — protein is not.</p>
   <h3>2. Use a food tracking app with a kitchen scale</h3>
   <p>Apps like Cronometer or MyFitnessPal let you scan barcodes and log accurately. Use a kitchen scale for the first 2–3 weeks — most people are surprised how far off their visual estimates are.</p>
   <h3>3. Adjust after two weeks</h3>
@@ -470,6 +485,13 @@ function _calc(){
   ].map(function(t){
     return '<div class="tip"><span>'+t.i+'</span><span>'+t.t+'</span></div>';
   }).join('');
+
+  var personEl=document.getElementById('res-person');
+  if(personEl){
+    var wDisp=unit==='imperial'?Math.round(wkg*2.205)+' lbs':Math.round(wkg)+' kg';
+    var s2=document.querySelector('input[name=sex]:checked');
+    personEl.textContent='Results for '+document.getElementById('age').value+'-year-old '+(s2?s2.value:'')+', '+wDisp;
+  }
   document.getElementById('results').style.display='block';
   setTimeout(function(){document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});},80);
 }
@@ -501,6 +523,26 @@ document.addEventListener('change',savePrefs);
 document.addEventListener('input',savePrefs);
 document.addEventListener('DOMContentLoaded',loadPrefs);
 document.addEventListener('keydown',function(e){if(e.key==='Enter')calculate();});
+
+function copyResults() {
+  var cals = document.getElementById('r-cals') ? document.getElementById('r-cals').textContent : '';
+  var prot = document.getElementById('r-prot') ? document.getElementById('r-prot').textContent : '';
+  var carb = document.getElementById('r-carb') ? document.getElementById('r-carb').textContent : '';
+  var fat  = document.getElementById('r-fat')  ? document.getElementById('r-fat').textContent  : '';
+  var text = 'My Macro Results\n----------------\n' +
+             'Daily calories: ' + cals + ' kcal\n' +
+             'Protein: ' + prot + 'g\n' +
+             'Carbohydrates: ' + carb + 'g\n' +
+             'Fat: ' + fat + 'g\n' +
+             'Calculator: https://tdee-calculator-dad.pages.dev/macro-calculator.html';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(function(){
+      var btn=document.getElementById('copy-btn');
+      btn.textContent='Copied!';
+      setTimeout(function(){btn.textContent='Copy results';},2000);
+    });
+  }
+}
 </script>
 </body>
 </html>
