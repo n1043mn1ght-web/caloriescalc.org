@@ -156,6 +156,70 @@ footer a{color:var(--text3);text-decoration:underline}
 </style>
 <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <!-- ============================================================
+     ВСТАВИТЬ в macro-calculator.html, внутрь <head>, перед </head>
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://tdee-calculator-dad.pages.dev/macro-calculator.html#app",
+      "name": "Macro Calculator — Protein, Carbs & Fat Targets",
+      "url": "https://tdee-calculator-dad.pages.dev/macro-calculator.html",
+      "description": "Free macro calculator. Get exact daily protein, carbs and fat targets in grams for cutting, bulking or maintenance. Instant results, no sign-up required.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": { "@id": "https://tdee-calculator-dad.pages.dev/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://tdee-calculator-dad.pages.dev/macro-calculator.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are macros and why do they matter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Macros are protein, carbohydrates, and fat — the three nutrients providing all calories. Total calorie intake determines weight change; macro distribution determines whether that change is fat or muscle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much protein do I need per day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For active individuals, 1.6–2.2g/kg bodyweight is supported by research. This calculator uses 0.85g/lb as a practical middle ground. Sedentary adults need approximately 0.8g/kg for basic health."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I track macros or just calories?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Calories control weight change. Macros control body composition — especially important when minimising muscle loss on a cut or maximising lean gains on a bulk. At minimum, track protein and let carbs and fat be flexible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to hit my macros exactly every day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Being within 10–15% of targets consistently across a week produces essentially the same outcome as hitting exact numbers daily. Weekly averages matter more than daily precision."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
