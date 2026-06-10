@@ -140,6 +140,78 @@ footer a{color:var(--text3);text-decoration:underline}
 .next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
 </style>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <!-- ============================================================
+     ВСТАВИТЬ в protein-calculator.html, внутрь <head>, перед </head>
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://tdee-calculator-dad.pages.dev/protein-calculator.html#app",
+      "name": "Protein Calculator — How Much Protein Do I Need Per Day?",
+      "url": "https://tdee-calculator-dad.pages.dev/protein-calculator.html",
+      "description": "Free protein calculator. Daily protein target in grams for fat loss, muscle gain or maintenance. Per-meal breakdowns and high-protein food sources included.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": { "@id": "https://tdee-calculator-dad.pages.dev/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://tdee-calculator-dad.pages.dev/protein-calculator.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much protein do I need per day?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For active individuals, 1.6–2.2g/kg bodyweight per day is supported by research. Sedentary adults need approximately 0.8g/kg for basic health. Protein needs adjust based on your activity level and goal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I eat more protein when cutting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — protein needs are higher during a calorie deficit. Consuming 2.2–2.4g/kg counteracts muscle breakdown, signalling your body to preserve muscle and burn fat preferentially."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it better to spread protein across meals?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Spreading protein across 3–5 meals (around 0.4g/kg per meal) maximises muscle protein synthesis throughout the day. Each protein-rich meal triggers a pulse of synthesis lasting 3–5 hours. For most people: 30–50g per meal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you eat too much protein?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For healthy individuals with normal kidney function, intakes up to 3g/kg/day have not been shown to cause harm in research. The main practical risk is displacing other important nutrients. People with kidney disease should consult a doctor first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do protein needs change with age?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Adults over 65 experience reduced sensitivity to protein's muscle-building signal and need more protein per meal (35–40g) to trigger the same response younger adults get from 20–25g. The recommended range rises to 1.8–2.4g/kg."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
