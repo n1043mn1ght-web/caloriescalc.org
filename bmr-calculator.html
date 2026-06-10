@@ -121,6 +121,78 @@ input[type=number]:invalid,input[type=number].error{border-color:#dc2626!importa
 </style>
 <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <!-- ============================================================
+     ВСТАВИТЬ в bmr-calculator.html, внутрь <head>, перед </head>
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html#app",
+      "name": "BMR Calculator — Basal Metabolic Rate",
+      "url": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html",
+      "description": "Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations. Imperial and metric. No sign-up required.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": { "@id": "https://tdee-calculator-dad.pages.dev/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between BMR and TDEE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BMR is your calorie burn at complete rest. TDEE (Total Daily Energy Expenditure) is BMR multiplied by an activity multiplier that accounts for exercise and daily movement. For a moderately active person, TDEE is approximately 1.55× BMR."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I eat at my BMR or TDEE?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Eat at (or relative to) your TDEE — not your BMR. BMR is the absolute minimum your body needs at rest. Since you move, exercise, and digest food throughout the day, eating only at BMR would create a large deficit for most people and risk muscle loss and fatigue."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why are the Mifflin–St Jeor and Katch–McArdle results different?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mifflin–St Jeor uses total body weight, while Katch–McArdle uses lean body mass. If you have average body composition, the results will be close. If you are particularly muscular or have high body fat, the difference may be 100–250+ calories. The Katch–McArdle result is more accurate when body fat % is known."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can BMR change over time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. BMR decreases with age and during prolonged calorie restriction (metabolic adaptation). It increases with gaining muscle mass. This is why recalculating every 4–8 weeks during a diet is important."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is BMR the same as RMR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not exactly. RMR (Resting Metabolic Rate) is measured after a period of rest but not under the strict fasting and temperature conditions required for true BMR. RMR is typically 10–20% higher than BMR. Most calculators technically calculate RMR but use the term BMR colloquially."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
