@@ -128,6 +128,70 @@ footer a{color:var(--text3);text-decoration:underline}
 </style>
 <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
 <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <!-- ============================================================
+     ВСТАВИТЬ в bmi-calculator.html, внутрь <head>, перед </head>
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://tdee-calculator-dad.pages.dev/bmi-calculator.html#app",
+      "name": "BMI Calculator — Body Mass Index Calculator for Adults",
+      "url": "https://tdee-calculator-dad.pages.dev/bmi-calculator.html",
+      "description": "Free BMI calculator for adults. Find your Body Mass Index, weight category, and healthy weight range. Imperial and metric. Instant results, no sign-up required.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "isPartOf": { "@id": "https://tdee-calculator-dad.pages.dev/#website" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://tdee-calculator-dad.pages.dev/bmi-calculator.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a healthy BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The WHO defines a healthy adult BMI as 18.5–24.9. Below 18.5 is underweight, 25–29.9 is overweight, and 30+ is obese. These are population-level thresholds — many individuals outside the normal range are perfectly healthy."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is BMI accurate for athletes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. BMI significantly overestimates health risk for muscular individuals. Athletes frequently show overweight or obese BMI despite very low body fat. For athletes, body fat percentage or DEXA scanning is a far more meaningful measure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between BMI and body fat percentage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "BMI is calculated from height and weight only — it gives no information about body composition. Body fat percentage directly measures the proportion of weight that is fat versus muscle, bone, and organs. Body fat % is more precise but requires measurement tools."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much weight do I need to lose to reach a healthy BMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A healthy BMI range is 18.5–24.9. The BMI calculator shows your healthy weight range based on your height. Use the TDEE calculator to set up a sustainable calorie deficit to reach your target weight."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#calculator" class="skip">Skip to calculator</a>
