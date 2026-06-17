@@ -1,564 +1,566 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>BMR Calculator — Free Basal Metabolic Rate Calculator</title>
-<meta name="description" content="Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations. Imperial and metric. No sign-up required."/>
-<link rel="canonical" href="https://tdee-calculator-dad.pages.dev/bmr-calculator.html"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
-<meta name="theme-color" content="#2d6a4f"/>
-<meta property="og:title" content="BMR Calculator — Basal Metabolic Rate"/>
-<meta property="og:description" content="Calculate your BMR — the minimum calories your body needs at rest. Free, accurate, no sign-up."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://tdee-calculator-dad.pages.dev/bmr-calculator.html"/>
-<meta name="robots" content="index, follow"/>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"BMR Calculator","url":"https://tdee-calculator-dad.pages.dev/bmr-calculator.html","description":"Calculate Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations.","applicationCategory":"HealthApplication","operatingSystem":"Any","inLanguage":"en","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tdee-calculator-dad.pages.dev/"},{"@type":"ListItem","position":2,"name":"BMR Calculator","item":"https://tdee-calculator-dad.pages.dev/bmr-calculator.html"}]}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is BMR?","acceptedAnswer":{"@type":"Answer","text":"BMR (Basal Metabolic Rate) is the number of calories your body needs at complete rest to sustain vital functions like breathing, circulation, and cell production. It represents the minimum energy required to keep you alive."}},
-{"@type":"Question","name":"What is the difference between BMR and TDEE?","acceptedAnswer":{"@type":"Answer","text":"BMR is your calorie burn at rest. TDEE (Total Daily Energy Expenditure) is BMR multiplied by an activity factor, representing total daily calorie burn including exercise and movement."}},
-{"@type":"Question","name":"Which BMR formula is most accurate?","acceptedAnswer":{"@type":"Answer","text":"The Mifflin–St Jeor equation is the most validated for the general population. The Katch–McArdle formula is more accurate for lean athletes when body fat percentage is known."}}
-]}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-:root{--bg:#f7f6f2;--surface:#fff;--surface2:#f0ede8;--border:#e4e0d8;--text:#1a1916;--text2:#6b6760;--text3:#9b9790;--accent:#2d6a4f;--accent-d:#1e4d38;--accent-light:#d8f3dc;--blue:#2563eb;--amber:#d97706;--coral:#e76f51;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
-.wrap{max-width:780px;margin:0 auto;padding:0 20px}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
-.hdr{display:flex;align-items:center;gap:12px;max-width:780px;margin:0 auto;padding:0 20px}
-.logo{font-size:17px;font-weight:600;letter-spacing:-.3px;color:var(--text);text-decoration:none}
-.logo span{color:var(--accent)}
-nav.site-nav{display:flex;gap:4px;margin-left:auto}
-nav.site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s}
-nav.site-nav a:hover{background:var(--surface2);color:var(--text)}
-nav.site-nav a.active{color:var(--accent);background:var(--accent-light)}
-.hero{padding:36px 0 16px;text-align:center}
-h1{font-size:clamp(24px,5vw,36px);font-weight:600;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
-h1 em{font-style:normal;color:var(--accent)}
-.hero-sub{font-size:15px;color:var(--text2);max-width:500px;margin:0 auto 24px}
-.unit-toggle{display:inline-flex;background:var(--surface2);border-radius:999px;padding:3px;gap:2px;margin-bottom:14px;border:1px solid var(--border)}
-.unit-toggle button{padding:6px 18px;border-radius:999px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);transition:all .18s}
-.unit-toggle button.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.1)}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
-.card-title{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
-.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-@media(max-width:500px){.fg{grid-template-columns:1fr}}
-.field{display:flex;flex-direction:column;gap:5px}
-label{font-size:13px;font-weight:500;color:var(--text2)}
-input[type=number],select{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s,box-shadow .15s}
-input[type=number]:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(45,106,79,.1)}
-.iw{position:relative}
-.ul{position:absolute;right:11px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text3);pointer-events:none;font-family:'DM Mono',monospace}
-.rg{display:flex;gap:8px}
-.rg label{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:9px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text2);transition:all .15s;user-select:none}
-.rg input[type=radio]{display:none}
-.rg input[type=radio]:checked+label{border-color:var(--accent);background:var(--accent-light);color:var(--accent)}
-.btn{width:100%;padding:15px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:background .15s;margin-top:6px}
-.btn:hover{background:var(--accent-d)}
-.btn:disabled{opacity:.65;cursor:not-allowed}
-#results{display:none}
-.res-hero{background:linear-gradient(135deg,var(--accent),#40916c);border-radius:var(--radius);padding:26px 20px;text-align:center;margin-bottom:14px;color:#fff}
-.res-num{font-size:60px;font-weight:300;letter-spacing:-2px;font-family:'DM Mono',monospace;line-height:1}
-.res-label{font-size:13px;opacity:.8;margin-top:4px}
-.res-sub{font-size:12px;opacity:.6;margin-top:4px}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0}
-@media(max-width:460px){.compare-grid{grid-template-columns:1fr}}
-.cmp-box{background:var(--surface2);border-radius:10px;padding:14px 12px;text-align:center}
-.cmp-v{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;letter-spacing:-.5px;margin-bottom:4px}
-.cmp-n{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
-.cmp-s{font-size:11px;color:var(--text3);margin-top:2px}
-.section{margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
-.section h2{font-size:21px;font-weight:600;letter-spacing:-.3px;margin-bottom:14px}
-.section p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:10px}
-.section p:last-child{margin-bottom:0}
-.infobox{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;font-size:14px;color:var(--accent-d);line-height:1.6}
-.faq-item{margin-bottom:18px}
-.faq-item h3{font-size:14px;font-weight:600;margin-bottom:5px}
-.faq-item p{font-size:14px;color:var(--text2);line-height:1.7}
-.tools-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:0}
-.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color .15s}
-.tool-card:hover{border-color:var(--accent)}
-.tool-card-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.tool-card-desc{font-size:12px;color:var(--text3)}
-.skip{position:absolute;top:-40px;left:0;background:var(--accent);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
-.skip:focus{top:0}
-footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text3)}
-footer a{color:var(--text3);text-decoration:underline}
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;overflow-y:auto;padding:20px}
-.modal-box{max-width:580px;margin:40px auto;background:#fff;border-radius:16px;padding:28px;position:relative}
-.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text2);line-height:1}
-@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fu{animation:fu .3s ease both}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>BMR Calculator — Basal Metabolic Rate | Free, Instant Results</title>
+  <meta name="description" content="Free, instant results — no sign-up. Calculate your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle. Imperial &amp; metric. See exactly how BMR is calculated.">
+  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/bmr-calculator.html">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2d6a4f">
 
-/* Input validation */
-input[type=number]:invalid,input[type=number].error{border-color:#dc2626!important;box-shadow:0 0 0 3px rgba(220,38,38,.1)!important}
-.field-error{font-size:12px;color:#dc2626;margin-top:3px;display:none}
-.field-error.show{display:block}
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/bmr-calculator.html">
+  <meta property="og:title" content="BMR Calculator — Basal Metabolic Rate">
+  <meta property="og:description" content="Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations.">
+  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BMR Calculator — Basal Metabolic Rate">
+  <meta name="twitter:description" content="Free BMR calculator. Mifflin–St Jeor and Katch–McArdle. Imperial &amp; metric.">
+  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/og-image.png">
 
-
-/* Copy button and CTA */
-.res-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
-.res-person{font-size:13px;color:var(--text2);font-style:italic}
-.copy-btn{font-size:12px;font-weight:500;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;white-space:nowrap}
-.copy-btn:hover{background:#c8ecd4}
-.next-cta{background:var(--accent-light);border:1.5px solid var(--accent);border-radius:var(--radius);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;text-decoration:none;transition:background .15s;cursor:pointer}
-.next-cta:hover{background:#c8ecd4}
-.next-cta-text{font-size:14px;color:var(--accent-d);font-weight:500}
-.next-cta-sub{font-size:12px;color:var(--accent);margin-top:2px}
-.next-cta-arrow{font-size:20px;color:var(--accent);flex-shrink:0}
-</style>
-<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
-<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-  <!-- ============================================================
-     ВСТАВИТЬ в bmr-calculator.html, внутрь <head>, перед </head>
-     ============================================================ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebApplication",
-      "@id": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html#app",
-      "name": "BMR Calculator — Basal Metabolic Rate",
-      "url": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html",
-      "description": "Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations. Imperial and metric. No sign-up required.",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "Any",
-      "browserRequirements": "Requires JavaScript",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "isPartOf": { "@id": "https://tdee-calculator-dad.pages.dev/#website" }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://tdee-calculator-dad.pages.dev/bmr-calculator.html#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is the difference between BMR and TDEE?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "BMR is your calorie burn at complete rest. TDEE (Total Daily Energy Expenditure) is BMR multiplied by an activity multiplier that accounts for exercise and daily movement. For a moderately active person, TDEE is approximately 1.55× BMR."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Should I eat at my BMR or TDEE?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Eat at (or relative to) your TDEE — not your BMR. BMR is the absolute minimum your body needs at rest. Since you move, exercise, and digest food throughout the day, eating only at BMR would create a large deficit for most people and risk muscle loss and fatigue."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why are the Mifflin–St Jeor and Katch–McArdle results different?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Mifflin–St Jeor uses total body weight, while Katch–McArdle uses lean body mass. If you have average body composition, the results will be close. If you are particularly muscular or have high body fat, the difference may be 100–250+ calories. The Katch–McArdle result is more accurate when body fat % is known."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can BMR change over time?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. BMR decreases with age and during prolonged calorie restriction (metabolic adaptation). It increases with gaining muscle mass. This is why recalculating every 4–8 weeks during a diet is important."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is BMR the same as RMR?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Not exactly. RMR (Resting Metabolic Rate) is measured after a period of rest but not under the strict fasting and temperature conditions required for true BMR. RMR is typically 10–20% higher than BMR. Most calculators technically calculate RMR but use the term BMR colloquially."
-          }
-        }
-      ]
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #2d6a4f; --green-light: #e8f5ee; --green-dark: #1b4332;
+      --text: #1a1a1a; --text-muted: #555; --text-faint: #888;
+      --border: #e0e0e0; --bg: #fff; --bg-soft: #f8f9fa;
+      --radius: 10px; --radius-sm: 6px;
+      --shadow: 0 2px 8px rgba(0,0,0,.07);
+      --max: 780px;
     }
-  ]
-}
-</script>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .skip-link { position: absolute; left: -9999px; top: 4px; background: var(--green); color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 14px; z-index: 9999; }
+    .skip-link:focus { left: 4px; }
+    nav { background: var(--green); padding: 0 20px; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; gap: 4px; height: 52px; }
+    .nav-logo { color: #fff; font-weight: 700; font-size: 17px; margin-right: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo:hover { opacity: .85; text-decoration: none; }
+    .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+    .nav-links a { color: rgba(255,255,255,.85); padding: 6px 10px; border-radius: var(--radius-sm); font-size: 14px; transition: background .15s; }
+    .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.18); color: #fff; text-decoration: none; }
+    main { max-width: var(--max); margin: 0 auto; padding: 0 20px 60px; }
+    .hero { text-align: center; padding: 36px 0 24px; }
+    .hero h1 { font-size: clamp(22px, 5vw, 32px); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+    .hero h1 em { color: var(--green); font-style: normal; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 520px; margin: 0 auto 18px; }
+    .hero-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .hero-links a { font-size: 13px; color: var(--green); border: 1px solid var(--green); border-radius: 20px; padding: 4px 14px; transition: all .15s; }
+    .hero-links a:hover { background: var(--green); color: #fff; text-decoration: none; }
+    .unit-toggle { display: flex; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; width: fit-content; }
+    .unit-toggle button { padding: 7px 20px; font-size: 14px; border: none; background: transparent; cursor: pointer; color: var(--text-muted); transition: all .15s; }
+    .unit-toggle button.active { background: var(--green); color: #fff; font-weight: 500; }
+    .calc-card { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); margin-bottom: 24px; }
+    .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .calc-header h2 { font-size: 17px; font-weight: 600; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+    @media(max-width:520px){ .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+    .form-group input, .form-group select { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color .15s; width: 100%; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--green); }
+    .form-group .hint { font-size: 12px; color: var(--text-faint); }
+    .height-row { display: flex; gap: 8px; }
+    .height-row input { flex: 1; }
+    .sex-row { display: flex; gap: 8px; }
+    .sex-btn { flex: 1; padding: 9px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all .15s; text-align: center; }
+    .sex-btn.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 500; }
+    .calc-btn { width: 100%; padding: 14px; background: var(--green); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .15s; }
+    .calc-btn:hover { background: var(--green-dark); }
+    .results { display: none; margin-top: 24px; }
+    .results.show { display: block; }
+    .results-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .result-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 12px; text-align: center; }
+    .result-card.primary { background: var(--green-light); border-color: var(--green); }
+    .result-val { font-size: 26px; font-weight: 700; color: var(--green); line-height: 1; }
+    .result-card.primary .result-val { font-size: 30px; }
+    .result-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .result-sub { font-size: 11px; color: var(--text-faint); }
+    .copy-btn { display: none; padding: 8px 18px; background: transparent; border: 1px solid var(--green); color: var(--green); border-radius: 20px; font-size: 13px; cursor: pointer; transition: all .15s; margin-bottom: 16px; align-items: center; gap: 6px; }
+    .copy-btn.show { display: inline-flex; }
+    .copy-btn:hover { background: var(--green); color: #fff; }
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .content-section { margin-bottom: 36px; }
+    .content-section h2 { font-size: 21px; font-weight: 700; margin-bottom: 12px; }
+    .content-section h3 { font-size: 16px; font-weight: 600; margin: 18px 0 6px; }
+    .content-section p { color: var(--text-muted); font-size: 15px; margin-bottom: 10px; line-height: 1.7; }
+    .content-section ul { color: var(--text-muted); font-size: 15px; padding-left: 20px; margin-bottom: 10px; }
+    .content-section li { margin-bottom: 4px; line-height: 1.6; }
+    .formula { background: var(--bg-soft); border-left: 3px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; font-family: monospace; font-size: 13px; color: var(--text); margin: 8px 0 14px; line-height: 1.8; }
+    .example-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 16px 0; }
+    .example-box h4 { font-size: 14px; font-weight: 600; color: #0369a1; margin-bottom: 12px; }
+    .example-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; border-bottom: 1px solid #e0f2fe; padding: 6px 0; }
+    .example-row:last-child { border-bottom: none; }
+    .example-row .er-label { color: #0369a1; }
+    .example-row .er-val { font-weight: 600; color: #0c4a6e; }
+    .mistakes-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius); padding: 20px; margin: 16px 0; }
+    .mistakes-box h4 { font-size: 14px; font-weight: 600; color: #9a3412; margin-bottom: 10px; }
+    .mistake-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 14px; }
+    .mistake-item .mi-icon { color: #ea580c; flex-shrink: 0; font-weight: 700; }
+    .mistake-item .mi-text { color: #7c2d12; line-height: 1.5; }
+    .mistake-item .mi-text strong { color: #9a3412; }
+    /* Formula comparison table */
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0 20px; }
+    .compare-table th { background: var(--bg-soft); padding: 9px 12px; text-align: left; font-weight: 600; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+    .compare-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table .recommended { background: var(--green-light); }
+    .badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 10px; margin-left: 6px; }
+    .badge-green { background: var(--green); color: #fff; }
+    .badge-blue { background: #3b82f6; color: #fff; }
+    .tdee-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0 16px; }
+    .tdee-table th { background: var(--bg-soft); padding: 8px 10px; text-align: left; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .tdee-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .tdee-table tr.active-row { background: var(--green-light); font-weight: 500; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+    .related-card { display: block; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; text-decoration: none; transition: border-color .15s; }
+    .related-card:hover { border-color: var(--green); text-decoration: none; }
+    .related-card.current { border-color: var(--green); background: var(--green-light); }
+    .related-card .rc-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .related-card .rc-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .related-card.current .rc-name { color: var(--green); }
+    .promo-link { display: flex; align-items: center; justify-content: space-between; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px; text-decoration: none; transition: border-color .15s; }
+    .promo-link:hover { border-color: var(--green); text-decoration: none; }
+    .promo-link .pl-title { font-weight: 600; font-size: 14px; color: var(--text); }
+    .promo-link .pl-sub { font-size: 12px; color: var(--text-muted); }
+    .promo-link .pl-arrow { font-size: 18px; color: var(--green); }
+    footer { background: var(--bg-soft); border-top: 1px solid var(--border); padding: 28px 20px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); }
+    .footer-copy { font-size: 12px; color: var(--text-faint); }
+    @keyframes pulse-green { 0%,100%{ box-shadow:0 0 0 0 rgba(45,106,79,.3); } 50%{ box-shadow:0 0 0 6px rgba(45,106,79,0); } }
+    .result-pulse { animation: pulse-green .6s ease-out; }
+  </style>
 </head>
 <body>
-<a href="#calculator" class="skip">Skip to calculator</a>
 
-<header>
-  <div class="hdr">
-    <a href="/" class="logo">tdee<span>calc</span></a>
-    <nav class="site-nav" aria-label="Main navigation">
+<a href="#calculator" class="skip-link">Skip to calculator</a>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">tdeecalc</a>
+    <div class="nav-links">
       <a href="/">TDEE</a>
       <a href="/bmr-calculator.html" class="active">BMR</a>
       <a href="/macro-calculator.html">Macros</a>
       <a href="/protein-calculator.html">Protein</a>
       <a href="/bmi-calculator.html">BMI</a>
       <a href="/about.html">About</a>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
 
 <main>
-<div class="wrap">
-
-<section class="hero" aria-labelledby="h1-title">
-  <h1 id="h1-title">Free <em>BMR Calculator</em> —<br>Basal Metabolic Rate</h1>
-  <p class="hero-sub">Find out how many calories your body burns at complete rest. Enter your stats below — results include both Mifflin–St Jeor and Katch–McArdle estimates.</p>
-  <div class="unit-toggle" role="group" aria-label="Unit system">
-    <button class="active" id="btn-imp" onclick="setUnit('imperial')">Imperial (lbs, ft)</button>
-    <button id="btn-met" onclick="setUnit('metric')">Metric (kg, cm)</button>
+  <div class="hero">
+    <h1>Free <em>BMR Calculator</em> — Basal Metabolic Rate</h1>
+    <p>Find your BMR using Mifflin–St Jeor and Katch–McArdle side by side. See exactly how many calories your body burns at rest.</p>
+    <div class="hero-links">
+      <a href="#calculator">Calculator</a>
+      <a href="#formulas">Formulas compared</a>
+      <a href="#use-bmr">How to use BMR</a>
+      <a href="#faq">FAQ</a>
+    </div>
   </div>
-</section>
 
-
-  <!-- AdSense slot — between hero and calculator -->
-  <!-- Replace data-ad-client and data-ad-slot with your values after AdSense approval -->
-  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;background:transparent">
-    <!--
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="XXXXXXXXXX"
-         data-ad-format="horizontal"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    -->
-  </div>
-<div class="card" id="calculator" role="region" aria-label="BMR Calculator">
-  <p class="card-title">Your stats</p>
-  <div class="fg" style="margin-bottom:12px">
-    <div class="field" style="grid-column:1/-1">
-      <label>Biological sex</label>
-      <div class="rg">
-        <input type="radio" name="sex" id="sm" value="male" checked/>
-        <label for="sm">Male</label>
-        <input type="radio" name="sex" id="sf" value="female"/>
-        <label for="sf">Female</label>
+  <!-- CALCULATOR -->
+  <div class="calc-card" id="calculator">
+    <div class="calc-header">
+      <h2>Your stats</h2>
+      <div class="unit-toggle">
+        <button class="active" id="btn-imperial" onclick="setUnit('imperial')">Imperial</button>
+        <button id="btn-metric" onclick="setUnit('metric')">Metric</button>
       </div>
     </div>
-    <div class="field">
-      <label for="age">Age</label>
-      <div class="iw"><input type="number" id="age" min="15" max="80" value="28"/><span class="ul">yrs</span></div>
-    </div>
-    <div class="field">
-      <label for="weight">Weight</label>
-      <div class="iw"><input type="number" id="weight" min="1" value="175"/><span class="ul" id="wunit">lbs</span></div>
-    </div>
-    <div class="field" id="h-imp">
-      <label>Height</label>
-      <div style="display:flex;gap:7px">
-        <div class="iw" style="flex:1"><input type="number" id="hft" min="3" max="8" value="5"/><span class="ul">ft</span></div>
-        <div class="iw" style="flex:1"><input type="number" id="hin" min="0" max="11" value="11"/><span class="ul">in</span></div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Biological sex</label>
+        <div class="sex-row">
+          <button class="sex-btn active" id="sex-male" onclick="setSex('male')">Male</button>
+          <button class="sex-btn" id="sex-female" onclick="setSex('female')">Female</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" min="15" max="100" placeholder="30" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label for="weight" id="weight-label">Weight (lbs)</label>
+        <input type="number" id="weight" min="1" placeholder="176" inputmode="decimal">
+      </div>
+      <div class="form-group">
+        <label id="height-label">Height</label>
+        <div class="height-row" id="height-imperial">
+          <input type="number" id="height-ft" min="1" max="8" placeholder="5" inputmode="numeric">
+          <input type="number" id="height-in" min="0" max="11" placeholder="10" inputmode="numeric">
+        </div>
+        <input type="number" id="height-cm" min="50" max="280" placeholder="178" inputmode="numeric" style="display:none">
+      </div>
+      <div class="form-group">
+        <label for="bodyfat">Body fat % <span style="font-weight:400;color:var(--text-faint)">(optional)</span></label>
+        <input type="number" id="bodyfat" min="3" max="70" placeholder="e.g. 18" inputmode="decimal">
+        <span class="hint">Enables Katch–McArdle formula</span>
+      </div>
+      <div class="form-group">
+        <label for="activity">Activity level</label>
+        <select id="activity">
+          <option value="1.2">Sedentary</option>
+          <option value="1.375">Lightly active</option>
+          <option value="1.55" selected>Moderately active</option>
+          <option value="1.725">Very active</option>
+          <option value="1.9">Athlete</option>
+        </select>
+        <span class="hint">Used to calculate TDEE from BMR</span>
       </div>
     </div>
-    <div class="field" id="h-met" style="display:none">
-      <label for="hcm">Height</label>
-      <div class="iw"><input type="number" id="hcm" min="100" max="250" value="180"/><span class="ul">cm</span></div>
-    </div>
-    <div class="field">
-      <label for="bf">Body fat % <span style="font-weight:400;color:var(--text3)">(optional — improves accuracy)</span></label>
-      <div class="iw"><input type="number" id="bf" min="3" max="60" placeholder="e.g. 18"/><span class="ul">%</span></div>
-    </div>
-  </div>
-  <button class="btn" id="calcbtn" onclick="calculate()">Calculate My BMR</button>
-</div>
 
-<div id="results" role="region" aria-live="polite">
-  <div class="res-header"><span class="res-person" id="res-person"></span><button class="copy-btn" onclick="copyResults()" id="copy-btn">Copy results</button></div>
-  <div class="res-hero fu">
-    <div class="res-num" id="r-bmr">—</div>
-    <div class="res-label">calories / day — your BMR (at rest)</div>
-    <div class="res-sub" id="r-formula"></div>
-  </div>
-  <div class="card fu" style="animation-delay:.07s">
-    <p class="card-title">Both formula estimates</p>
-    <div class="compare-grid">
-      <div class="cmp-box">
-        <div class="cmp-v" id="r-msj">—</div>
-        <div class="cmp-n">Mifflin–St Jeor</div>
-        <div class="cmp-s">Best for general population</div>
+    <button class="calc-btn" onclick="calculate()">Calculate My BMR</button>
+
+    <div class="results" id="results">
+      <div class="divider"></div>
+
+      <button class="copy-btn" id="copy-btn" onclick="copyResults()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy results
+      </button>
+
+      <div class="results-top" id="results-top">
+        <div class="result-card primary">
+          <div class="result-val" id="r-bmr-mifflin">—</div>
+          <div class="result-label">BMR — Mifflin–St Jeor</div>
+          <div class="result-sub">Most accurate for general population</div>
+        </div>
+        <div class="result-card" id="katch-card">
+          <div class="result-val" id="r-bmr-katch">—</div>
+          <div class="result-label">BMR — Katch–McArdle</div>
+          <div class="result-sub" id="katch-sub">Enter body fat % to unlock</div>
+        </div>
+        <div class="result-card">
+          <div class="result-val" id="r-bmr-harris">—</div>
+          <div class="result-label">BMR — Harris–Benedict</div>
+          <div class="result-sub">Original 1919 formula (revised)</div>
+        </div>
+        <div class="result-card primary" style="border-color:var(--green)">
+          <div class="result-val" id="r-tdee">—</div>
+          <div class="result-label">TDEE (your daily burn)</div>
+          <div class="result-sub" id="r-tdee-sub">BMR × activity factor</div>
+        </div>
       </div>
-      <div class="cmp-box">
-        <div class="cmp-v" id="r-kma">—</div>
-        <div class="cmp-n">Katch–McArdle</div>
-        <div class="cmp-s" id="r-kma-note">Requires body fat %</div>
-      </div>
+
+      <div id="tdee-table-block"></div>
+      <div id="formula-diff-block"></div>
+
+      <a href="/" class="promo-link">
+        <div><div class="pl-title">Get full TDEE + Macros breakdown →</div><div class="pl-sub">Calorie targets for cut, bulk and maintenance in one click</div></div>
+        <span class="pl-arrow">›</span>
+      </a>
     </div>
   </div>
-  <div class="card fu" style="animation-delay:.12s">
-    <p class="card-title">TDEE estimates from your BMR</p>
-    <table style="width:100%;border-collapse:collapse;font-size:13px" id="tdee-table">
-      <thead><tr>
-        <th style="text-align:left;padding:7px 9px;font-weight:500;color:var(--text3);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border)">Activity level</th>
-        <th style="text-align:right;padding:7px 9px;font-weight:500;color:var(--text3);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border)">TDEE (kcal/day)</th>
-      </tr></thead>
-      <tbody id="tdee-body"></tbody>
-    </table>
-    <p style="font-size:12px;color:var(--text3);margin-top:10px">Use the full <a href="/" style="color:var(--accent)">TDEE calculator</a> to select your activity level and get macro targets.</p>
-  </div>
-</div>
 
-  <!-- AdSense slot — after results, before educational content -->
-  <div class="ad-container" aria-label="Advertisement" style="margin:0 0 20px;text-align:center;background:transparent">
-    <!--
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="XXXXXXXXXX"
-         data-ad-format="rectangle"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    -->
+  <!-- FORMULAS COMPARED -->
+  <div class="content-section" id="formulas">
+    <h2>BMR formulas compared — which one should you use?</h2>
+    <p>Three main equations are used to estimate BMR. Each was developed from different populations and uses different variables. Here is what the research says about each:</p>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Formula</th>
+            <th>Year</th>
+            <th>Inputs needed</th>
+            <th>Best for</th>
+            <th>Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="recommended">
+            <td><strong>Mifflin–St Jeor</strong> <span class="badge badge-green">Recommended</span></td>
+            <td>1990</td>
+            <td>Weight, height, age, sex</td>
+            <td>General population, most people</td>
+            <td>±10% in 82% of subjects</td>
+          </tr>
+          <tr>
+            <td><strong>Katch–McArdle</strong> <span class="badge badge-blue">Best accuracy</span></td>
+            <td>1996</td>
+            <td>Lean body mass only</td>
+            <td>Athletes, very lean or muscular individuals</td>
+            <td>Most accurate when body fat % is known</td>
+          </tr>
+          <tr>
+            <td><strong>Harris–Benedict</strong> (revised)</td>
+            <td>1919 / 1984</td>
+            <td>Weight, height, age, sex</td>
+            <td>Historical reference, clinical settings</td>
+            <td>Tends to overestimate by 5–15%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The formulas in full</h3>
+    <p><strong>Mifflin–St Jeor:</strong></p>
+    <div class="formula">Male:   BMR = (10 × kg) + (6.25 × cm) − (5 × age) + 5<br>Female: BMR = (10 × kg) + (6.25 × cm) − (5 × age) − 161</div>
+
+    <p><strong>Katch–McArdle</strong> (requires body fat %):</p>
+    <div class="formula">LBM = weight × (1 − body fat% / 100)<br>BMR = 370 + (21.6 × LBM in kg)</div>
+
+    <p><strong>Harris–Benedict</strong> (Roza & Shizgal 1984 revision):</p>
+    <div class="formula">Male:   BMR = 88.362 + (13.397 × kg) + (4.799 × cm) − (5.677 × age)<br>Female: BMR = 447.593 + (9.247 × kg) + (3.098 × cm) − (4.330 × age)</div>
+
+    <!-- Step by step example -->
+    <h3>Step-by-step BMR calculation example</h3>
+
+    <div class="example-box">
+      <h4>Male, 32 years old, 80 kg, 178 cm — step by step</h4>
+      <div class="example-row"><span class="er-label">Step 1 — Weight term</span><span class="er-val">10 × 80 = 800</span></div>
+      <div class="example-row"><span class="er-label">Step 2 — Height term</span><span class="er-val">6.25 × 178 = 1,112.5</span></div>
+      <div class="example-row"><span class="er-label">Step 3 — Age term</span><span class="er-val">5 × 32 = 160</span></div>
+      <div class="example-row"><span class="er-label">Step 4 — Sex constant (male)</span><span class="er-val">+5</span></div>
+      <div class="example-row"><span class="er-label">BMR = 800 + 1,112.5 − 160 + 5</span><span class="er-val">= 1,757 kcal/day</span></div>
+      <div class="example-row"><span class="er-label">TDEE (moderately active ×1.55)</span><span class="er-val">1,757 × 1.55 = 2,723 kcal/day</span></div>
+    </div>
+
+    <div class="example-box" style="background:#fdf4ff;border-color:#e9d5ff">
+      <h4 style="color:#7e22ce">Female, 28 years old, 65 kg, 165 cm — step by step</h4>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">Step 1 — Weight term</span><span class="er-val" style="color:#581c87">10 × 65 = 650</span></div>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">Step 2 — Height term</span><span class="er-val" style="color:#581c87">6.25 × 165 = 1,031.25</span></div>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">Step 3 — Age term</span><span class="er-val" style="color:#581c87">5 × 28 = 140</span></div>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">Step 4 — Sex constant (female)</span><span class="er-val" style="color:#581c87">−161</span></div>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">BMR = 650 + 1,031.25 − 140 − 161</span><span class="er-val" style="color:#581c87">= 1,380 kcal/day</span></div>
+      <div class="example-row" style="border-color:#f3e8ff"><span class="er-label" style="color:#7e22ce">TDEE (lightly active ×1.375)</span><span class="er-val" style="color:#581c87">1,380 × 1.375 = 1,898 kcal/day</span></div>
+    </div>
   </div>
 
-  <a href="/" class="next-cta"><div><div class="next-cta-text">Calculate your full TDEE →</div><div class="next-cta-sub">Use your BMR to get calories, macros and goal timeline</div></div><div class="next-cta-arrow">→</div></a>
+  <!-- HOW TO USE BMR -->
+  <div class="content-section" id="use-bmr">
+    <h2>How to use your BMR to reach your goal</h2>
 
-<!-- What is BMR -->
-<section class="section" id="what-is-bmr" aria-labelledby="wib-title">
-  <h2 id="wib-title">What is Basal Metabolic Rate (BMR)?</h2>
-  <p>Your <strong>Basal Metabolic Rate</strong> is the number of calories your body burns each day at complete rest — essentially what you'd burn if you lay in bed all day without moving. It represents the minimum energy needed to keep your vital organs functioning: heart beating, lungs breathing, kidneys filtering, and cells repairing.</p>
-  <p>BMR accounts for roughly <strong>60–75% of total daily calorie expenditure</strong> for most people. The rest comes from physical activity (15–30%) and the thermic effect of food (around 10%). This is why even "sedentary" people burn considerably more than their BMR — daily movement, digestion, and basic tasks all add up.</p>
-  <div class="infobox">
-    BMR is the <em>floor</em> of your calorie intake. Eating consistently below your BMR causes muscle loss, hormonal disruption, and metabolic adaptation. Even aggressive cutting diets should stay above BMR.
-  </div>
-</section>
+    <h3>BMR is a floor, not a target</h3>
+    <p>Your BMR is the minimum calories your body needs to sustain basic organ function — breathing, circulation, cell repair. <strong>Do not try to eat at your BMR.</strong> Since you move, exercise, and digest food, your actual calorie need (TDEE) is always higher than BMR.</p>
+    <p>Use your <strong>TDEE</strong> as the baseline for setting calorie targets. Your BMR is most useful as a safety check: if your cut calories are close to or below your BMR, the deficit is too aggressive.</p>
 
-<!-- Formulas -->
-<section class="section" aria-labelledby="form-title">
-  <h2 id="form-title">BMR formulas explained</h2>
-  <p><strong>Mifflin–St Jeor (1990)</strong> is the most widely validated equation for the general population and is the default here. Peer-reviewed studies consistently show it has the smallest mean error versus measured BMR for non-athletic individuals.</p>
-  <div class="infobox">
-    <strong>Male:</strong> BMR = (10 × weight kg) + (6.25 × height cm) − (5 × age) + 5<br>
-    <strong>Female:</strong> BMR = (10 × weight kg) + (6.25 × height cm) − (5 × age) − 161
-  </div>
-  <p><strong>Katch–McArdle (1975)</strong> uses lean body mass instead of total weight, making it significantly more accurate for athletes, bodybuilders, and anyone with above-average muscle mass or below-average body fat. To use it, you need a reasonable estimate of your body fat percentage.</p>
-  <div class="infobox">
-    <strong>Katch–McArdle:</strong> BMR = 370 + (21.6 × lean body mass in kg)<br>
-    Where lean body mass = weight × (1 − body fat % / 100)
-  </div>
-  <p>The <strong>Harris–Benedict equation</strong> (1919, revised 1984) was the gold standard for decades but is now considered slightly less accurate than Mifflin–St Jeor for the modern population. It is not used here, but its values typically run 5–15% higher than Mifflin–St Jeor.</p>
-</section>
+    <h3>Fat loss: cut from TDEE, not BMR</h3>
+    <p>A 500 kcal deficit below TDEE produces ~1 lb/week of fat loss. Eat above your BMR at all times to avoid muscle loss and hormonal disruption. A deficit of 20–25% of TDEE is the safe practical maximum.</p>
 
-<!-- Factors -->
-<section class="section" aria-labelledby="fac-title">
-  <h2 id="fac-title">What affects your BMR?</h2>
-  <p><strong>Muscle mass</strong> is the single biggest factor — muscle burns approximately 3× more calories at rest than fat tissue. Two people of identical weight can have BMRs differing by 300+ calories if their body composition is significantly different.</p>
-  <p><strong>Age</strong> reduces BMR by approximately 1–2% per decade after 25, primarily due to natural reductions in muscle mass (sarcopenia) unless countered by resistance training.</p>
-  <p><strong>Sex</strong> affects BMR significantly — men typically have 5–15% higher BMR than women of the same age, weight, and height, largely due to higher average muscle mass and lower average body fat percentage.</p>
-  <p><strong>Thyroid function</strong> has a major impact on metabolic rate. Hypothyroidism can reduce BMR by 20–40%, while hyperthyroidism raises it significantly. If your real-world calorie results differ dramatically from this calculator's estimates, thyroid function is worth investigating with a doctor.</p>
-</section>
+    <h3>Muscle gain: eat slightly above TDEE</h3>
+    <p>Add 200–350 kcal above TDEE for a lean bulk. Larger surpluses produce faster fat gain without meaningfully faster muscle growth for natural athletes.</p>
 
-<!-- FAQ -->
-<article class="section" id="faq" aria-labelledby="faq-title">
-  <h2 id="faq-title">Frequently asked questions</h2>
-  <div class="faq-item">
-    <h3>What is the difference between BMR and TDEE?</h3>
-    <p>BMR is your calorie burn at complete rest. TDEE (Total Daily Energy Expenditure) is BMR multiplied by an activity multiplier that accounts for exercise and daily movement. For a moderately active person, TDEE is approximately 1.55× BMR. Use the <a href="/" style="color:var(--accent)">TDEE calculator</a> to factor in your activity level.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Should I eat at my BMR or TDEE?</h3>
-    <p>Eat at (or relative to) your TDEE — not your BMR. BMR is the absolute minimum your body needs at rest. Since you move, exercise, and digest food throughout the day, eating only at BMR would create a large deficit for most people and risk muscle loss and fatigue. Use TDEE as your baseline and create a deficit from that.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Why are the two formula results different?</h3>
-    <p>Mifflin–St Jeor uses total body weight, while Katch–McArdle uses lean body mass. If you have average body composition, the results will be close. If you are particularly muscular or have high body fat, the difference may be 100–250+ calories. The Katch–McArdle result is more accurate when body fat % is known.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Can BMR change over time?</h3>
-    <p>Yes. BMR decreases with age and during prolonged calorie restriction (metabolic adaptation). It increases with gaining muscle mass. This is why recalculating every 4–8 weeks during a diet is important — as you lose weight, your BMR decreases and calorie targets need adjusting.</p>
-  </div>
-  <div class="faq-item">
-    <h3>Is BMR the same as RMR?</h3>
-    <p>Not exactly. RMR (Resting Metabolic Rate) is measured after a period of rest but not under the strict fasting and temperature conditions required for true BMR. RMR is typically 10–20% higher than BMR. Most calculators, including this one, technically calculate RMR but use the term BMR colloquially, as do most nutrition applications.</p>
-  </div>
-</article>
+    <h3>Why results change as you lose weight</h3>
+    <p>BMR is directly tied to body weight. Every 10 lbs (4.5 kg) of weight lost reduces BMR by roughly 50–80 kcal/day. This is why weight loss stalls — if you don't recalculate, the deficit you started with slowly disappears. Recalculate every 4–8 weeks.</p>
 
-<!-- Related tools -->
-<section class="section" aria-labelledby="rt-title">
-  <h2 id="rt-title" style="font-size:17px">Related calculators</h2>
-  <div class="tools-row">
-    <a href="/" class="tool-card">
-      <div class="tool-card-name">TDEE Calculator</div>
-      <div class="tool-card-desc">Total daily calorie burn + macros</div>
-    </a>
-    <a href="/bmr-calculator.html" class="tool-card" style="border-color:var(--accent);background:var(--accent-light)">
-      <div class="tool-card-name" style="color:var(--accent)">BMR Calculator</div>
-      <div class="tool-card-desc" style="color:var(--accent)">You are here</div>
-    </a>
-    <a href="/about.html" class="tool-card">
-      <div class="tool-card-name">About &amp; Methodology</div>
-      <div class="tool-card-desc">Formulas and sources</div>
-    </a>
+    <!-- Mistakes -->
+    <h3>Why different BMR calculators give different numbers</h3>
+    <div class="mistakes-box">
+      <h4>Common reasons for BMR discrepancies</h4>
+      <div class="mistake-item"><span class="mi-icon">1</span><span class="mi-text"><strong>Different formula used.</strong> Mifflin–St Jeor and Harris–Benedict can differ by 100–200 kcal for the same inputs. Neither is wrong — they reflect different research populations. Mifflin–St Jeor is recommended for most people.</span></div>
+      <div class="mistake-item"><span class="mi-icon">2</span><span class="mi-text"><strong>Unit conversion rounding.</strong> If one calculator uses lbs/inches natively and another converts internally, rounding at different steps produces slightly different results.</span></div>
+      <div class="mistake-item"><span class="mi-icon">3</span><span class="mi-text"><strong>Body fat % included or not.</strong> A calculator using Katch–McArdle with your body fat % will give a very different result from one using Mifflin–St Jeor with just your weight, especially if you are lean or muscular.</span></div>
+      <div class="mistake-item"><span class="mi-icon">4</span><span class="mi-text"><strong>RMR vs BMR confusion.</strong> Some tools display RMR (Resting Metabolic Rate), which is 10–20% higher than true BMR. They are often used interchangeably but measured differently.</span></div>
+    </div>
   </div>
-</section>
 
-</div>
+  <!-- FAQ -->
+  <div class="content-section" id="faq">
+    <h2>Frequently asked questions about BMR</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What is the difference between BMR and TDEE?</div>
+      <div class="faq-a">BMR is your calorie burn at complete rest. TDEE (Total Daily Energy Expenditure) is BMR multiplied by an activity factor that accounts for movement and exercise. For a moderately active person, TDEE is approximately 1.55× BMR. Always use TDEE as your calorie planning baseline.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Should I eat at my BMR or my TDEE?</div>
+      <div class="faq-a">Always eat at (or relative to) your TDEE — not your BMR. BMR is the absolute minimum your body needs at complete rest. Since you move, exercise, and digest food throughout the day, eating only at BMR would create a large, unhealthy deficit for most people and cause muscle loss, fatigue, and hormonal disruption.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Why are the Mifflin–St Jeor and Katch–McArdle results different?</div>
+      <div class="faq-a">Mifflin–St Jeor uses total body weight, while Katch–McArdle uses lean body mass. If you have average body composition, results will be close (within 50–100 kcal). If you are particularly muscular, Katch–McArdle will be higher — and more accurate. If you have high body fat, Katch–McArdle will be lower. The difference can exceed 200 kcal for people at body composition extremes.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can BMR change over time?</div>
+      <div class="faq-a">Yes. BMR decreases with age (roughly 1–2% per decade after 30), with prolonged calorie restriction (metabolic adaptation), and with weight loss. It increases with gaining muscle mass. This is why recalculating every 4–8 weeks during a diet or training phase is important.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is BMR the same as RMR?</div>
+      <div class="faq-a">Not exactly. RMR (Resting Metabolic Rate) is measured after a period of rest but not under the strict fasting and controlled temperature conditions required for true BMR measurement. RMR is typically 10–20% higher than BMR. Most online calculators technically estimate RMR but use the term BMR colloquially — this is standard practice and the difference is not clinically significant for calorie planning.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How accurate is a BMR calculator?</div>
+      <div class="faq-a">The Mifflin–St Jeor equation predicts BMR within 10% of measured values for approximately 82% of the general population. It is less accurate for very lean athletes (use Katch–McArdle) and people with certain medical conditions. For practical calorie planning, ±10% accuracy is sufficient — treat the result as a starting estimate and adjust based on 2–4 weeks of real weight data.</div>
+    </div>
+  </div>
+
+  <!-- Related -->
+  <div class="content-section">
+    <h2>Related free calculators</h2>
+    <div class="related-grid">
+      <a href="/" class="related-card"><div class="rc-name">TDEE</div><div class="rc-desc">Full daily calorie needs</div></a>
+      <a href="/bmr-calculator.html" class="related-card current"><div class="rc-name">BMR</div><div class="rc-desc">You are here</div></a>
+      <a href="/macro-calculator.html" class="related-card"><div class="rc-name">Macros</div><div class="rc-desc">Protein, carbs &amp; fat</div></a>
+      <a href="/protein-calculator.html" class="related-card"><div class="rc-name">Protein</div><div class="rc-desc">Daily protein target</div></a>
+      <a href="/bmi-calculator.html" class="related-card"><div class="rc-name">BMI</div><div class="rc-desc">Body mass index</div></a>
+      <a href="/about.html" class="related-card"><div class="rc-name">About</div><div class="rc-desc">Methodology &amp; sources</div></a>
+    </div>
+    <p style="font-size:12px;color:var(--text-faint);margin-top:12px">Results are estimates based on validated formulas. Not medical advice.</p>
+  </div>
 </main>
 
-
 <footer>
-  <div class="wrap">
-    <p>Results are estimates based on validated formulas. Not medical advice.</p>
+  <div class="footer-inner">
     <div class="footer-links">
       <a href="/">TDEE Calculator</a>
       <a href="/bmr-calculator.html">BMR Calculator</a>
       <a href="/macro-calculator.html">Macro Calculator</a>
-      <a href="/protein-calculator.html">Protein</a>
-      <a href="/bmi-calculator.html">BMI Calculator</a>
       <a href="/protein-calculator.html">Protein Calculator</a>
+      <a href="/bmi-calculator.html">BMI Calculator</a>
       <a href="/about.html">About &amp; Methodology</a>
       <a href="/terms.html">Terms of Use</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
     </div>
-    <p style="margin-top:10px">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</p>
+    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
 <script>
-let unit='imperial';
-function setUnit(u){
-  unit=u;
-  document.getElementById('btn-imp').classList.toggle('active',u==='imperial');
-  document.getElementById('btn-met').classList.toggle('active',u==='metric');
-  document.getElementById('h-imp').style.display=u==='imperial'?'':'none';
-  document.getElementById('h-met').style.display=u==='metric'?'':'none';
-  document.getElementById('wunit').textContent=u==='imperial'?'lbs':'kg';
-  const w=parseFloat(document.getElementById('weight').value)||0;
-  if(u==='metric'&&w>0){
-    document.getElementById('weight').value=Math.round(w/2.205);
-    const ft=parseInt(document.getElementById('hft').value)||5;
-    const i=parseInt(document.getElementById('hin').value)||11;
-    document.getElementById('hcm').value=Math.round((ft*12+i)*2.54);
-  } else if(u==='imperial'&&w>0){
-    document.getElementById('weight').value=Math.round(w*2.205);
-    const cm=parseFloat(document.getElementById('hcm').value)||180;
-    document.getElementById('hft').value=Math.floor(cm/2.54/12);
-    document.getElementById('hin').value=Math.round((cm/2.54)%12);
-  }
+let unit = 'imperial';
+let sex = 'male';
+
+function setUnit(u) {
+  unit = u;
+  document.getElementById('btn-imperial').classList.toggle('active', u === 'imperial');
+  document.getElementById('btn-metric').classList.toggle('active', u === 'metric');
+  document.getElementById('height-imperial').style.display = u === 'imperial' ? 'flex' : 'none';
+  document.getElementById('height-cm').style.display = u === 'metric' ? 'block' : 'none';
+  document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)';
+  document.getElementById('height-label').textContent = u === 'imperial' ? 'Height (ft / in)' : 'Height (cm)';
+  document.getElementById('weight').placeholder = u === 'imperial' ? '176' : '80';
 }
-function fmt(n){return Math.round(n).toLocaleString()}
-function calculate(){
-  const btn=document.getElementById('calcbtn');
-  btn.disabled=true;btn.textContent='Calculating…';
-  setTimeout(()=>{_calc();btn.disabled=false;btn.textContent='Calculate My BMR';},30);
+
+function setSex(s) {
+  sex = s;
+  document.getElementById('sex-male').classList.toggle('active', s === 'male');
+  document.getElementById('sex-female').classList.toggle('active', s === 'female');
 }
-function _calc(){
-  const sex=document.querySelector('input[name=sex]:checked').value;
-  const age=parseFloat(document.getElementById('age').value);
-  const bf=parseFloat(document.getElementById('bf').value);
-  let wkg,hcm;
-  if(unit==='imperial'){
-    wkg=parseFloat(document.getElementById('weight').value)/2.205;
-    const ft=parseFloat(document.getElementById('hft').value)||5;
-    const i=parseFloat(document.getElementById('hin').value)||11;
-    hcm=(ft*12+i)*2.54;
+
+function calculate() {
+  const ageVal = parseFloat(document.getElementById('age').value);
+  const weightVal = parseFloat(document.getElementById('weight').value);
+  const bfVal = parseFloat(document.getElementById('bodyfat').value);
+  const actVal = parseFloat(document.getElementById('activity').value);
+  const actText = document.getElementById('activity').options[document.getElementById('activity').selectedIndex].text;
+
+  let weightKg, heightCm;
+  if (unit === 'imperial') {
+    weightKg = weightVal * 0.453592;
+    const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+    const inch = parseFloat(document.getElementById('height-in').value) || 0;
+    heightCm = (ft * 30.48) + (inch * 2.54);
   } else {
-    wkg=parseFloat(document.getElementById('weight').value);
-    hcm=parseFloat(document.getElementById('hcm').value);
+    weightKg = weightVal;
+    heightCm = parseFloat(document.getElementById('height-cm').value);
   }
-  if(!wkg||!hcm||!age){alert('Please fill in all required fields.');return;}
-  const msj=sex==='male'?10*wkg+6.25*hcm-5*age+5:10*wkg+6.25*hcm-5*age-161;
-  let kma=null,formula,bmr;
-  if(!isNaN(bf)&&bf>0){
-    const lbm=wkg*(1-bf/100);
-    kma=370+21.6*lbm;
-    bmr=kma;
-    formula='Katch–McArdle (body fat % provided)';
-    document.getElementById('r-kma-note').textContent='Using your body fat %';
+
+  if (!ageVal || !weightKg || !heightCm || ageVal < 15) {
+    alert('Please enter valid age, weight, and height.');
+    return;
+  }
+
+  // Mifflin–St Jeor
+  const mifflin = sex === 'male'
+    ? (10 * weightKg) + (6.25 * heightCm) - (5 * ageVal) + 5
+    : (10 * weightKg) + (6.25 * heightCm) - (5 * ageVal) - 161;
+
+  // Harris–Benedict (revised Roza & Shizgal 1984)
+  const harris = sex === 'male'
+    ? 88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageVal)
+    : 447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * ageVal);
+
+  // Katch–McArdle
+  let katch = null;
+  if (!isNaN(bfVal) && bfVal > 0 && bfVal < 70) {
+    const lbm = weightKg * (1 - bfVal / 100);
+    katch = 370 + (21.6 * lbm);
+  }
+
+  const tdee = Math.round(mifflin * actVal);
+
+  // Render
+  document.getElementById('r-bmr-mifflin').textContent = Math.round(mifflin).toLocaleString();
+  document.getElementById('r-bmr-harris').textContent = Math.round(harris).toLocaleString();
+  document.getElementById('r-tdee').textContent = tdee.toLocaleString();
+  document.getElementById('r-tdee-sub').textContent = `BMR × ${actVal} (${actText.split('—')[0].trim()})`;
+
+  if (katch) {
+    document.getElementById('r-bmr-katch').textContent = Math.round(katch).toLocaleString();
+    document.getElementById('katch-sub').textContent = `Body fat: ${bfVal}%`;
+    document.getElementById('katch-card').style.opacity = '1';
   } else {
-    bmr=msj;
-    formula='Mifflin–St Jeor (default)';
-    document.getElementById('r-kma-note').textContent='Enter body fat % above to unlock';
+    document.getElementById('r-bmr-katch').textContent = '—';
+    document.getElementById('katch-sub').textContent = 'Enter body fat % to unlock';
+    document.getElementById('katch-card').style.opacity = '.55';
   }
-  document.getElementById('r-bmr').textContent=fmt(bmr);
-  document.getElementById('r-formula').textContent=formula;
-  document.getElementById('r-msj').textContent=fmt(msj);
-  document.getElementById('r-kma').textContent=kma?fmt(kma):'—';
-  const acts=[{l:'Sedentary',m:1.2},{l:'Lightly active',m:1.375},{l:'Moderately active',m:1.55},{l:'Very active',m:1.725},{l:'Athlete',m:1.9}];
-  document.getElementById('tdee-body').innerHTML=acts.map(a=>`<tr><td style="padding:8px 9px;border-bottom:1px solid var(--border)">${a.l}</td><td style="padding:8px 9px;border-bottom:1px solid var(--border);text-align:right;font-family:'DM Mono',monospace">${fmt(bmr*a.m)}</td></tr>`).join('');
 
-  /* Personalized header */
-  var personEl = document.getElementById('res-person');
-  if(personEl){
-    var wDisp = unit==='imperial'?Math.round(wkg*2.205)+' lbs':Math.round(wkg)+' kg';
-    var sexEl2 = document.querySelector('input[name=sex]:checked');
-    var sexVal = sexEl2 ? sexEl2.value : '';
-    personEl.textContent = 'Results for '+document.getElementById('age').value+'-year-old '+sexVal+', '+wDisp;
+  // TDEE at all levels
+  const levels = [
+    ['Sedentary (×1.2)', 1.2], ['Lightly active (×1.375)', 1.375],
+    ['Moderately active (×1.55)', 1.55], ['Very active (×1.725)', 1.725], ['Athlete (×1.9)', 1.9]
+  ];
+  const tbody = levels.map(([name, mult]) =>
+    `<tr class="${mult === actVal ? 'active-row' : ''}"><td>${name}</td><td>${Math.round(mifflin * mult).toLocaleString()} kcal</td>${katch ? `<td>${Math.round(katch * mult).toLocaleString()} kcal</td>` : ''}</tr>`
+  ).join('');
+  const katchHeader = katch ? '<th>TDEE (Katch)</th>' : '';
+  document.getElementById('tdee-table-block').innerHTML = `
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Your TDEE at all activity levels</h3>
+    <div style="overflow-x:auto"><table class="tdee-table">
+      <thead><tr><th>Activity level</th><th>TDEE (Mifflin)</th>${katchHeader}</tr></thead>
+      <tbody>${tbody}</tbody>
+    </table></div>`;
+
+  // Formula difference note
+  if (katch) {
+    const diff = Math.abs(Math.round(mifflin) - Math.round(katch));
+    const higher = Math.round(katch) > Math.round(mifflin) ? 'Katch–McArdle' : 'Mifflin–St Jeor';
+    document.getElementById('formula-diff-block').innerHTML = `
+      <div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;color:var(--text-muted);margin-bottom:16px">
+        Formula difference: <strong style="color:var(--text)">${diff} kcal/day</strong>. ${higher} gives the higher estimate.
+        ${diff > 150 ? ' This large gap suggests your body composition differs significantly from average — <strong>Katch–McArdle is likely more accurate for you</strong>.' : ' Both formulas agree closely — either result is reliable.'}
+      </div>`;
+  } else {
+    document.getElementById('formula-diff-block').innerHTML = '';
   }
-  document.getElementById('results').style.display='block';
-  setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}),80);
-}
 
-
-// ── localStorage: save and restore inputs ─────────────────────
-const LS_KEY = 'tdee_calc_prefs';
-function savePrefs() {
-  const prefs = { unit };
-  ['age','weight','bf'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.value) prefs[id] = el.value;
-  });
-  ['hft','hin','hcm'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.value) prefs[id] = el.value;
-  });
-  const sexEl = document.querySelector('input[name=sex]:checked');
-  if (sexEl) prefs.sex = sexEl.value;
-  try { localStorage.setItem(LS_KEY, JSON.stringify(prefs)); } catch(e) {}
+  // Show / animate
+  const resultsEl = document.getElementById('results');
+  resultsEl.classList.add('show');
+  document.getElementById('copy-btn').classList.add('show');
+  const topEl = document.getElementById('results-top');
+  topEl.classList.remove('result-pulse');
+  void topEl.offsetWidth;
+  topEl.classList.add('result-pulse');
+  setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
 }
-function loadPrefs() {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (!raw) return;
-    const prefs = JSON.parse(raw);
-    if (prefs.unit && prefs.unit !== unit) setUnit(prefs.unit);
-    ['age','weight','bf','hft','hin','hcm'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el && prefs[id] !== undefined) el.value = prefs[id];
-    });
-    if (prefs.sex) {
-      const el = document.querySelector('input[name=sex][value="'+prefs.sex+'"]');
-      if (el) el.checked = true;
-    }
-  } catch(e) {}
-}
-// Save on any input change
-document.addEventListener('change', savePrefs);
-document.addEventListener('input', savePrefs);
-// Load on page ready
-document.addEventListener('DOMContentLoaded', loadPrefs);
-
 
 function copyResults() {
-  var bmr = document.getElementById('r-bmr') ? document.getElementById('r-bmr').textContent : '';
-  var msj = document.getElementById('r-msj') ? document.getElementById('r-msj').textContent : '';
-  var kma = document.getElementById('r-kma') ? document.getElementById('r-kma').textContent : '';
-  var text = 'My BMR Results\n--------------\n' +
-             'BMR: ' + bmr + ' kcal/day\n' +
-             'Mifflin-St Jeor: ' + msj + ' kcal\n' +
-             'Katch-McArdle: ' + kma + ' kcal\n' +
-             'Calculator: https://tdee-calculator-dad.pages.dev/bmr-calculator.html';
-  if(navigator.clipboard){
-    navigator.clipboard.writeText(text).then(function(){
-      var btn=document.getElementById('copy-btn');
-      btn.textContent='Copied!';
-      setTimeout(function(){btn.textContent='Copy results';},2000);
-    });
-  }
+  const mifflin = document.getElementById('r-bmr-mifflin').textContent;
+  const harris  = document.getElementById('r-bmr-harris').textContent;
+  const katch   = document.getElementById('r-bmr-katch').textContent;
+  const tdee    = document.getElementById('r-tdee').textContent;
+  const text = `BMR (Mifflin–St Jeor): ${mifflin} kcal/day\nBMR (Harris–Benedict): ${harris} kcal/day\nBMR (Katch–McArdle): ${katch} kcal/day\nTDEE: ${tdee} kcal/day\nCalculated at tdee-calculator-dad.pages.dev/bmr-calculator.html`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy results'; }, 2000);
+  });
 }
 </script>
 </body>

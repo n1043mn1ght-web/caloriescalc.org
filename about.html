@@ -1,230 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>About — TDEE Calculator Methodology, Formulas & Sources</title>
-<meta name="description" content="Learn about the formulas behind our TDEE, BMR and macro calculators. We use the Mifflin–St Jeor and Katch–McArdle equations backed by peer-reviewed research."/>
-<link rel="canonical" href="https://tdee-calculator-dad.pages.dev/about.html"/>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232d6a4f'/><text y='23' x='4' font-size='20' font-family='sans-serif' font-weight='700' fill='white'>T</text></svg>"/>
-<meta name="theme-color" content="#2d6a4f"/>
-<meta property="og:title" content="About — TDEE Calculator Methodology"/>
-<meta property="og:description" content="The formulas, sources and methodology behind our free TDEE and BMR calculators."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://tdee-calculator-dad.pages.dev/about.html"/>
-<meta name="robots" content="index, follow"/>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"AboutPage","name":"About TDEE Calculator","url":"https://tdee-calculator-dad.pages.dev/about.html","description":"Methodology, formulas and sources for the TDEE Calculator tools.","isPartOf":{"@type":"WebSite","name":"TDEE Calculator","url":"https://tdee-calculator-dad.pages.dev/"}}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tdee-calculator-dad.pages.dev/"},{"@type":"ListItem","position":2,"name":"About","item":"https://tdee-calculator-dad.pages.dev/about.html"}]}
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-:root{--bg:#f7f6f2;--surface:#fff;--surface2:#f0ede8;--border:#e4e0d8;--text:#1a1916;--text2:#6b6760;--text3:#9b9790;--accent:#2d6a4f;--accent-d:#1e4d38;--accent-light:#d8f3dc;--radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04)}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
-.wrap{max-width:780px;margin:0 auto;padding:0 20px}
-header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
-.hdr{display:flex;align-items:center;gap:12px;max-width:780px;margin:0 auto;padding:0 20px}
-.logo{font-size:17px;font-weight:600;letter-spacing:-.3px;color:var(--text);text-decoration:none}
-.logo span{color:var(--accent)}
-nav.site-nav{display:flex;gap:4px;margin-left:auto}
-nav.site-nav a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;padding:6px 10px;border-radius:6px;transition:background .15s,color .15s}
-nav.site-nav a:hover{background:var(--surface2);color:var(--text)}
-nav.site-nav a.active{color:var(--accent);background:var(--accent-light)}
-.page-hero{padding:44px 0 36px}
-h1{font-size:clamp(24px,5vw,34px);font-weight:600;letter-spacing:-.4px;line-height:1.2;margin-bottom:10px}
-.hero-sub{font-size:15px;color:var(--text2);max-width:560px;margin-bottom:0}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:16px}
-.section{margin-top:40px;padding-top:28px;border-top:1px solid var(--border)}
-.section h2{font-size:20px;font-weight:600;letter-spacing:-.3px;margin-bottom:14px}
-.section h3{font-size:16px;font-weight:600;margin:20px 0 8px}
-.section p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:10px}
-.section p:last-child{margin-bottom:0}
-.section ul{padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--text2);line-height:1.7}
-.infobox{background:var(--accent-light);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;margin:16px 0;font-size:14px;color:var(--accent-d);line-height:1.6}
-.ref-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
-.ref-item{font-size:13px;color:var(--text2);padding:12px 14px;background:var(--surface2);border-radius:8px;line-height:1.6}
-.ref-item strong{color:var(--text);display:block;margin-bottom:2px}
-.tools-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-.tool-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;text-decoration:none;transition:border-color .15s}
-.tool-card:hover{border-color:var(--accent)}
-.tool-card-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
-.tool-card-desc{font-size:12px;color:var(--text3)}
-.skip{position:absolute;top:-40px;left:0;background:var(--accent);color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:13px;font-weight:500;z-index:999;transition:top .2s;text-decoration:none}
-.skip:focus{top:0}
-footer{margin-top:56px;padding:28px 0;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text3)}
-footer a{color:var(--text3);text-decoration:underline}
-.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin-top:10px}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;overflow-y:auto;padding:20px}
-.modal-box{max-width:580px;margin:40px auto;background:#fff;border-radius:16px;padding:28px;position:relative}
-.modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text2);line-height:1}
-</style>
-<meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.svg"/>
-<link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About &amp; Methodology — TDEE Calculator</title>
+  <meta name="description" content="Learn the formulas and methodology behind our free TDEE, BMR, macro, protein and BMI calculators — Mifflin–St Jeor, Katch–McArdle and more, with sources.">
+  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/about.html">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2d6a4f">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/about.html">
+  <meta property="og:title" content="About &amp; Methodology — TDEE Calculator">
+  <meta property="og:description" content="The formulas and research behind our free health calculators, with sources.">
+  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About &amp; Methodology — TDEE Calculator">
+  <meta name="twitter:description" content="The formulas and research behind our free health calculators.">
+  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/og-image.png">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #2d6a4f; --green-light: #e8f5ee; --green-dark: #1b4332;
+      --text: #1a1a1a; --text-muted: #555; --text-faint: #888;
+      --border: #e0e0e0; --bg: #fff; --bg-soft: #f8f9fa;
+      --radius: 10px; --radius-sm: 6px;
+      --shadow: 0 2px 8px rgba(0,0,0,.07); --max: 780px;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    a { color: var(--green); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .skip-link { position: absolute; left: -9999px; top: 4px; background: var(--green); color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 14px; z-index: 9999; }
+    .skip-link:focus { left: 4px; }
+    nav { background: var(--green); padding: 0 20px; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; gap: 4px; height: 52px; }
+    .nav-logo { color: #fff; font-weight: 700; font-size: 17px; margin-right: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo:hover { opacity: .85; }
+    .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+    .nav-links a { color: rgba(255,255,255,.85); padding: 6px 10px; border-radius: var(--radius-sm); font-size: 14px; transition: background .15s; }
+    .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.18); color: #fff; text-decoration: none; }
+    main { max-width: var(--max); margin: 0 auto; padding: 36px 20px 60px; }
+    .hero { text-align: center; padding: 0 0 24px; }
+    .hero h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 560px; margin: 0 auto; }
+    .content-section { margin-bottom: 36px; }
+    .content-section h2 { font-size: 21px; font-weight: 700; margin-bottom: 12px; }
+    .content-section h3 { font-size: 16px; font-weight: 600; margin: 16px 0 6px; }
+    .content-section p { color: var(--text-muted); font-size: 15px; margin-bottom: 10px; line-height: 1.7; }
+    .content-section ul, .content-section ol { color: var(--text-muted); font-size: 15px; padding-left: 20px; margin-bottom: 10px; }
+    .content-section li { margin-bottom: 4px; line-height: 1.6; }
+    .formula { background: var(--bg-soft); border-left: 3px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; font-family: monospace; font-size: 13px; color: var(--text); margin: 8px 0 14px; line-height: 1.8; }
+    .source-list { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin: 12px 0; }
+    .source-list h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+    .source-list li { font-size: 13px; }
+    .disclaimer-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius); padding: 18px 20px; font-size: 14px; color: #7c2d12; margin: 16px 0; }
+    .disclaimer-box strong { color: #9a3412; }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+    .related-card { display: block; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; text-decoration: none; transition: border-color .15s; }
+    .related-card:hover { border-color: var(--green); text-decoration: none; }
+    .related-card.current { border-color: var(--green); background: var(--green-light); }
+    .related-card .rc-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .related-card .rc-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .related-card.current .rc-name { color: var(--green); }
+    footer { background: var(--bg-soft); border-top: 1px solid var(--border); padding: 28px 20px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); }
+    .footer-copy { font-size: 12px; color: var(--text-faint); }
+  </style>
 </head>
 <body>
-<a href="#main-content" class="skip">Skip to content</a>
 
-<header>
-  <div class="hdr">
-    <a href="/" class="logo">tdee<span>calc</span></a>
-    <nav class="site-nav" aria-label="Main navigation">
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">tdeecalc</a>
+    <div class="nav-links">
       <a href="/">TDEE</a>
       <a href="/bmr-calculator.html">BMR</a>
       <a href="/macro-calculator.html">Macros</a>
       <a href="/protein-calculator.html">Protein</a>
       <a href="/bmi-calculator.html">BMI</a>
       <a href="/about.html" class="active">About</a>
-    </nav>
+    </div>
   </div>
-</header>
+</nav>
 
 <main id="main-content">
-<div class="wrap">
-
-<div class="page-hero">
-  <h1>About This Calculator</h1>
-  <p class="hero-sub">What we built, why we built it, and the peer-reviewed science behind every calculation.</p>
-</div>
-
-<!-- Mission -->
-<section class="section" style="margin-top:0;padding-top:0;border-top:none" aria-labelledby="mission-title">
-  <h2 id="mission-title">Our goal</h2>
-  <p>Most online calculators give you a number with no explanation. We wanted to build something different: a tool that shows you <em>how</em> the calculation works, <em>why</em> each formula was chosen, and <em>what to actually do</em> with the result.</p>
-  <p>This site is built and maintained by an independent developer with a background in software engineering and a long-standing interest in evidence-based nutrition. All formulas are sourced from peer-reviewed research and applied exactly as published. We do not modify, "tune", or optimise formulas for marketing purposes.</p>
-  <div class="infobox">
-    <strong>Our principle:</strong> Every number this calculator produces should be explainable, traceable to a published source, and reproducible by anyone with the same inputs.
+  <div class="hero">
+    <h1>About &amp; Methodology</h1>
+    <p>How our calculators work, the formulas they use, and where the numbers come from.</p>
   </div>
-</section>
 
-<!-- Methodology -->
-<section class="section" aria-labelledby="method-title">
-  <h2 id="method-title">Methodology</h2>
-
-  <h3>BMR calculation</h3>
-  <p>The <strong>Mifflin–St Jeor equation</strong> (1990) is used as the default for BMR estimation. A 2005 meta-analysis published in the <em>Journal of the American Dietetic Association</em> evaluated several equations against measured resting metabolic rate in 200+ subjects and found Mifflin–St Jeor to be the most accurate for the general non-athletic population, predicting within 10% of actual values in roughly 82% of cases.</p>
-  <p>When body fat percentage is provided, the calculator switches automatically to the <strong>Katch–McArdle formula</strong> (1996), which is based on lean body mass. This eliminates the systematic overestimation of BMR in higher-body-fat individuals and underestimation in lean/muscular individuals that occurs when total weight is used.</p>
-
-  <h3>TDEE calculation</h3>
-  <p>TDEE is calculated as BMR × activity multiplier. The multipliers used (1.2, 1.375, 1.55, 1.725, 1.9) are the Harris–Benedict activity factors, which remain the most widely cited and validated values in nutrition science despite predating more recent equations. The categories have been reworded for clarity but the numeric values are unchanged from the original publication.</p>
-
-  <h3>Macro calculation</h3>
-  <p>Protein targets are set at 0.85g per lb of bodyweight (1.87g/kg), which falls within the range of 1.6–2.2g/kg recommended by the International Society of Sports Nutrition for active individuals seeking to preserve or gain muscle mass. For users not engaged in resistance training, this may be slightly above minimum requirements but is never harmful and provides a meaningful buffer.</p>
-  <p>After protein is allocated, remaining calories are split approximately 35% fat and 65% carbohydrate. This ratio is not a rigid prescription — it reflects a balanced starting point. Individual adjustments based on preference, training type, and insulin sensitivity are entirely appropriate.</p>
-
-  <h3>BMI calculation</h3>
-  <p>BMI is calculated as weight (kg) ÷ height (m)², using the WHO standard classification: Under 18.5 (Underweight), 18.5–24.9 (Normal), 25–29.9 (Overweight), 30+ (Obese). We include a disclaimer with every BMI result because this measure does not distinguish between fat and muscle mass and is a poor individual health metric for athletic populations.</p>
-
-  <h3>Ideal weight</h3>
-  <p>The Devine formula (1974) is used for the ideal weight estimate. This formula was originally developed for medical drug dosing calculations — not as a fitness target. It is included for reference only and should not be treated as a goal. Many healthy, fit individuals fall significantly above their "ideal" Devine weight.</p>
-</section>
-
-<!-- Accuracy -->
-<section class="section" aria-labelledby="acc-title">
-  <h2 id="acc-title">Accuracy and limitations</h2>
-  <p>All BMR equations are statistical estimates derived from population studies. Individual metabolic rate varies due to genetics, thyroid function, gut microbiome, sleep quality, stress hormones, and factors not captured by any equation. The typical margin of error for Mifflin–St Jeor is ±10% — meaning a calculated BMR of 1,800 kcal could reflect a true BMR anywhere from approximately 1,620 to 1,980 kcal.</p>
-  <p>The most reliable approach is to:</p>
-  <ul style="margin-top:8px">
-    <li>Use this calculator to establish a starting point.</li>
-    <li>Track actual food intake carefully (using a food scale and app like Cronometer or MyFitnessPal) for 2–3 weeks.</li>
-    <li>Compare expected vs. actual weight change and adjust calorie targets by 100–200 kcal accordingly.</li>
-    <li>Recalculate every 4–8 weeks as body weight changes.</li>
-  </ul>
-  <p style="margin-top:12px">This iterative, data-driven approach consistently outperforms relying solely on any calculator's initial output.</p>
-</section>
-
-<!-- Sources -->
-<section class="section" aria-labelledby="src-title">
-  <h2 id="src-title">Sources &amp; references</h2>
-  <ul class="ref-list">
-    <li class="ref-item">
-      <strong>Mifflin MD, St Jeor ST, Hill LA, Scott BJ, Daugherty SA, Koh YO (1990)</strong>
-      A new predictive equation for resting energy expenditure in healthy individuals. <em>American Journal of Clinical Nutrition</em>, 51(2):241–247.
-    </li>
-    <li class="ref-item">
-      <strong>Frankenfield D, Roth-Yousey L, Compher C (2005)</strong>
-      Comparison of predictive equations for resting metabolic rate in healthy nonobese and obese adults. <em>Journal of the American Dietetic Association</em>, 105(5):775–789.
-    </li>
-    <li class="ref-item">
-      <strong>McArdle WD, Katch FI, Katch VL (1996)</strong>
-      Exercise Physiology: Energy, Nutrition, and Human Performance. 4th ed. Williams &amp; Wilkins. (Katch–McArdle formula source.)
-    </li>
-    <li class="ref-item">
-      <strong>Harris JA, Benedict FG (1919)</strong>
-      A biometric study of human basal metabolism. <em>Proceedings of the National Academy of Sciences</em>, 4(12):370–373.
-    </li>
-    <li class="ref-item">
-      <strong>Morton RW, Murphy KT, McKellar SR et al. (2018)</strong>
-      A systematic review, meta-analysis and meta-regression of the effect of protein supplementation on resistance training-induced gains in muscle mass and strength. <em>British Journal of Sports Medicine</em>, 52(6):376–384.
-    </li>
-    <li class="ref-item">
-      <strong>Devine BJ (1974)</strong>
-      Gentamicin therapy. <em>Drug Intelligence and Clinical Pharmacy</em>, 8:650–655. (Ideal weight formula source.)
-    </li>
-    <li class="ref-item">
-      <strong>World Health Organization (2000)</strong>
-      Obesity: Preventing and managing the global epidemic. WHO Technical Report Series 894. (BMI classification.)
-    </li>
-  </ul>
-</section>
-
-<!-- Contact -->
-<section class="section" aria-labelledby="contact-title">
-  <h2 id="contact-title">Contact</h2>
-  <p>Found a bug? Have a suggestion? Disagree with something in our methodology? We genuinely want to hear it.</p>
-  <p>Email: <a href="mailto:n1043m.n1ght@gmail.com" style="color:var(--accent)">n1043m.n1ght@gmail.com</a></p>
-  <p>We aim to respond within 2–3 business days. We do not accept sponsored content, paid placements, or affiliate arrangements that would compromise our calculation accuracy.</p>
-</section>
-
-<!-- Tools -->
-<section class="section" aria-labelledby="tools-title">
-  <h2 id="tools-title" style="font-size:17px">Our free calculators</h2>
-  <div class="tools-row">
-    <a href="/" class="tool-card">
-      <div class="tool-card-name">TDEE Calculator</div>
-      <div class="tool-card-desc">Calories, macros, BMI & more</div>
-    </a>
-    <a href="/bmr-calculator.html" class="tool-card">
-      <div class="tool-card-name">BMR Calculator</div>
-      <div class="tool-card-desc">Basal metabolic rate at rest</div>
-    </a>
-    <a href="/about.html" class="tool-card" style="border-color:var(--accent);background:var(--accent-light)">
-      <div class="tool-card-name" style="color:var(--accent)">About</div>
-      <div class="tool-card-desc" style="color:var(--accent)">You are here</div>
-    </a>
+  <div class="content-section">
+    <h2>What this site does</h2>
+    <p>This site provides five free calculators for everyday health and fitness planning: TDEE (Total Daily Energy Expenditure), BMR (Basal Metabolic Rate), Macros (protein/carbs/fat), Protein targets, and BMI (Body Mass Index). All calculators run entirely in your browser — no data is sent to a server, no account is required, and no information is stored.</p>
+    <p>Every formula used is published, peer-reviewed, and widely cited in nutrition and exercise science research. We link to primary sources below so you can verify the methodology yourself.</p>
   </div>
-</section>
 
-</div>
+  <div class="content-section">
+    <h2>Formulas used</h2>
+
+    <h3>Mifflin–St Jeor (1990) — primary BMR formula</h3>
+    <p>Used as the default formula across all calculators. Validated against doubly-labeled water studies (the gold standard for measuring energy expenditure) and found to be the most accurate predictive equation for the general population, predicting BMR within 10% for approximately 82% of subjects.</p>
+    <div class="formula">Male:   BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5<br>Female: BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161</div>
+
+    <h3>Katch–McArdle (1996) — used when body fat % is provided</h3>
+    <p>Based on lean body mass (LBM) rather than total weight. More accurate for individuals with body composition that differs significantly from population averages — athletes, bodybuilders, or people with higher body fat percentages.</p>
+    <div class="formula">LBM = weight in kg × (1 − body fat % / 100)<br>BMR = 370 + (21.6 × LBM)</div>
+
+    <h3>Harris–Benedict (1919, revised 1984)</h3>
+    <p>The original BMR equation, still widely referenced in clinical settings. The 1984 revision by Roza and Shizgal improved on the original. Tends to slightly overestimate BMR compared to Mifflin–St Jeor for most modern populations.</p>
+    <div class="formula">Male:   BMR = 88.362 + (13.397 × kg) + (4.799 × cm) − (5.677 × age)<br>Female: BMR = 447.593 + (9.247 × kg) + (3.098 × cm) − (4.330 × age)</div>
+
+    <h3>TDEE — activity multipliers</h3>
+    <p>TDEE is calculated as BMR × an activity factor. These multipliers are based on the commonly used Harris–Benedict activity scale, refined through subsequent research:</p>
+    <div class="formula">Sedentary (little/no exercise): ×1.2<br>Lightly active (1–2 days/week): ×1.375<br>Moderately active (3–5 days/week): ×1.55<br>Very active (6–7 days/week): ×1.725<br>Athlete (2x/day training): ×1.9</div>
+
+    <h3>BMI — Quetelet Index</h3>
+    <p>Developed by Adolphe Quetelet in the 1830s. Still the WHO standard for population-level weight screening.</p>
+    <div class="formula">BMI = weight in kg / (height in m)²</div>
+
+    <h3>Ideal weight — Devine formula (1974)</h3>
+    <p>Originally developed for drug dosage calculations, now commonly used as a quick reference for "ideal" weight. Provided as one reference point among several reasonable approaches — the WHO healthy BMI range (18.5–24.9) is generally a more useful target range than a single number.</p>
+    <div class="formula">Male:   IBW (kg) = 50 + 2.3 × (height in inches − 60)<br>Female: IBW (kg) = 45.5 + 2.3 × (height in inches − 60)</div>
+
+    <h3>Macro &amp; protein targets</h3>
+    <p>Protein recommendations (1.6–2.4 g/kg depending on goal and activity level) are based on position stands from the International Society of Sports Nutrition and systematic reviews of protein intake studies in resistance-trained populations. Macro splits (protein/carb/fat percentages) for cutting, maintaining, and bulking reflect commonly recommended ranges from sports nutrition literature, prioritising protein for lean mass preservation during deficits and adequate fat intake for hormonal health.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Sources &amp; further reading</h2>
+    <div class="source-list">
+      <h4>Key research referenced</h4>
+      <ul>
+        <li>Mifflin MD, St Jeor ST, et al. (1990). A new predictive equation for resting energy expenditure in healthy individuals. American Journal of Clinical Nutrition.</li>
+        <li>Katch FI, McArdle WD (1996). Introduction to Nutrition, Exercise, and Health.</li>
+        <li>Harris JA, Benedict FG (1919). A Biometric Study of Basal Metabolism in Man.</li>
+        <li>Roza AM, Shizgal HM (1984). The Harris Benedict equation reevaluated. American Journal of Clinical Nutrition.</li>
+        <li>World Health Organization. Body Mass Index classification.</li>
+        <li>International Society of Sports Nutrition. Position Stand: protein and exercise.</li>
+        <li>Devine BJ (1974). Gentamicin therapy. Drug Intelligence and Clinical Pharmacy.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-section">
+    <h2>Disclaimer</h2>
+    <div class="disclaimer-box">
+      <strong>This tool provides estimates for general informational purposes only and is not medical advice.</strong> Results are based on population-average formulas and may not accurately reflect individual variation due to genetics, medical conditions, medications, or other factors. Always consult a qualified healthcare provider, registered dietitian, or physician before making significant changes to your diet or exercise routine — particularly if you have any existing health conditions, are pregnant or breastfeeding, or are under 18.
+    </div>
+  </div>
+
+  <!-- Related calculators -->
+  <div class="content-section">
+    <h2>All calculators</h2>
+    <div class="related-grid">
+      <a href="/" class="related-card"><div class="rc-name">TDEE</div><div class="rc-desc">Daily calorie needs</div></a>
+      <a href="/bmr-calculator.html" class="related-card"><div class="rc-name">BMR</div><div class="rc-desc">Calories at rest</div></a>
+      <a href="/macro-calculator.html" class="related-card"><div class="rc-name">Macros</div><div class="rc-desc">Protein, carbs &amp; fat</div></a>
+      <a href="/protein-calculator.html" class="related-card"><div class="rc-name">Protein</div><div class="rc-desc">Daily protein target</div></a>
+      <a href="/bmi-calculator.html" class="related-card"><div class="rc-name">BMI</div><div class="rc-desc">Body mass index</div></a>
+      <a href="/about.html" class="related-card current"><div class="rc-name">About</div><div class="rc-desc">You are here</div></a>
+    </div>
+  </div>
 </main>
 
-
 <footer>
-  <div class="wrap">
-    <p>Not medical advice — consult a healthcare professional before making significant dietary changes.</p>
+  <div class="footer-inner">
     <div class="footer-links">
       <a href="/">TDEE Calculator</a>
       <a href="/bmr-calculator.html">BMR Calculator</a>
       <a href="/macro-calculator.html">Macro Calculator</a>
-      <a href="/protein-calculator.html">Protein</a>
-      <a href="/bmi-calculator.html">BMI Calculator</a>
       <a href="/protein-calculator.html">Protein Calculator</a>
+      <a href="/bmi-calculator.html">BMI Calculator</a>
       <a href="/about.html">About &amp; Methodology</a>
       <a href="/terms.html">Terms of Use</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
     </div>
-    <p style="margin-top:10px">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</p>
+    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
-<script>
-
-</script>
 </body>
 </html>
