@@ -9,7 +9,6 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2d6a4f">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/">
   <meta property="og:title" content="TDEE Calculator — Daily Calories, Macros &amp; BMR">
@@ -35,11 +34,9 @@
     a { color: var(--green); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* Skip link */
     .skip-link { position: absolute; left: -9999px; top: 4px; background: var(--green); color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 14px; z-index: 9999; }
     .skip-link:focus { left: 4px; }
 
-    /* Nav */
     nav { background: var(--green); padding: 0 20px; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: var(--max); margin: 0 auto; display: flex; align-items: center; gap: 4px; height: 52px; }
     .nav-logo { color: #fff; font-weight: 700; font-size: 17px; margin-right: 12px; text-decoration: none; flex-shrink: 0; }
@@ -48,10 +45,8 @@
     .nav-links a { color: rgba(255,255,255,.85); padding: 6px 10px; border-radius: var(--radius-sm); font-size: 14px; transition: background .15s; }
     .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.18); color: #fff; text-decoration: none; }
 
-    /* Main layout */
     main { max-width: var(--max); margin: 0 auto; padding: 0 20px 60px; }
 
-    /* Hero */
     .hero { text-align: center; padding: 36px 0 24px; }
     .hero h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
     .hero h1 em { color: var(--green); font-style: normal; }
@@ -60,22 +55,24 @@
     .hero-links a { font-size: 13px; color: var(--green); border: 1px solid var(--green); border-radius: 20px; padding: 4px 14px; transition: all .15s; }
     .hero-links a:hover { background: var(--green); color: #fff; text-decoration: none; }
 
-    /* Unit toggle */
     .unit-toggle { display: flex; gap: 0; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; width: fit-content; }
     .unit-toggle button { padding: 7px 20px; font-size: 14px; border: none; background: transparent; cursor: pointer; color: var(--text-muted); transition: all .15s; }
     .unit-toggle button.active { background: var(--green); color: #fff; font-weight: 500; }
 
-    /* Calculator card */
     .calc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); margin-bottom: 24px; }
-    .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+    .calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
     .calc-header h2 { font-size: 17px; font-weight: 600; color: var(--text); }
 
-    /* Form */
+    .sample-banner { display: flex; align-items: center; gap: 8px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--radius-sm); padding: 9px 14px; font-size: 13px; color: #1e40af; margin-bottom: 18px; flex-wrap: wrap; }
+    .sample-banner svg { flex-shrink: 0; }
+    .sample-banner button.reset-link { background: none; border: none; color: #1d4ed8; text-decoration: underline; font-size: 13px; cursor: pointer; margin-left: auto; padding: 0; flex-shrink: 0; }
+
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
     @media(max-width:520px){ .form-grid { grid-template-columns: 1fr; } }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
-    .form-group input, .form-group select { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color .15s; width: 100%; }
+    .form-group input, .form-group select { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 15px; color: var(--text); background: var(--bg); transition: border-color .15s, color .15s; width: 100%; }
+    .form-group input.is-sample, .form-group select.is-sample { color: #9ca3af; }
     .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--green); }
     .form-group .hint { font-size: 12px; color: var(--text-faint); }
     .height-row { display: flex; gap: 8px; }
@@ -84,7 +81,6 @@
     .sex-btn { flex: 1; padding: 9px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg); cursor: pointer; font-size: 14px; color: var(--text-muted); transition: all .15s; text-align: center; }
     .sex-btn.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); font-weight: 500; }
 
-    /* Goal selector */
     .goal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-bottom: 18px; }
     @media(max-width:520px){ .goal-grid { grid-template-columns: 1fr 1fr; } }
     .goal-btn { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 6px; background: var(--bg); cursor: pointer; font-size: 12px; color: var(--text-muted); text-align: center; line-height: 1.3; transition: all .15s; }
@@ -93,18 +89,14 @@
     .goal-btn.active { border-color: var(--green); background: var(--green-light); color: var(--green-dark); }
     .goal-btn.active .goal-kcal { color: var(--green); }
 
-    /* Activity select with warning */
     .activity-wrap { position: relative; }
     .activity-warning { font-size: 12px; color: #b45309; background: #fef3c7; border-radius: 5px; padding: 6px 10px; margin-top: 6px; display: none; }
     .activity-warning.show { display: block; }
 
-    /* Calculate button */
     .calc-btn { width: 100%; padding: 14px; background: var(--green); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 16px; font-weight: 600; cursor: pointer; transition: background .15s; }
     .calc-btn:hover { background: var(--green-dark); }
 
-    /* Results */
-    .results { display: none; margin-top: 24px; }
-    .results.show { display: block; }
+    .results { margin-top: 24px; }
     .results-top { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 16px; }
     .result-card { background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 12px; text-align: center; }
     .result-card.primary { background: var(--green-light); border-color: var(--green); }
@@ -113,23 +105,19 @@
     .result-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
     .result-sub { font-size: 11px; color: var(--text-faint); }
     .weekly-note { background: #f0fdf4; border: 1px solid #86efac; border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: #166534; margin-bottom: 16px; }
-    .copy-btn { display: none; padding: 8px 18px; background: transparent; border: 1px solid var(--green); color: var(--green); border-radius: 20px; font-size: 13px; cursor: pointer; transition: all .15s; margin-bottom: 16px; }
-    .copy-btn.show { display: inline-flex; align-items: center; gap: 6px; }
+    .copy-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; background: transparent; border: 1px solid var(--green); color: var(--green); border-radius: 20px; font-size: 13px; cursor: pointer; transition: all .15s; margin-bottom: 16px; }
     .copy-btn:hover { background: var(--green); color: #fff; }
 
-    /* Goal targets table */
     .goal-table-wrap { overflow-x: auto; margin-bottom: 16px; }
     .goal-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .goal-table th { background: var(--bg-soft); text-align: left; padding: 8px 10px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
     .goal-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
     .goal-table tr.highlight { background: var(--green-light); font-weight: 500; }
 
-    /* Activity table */
     .activity-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
     .activity-table th { background: var(--bg-soft); padding: 7px 10px; text-align: left; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
     .activity-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
 
-    /* Macro bar */
     .macro-row { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
     .macro-item { flex: 1; min-width: 80px; background: var(--bg-soft); border-radius: var(--radius-sm); padding: 10px 12px; text-align: center; border: 1px solid var(--border); }
     .macro-item .m-val { font-size: 20px; font-weight: 700; }
@@ -142,14 +130,12 @@
     .macro-bar .seg-c { background: #f59e0b; }
     .macro-bar .seg-f { background: #ef4444; }
 
-    /* Promo link */
     .promo-link { display: flex; align-items: center; justify-content: space-between; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px; text-decoration: none; transition: border-color .15s; }
     .promo-link:hover { border-color: var(--green); text-decoration: none; }
     .promo-link .pl-title { font-weight: 600; font-size: 14px; color: var(--text); }
     .promo-link .pl-sub { font-size: 12px; color: var(--text-muted); }
     .promo-link .pl-arrow { font-size: 18px; color: var(--green); }
 
-    /* Content sections */
     .content-section { margin-bottom: 36px; }
     .content-section h2 { font-size: 21px; font-weight: 700; margin-bottom: 12px; color: var(--text); }
     .content-section h3 { font-size: 16px; font-weight: 600; margin: 16px 0 6px; color: var(--text); }
@@ -157,7 +143,6 @@
     .content-section ul, .content-section ol { color: var(--text-muted); font-size: 15px; padding-left: 20px; margin-bottom: 10px; }
     .content-section li { margin-bottom: 4px; line-height: 1.6; }
 
-    /* Example box */
     .example-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: var(--radius); padding: 20px; margin: 16px 0; }
     .example-box h4 { font-size: 14px; font-weight: 600; color: #0369a1; margin-bottom: 12px; }
     .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -167,7 +152,6 @@
     .example-row .er-label { color: #0369a1; }
     .example-row .er-val { font-weight: 600; color: #0c4a6e; }
 
-    /* Mistakes box */
     .mistakes-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius); padding: 20px; margin: 16px 0; }
     .mistakes-box h4 { font-size: 14px; font-weight: 600; color: #9a3412; margin-bottom: 10px; }
     .mistake-item { display: flex; gap: 10px; margin-bottom: 8px; font-size: 14px; }
@@ -175,16 +159,13 @@
     .mistake-item .mi-text { color: #7c2d12; }
     .mistake-item .mi-text strong { color: #9a3412; }
 
-    /* Formula block */
     .formula { background: var(--bg-soft); border-left: 3px solid var(--green); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 12px 16px; font-family: monospace; font-size: 13px; color: var(--text); margin: 8px 0 12px; }
 
-    /* FAQ */
     .faq-item { border-bottom: 1px solid var(--border); padding: 14px 0; }
     .faq-item:last-child { border-bottom: none; }
     .faq-q { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
     .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-    /* Related calculators grid */
     .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
     .related-card { display: block; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; text-decoration: none; transition: border-color .15s; }
     .related-card:hover { border-color: var(--green); text-decoration: none; }
@@ -193,14 +174,12 @@
     .related-card .rc-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
     .related-card.current .rc-name { color: var(--green); }
 
-    /* Footer */
     footer { background: var(--bg-soft); border-top: 1px solid var(--border); padding: 28px 20px; }
     .footer-inner { max-width: var(--max); margin: 0 auto; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 10px; }
     .footer-links a { font-size: 13px; color: var(--text-muted); }
     .footer-copy { font-size: 12px; color: var(--text-faint); }
 
-    /* Animations */
     @keyframes pulse-green { 0%,100%{ box-shadow: 0 0 0 0 rgba(45,106,79,.3); } 50%{ box-shadow: 0 0 0 6px rgba(45,106,79,0); } }
     .result-pulse { animation: pulse-green .6s ease-out; }
   </style>
@@ -245,8 +224,13 @@
       </div>
     </div>
 
+    <div class="sample-banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span>Showing example results — edit any field for your own, or calculate as-is</span>
+      <button class="reset-link" onclick="resetToSample()">Reset</button>
+    </div>
+
     <div class="form-grid">
-      <!-- Sex -->
       <div class="form-group">
         <label>Biological sex</label>
         <div class="sex-row">
@@ -255,36 +239,31 @@
         </div>
       </div>
 
-      <!-- Age -->
       <div class="form-group">
         <label for="age">Age</label>
-        <input type="number" id="age" min="15" max="100" placeholder="30" inputmode="numeric">
+        <input type="number" id="age" min="15" max="100" value="30" inputmode="numeric" class="is-sample" oninput="markTouched(this); calculate()">
       </div>
 
-      <!-- Weight -->
       <div class="form-group">
         <label for="weight" id="weight-label">Weight (lbs)</label>
-        <input type="number" id="weight" min="1" placeholder="165" inputmode="decimal">
+        <input type="number" id="weight" min="1" value="165" inputmode="decimal" class="is-sample" oninput="markTouched(this); calculate()">
       </div>
 
-      <!-- Height -->
       <div class="form-group">
         <label id="height-label">Height</label>
         <div class="height-row" id="height-imperial">
-          <input type="number" id="height-ft" min="1" max="8" placeholder="5" inputmode="numeric">
-          <input type="number" id="height-in" min="0" max="11" placeholder="10" inputmode="numeric">
+          <input type="number" id="height-ft" min="1" max="8" value="5" inputmode="numeric" class="is-sample" oninput="markTouched(this); calculate()">
+          <input type="number" id="height-in" min="0" max="11" value="10" inputmode="numeric" class="is-sample" oninput="markTouched(this); calculate()">
         </div>
-        <input type="number" id="height-cm" min="50" max="280" placeholder="178" inputmode="numeric" style="display:none">
+        <input type="number" id="height-cm" min="50" max="280" value="178" inputmode="numeric" class="is-sample" style="display:none" oninput="markTouched(this); calculate()">
       </div>
 
-      <!-- Body fat -->
       <div class="form-group">
         <label for="bodyfat">Body fat % <span style="font-weight:400;color:var(--text-faint)">(optional)</span></label>
-        <input type="number" id="bodyfat" min="3" max="70" placeholder="e.g. 18" inputmode="decimal">
+        <input type="number" id="bodyfat" min="3" max="70" placeholder="e.g. 18" inputmode="decimal" oninput="calculate()">
         <span class="hint">Enables Katch–McArdle formula for better accuracy</span>
       </div>
 
-      <!-- Activity -->
       <div class="form-group">
         <label for="activity">Activity level</label>
         <div class="activity-wrap">
@@ -302,7 +281,6 @@
       </div>
     </div>
 
-    <!-- Goal -->
     <div style="margin-bottom:18px">
       <label style="font-size:13px;font-weight:500;color:var(--text-muted);display:block;margin-bottom:8px">Primary goal</label>
       <div class="goal-grid">
@@ -314,7 +292,7 @@
       </div>
     </div>
 
-    <button class="calc-btn" onclick="calculate()">Calculate My TDEE &amp; Macros</button>
+    <button class="calc-btn" onclick="calculate(true)">Calculate My TDEE &amp; Macros</button>
 
     <!-- Results -->
     <div class="results" id="results">
@@ -347,13 +325,10 @@
         </div>
       </div>
 
-      <!-- Weekly note -->
       <div class="weekly-note" id="weekly-note"></div>
 
-      <!-- Goal target -->
       <div id="goal-target-block"></div>
 
-      <!-- Macros -->
       <h3 style="font-size:15px;font-weight:600;margin-bottom:10px">Macros — for selected goal</h3>
       <div class="macro-row" id="macro-row"></div>
       <div class="macro-bar" id="macro-bar"></div>
@@ -363,10 +338,8 @@
         <span class="pl-arrow">›</span>
       </a>
 
-      <!-- Timeline -->
       <div id="timeline-block"></div>
 
-      <!-- Activity table -->
       <h3 style="font-size:15px;font-weight:600;margin:16px 0 10px">TDEE at different activity levels</h3>
       <div style="overflow-x:auto">
         <table class="activity-table" id="activity-table">
@@ -378,7 +351,6 @@
     </div><!-- /results -->
   </div><!-- /calc-card -->
 
-  <!-- REAL EXAMPLE -->
   <div class="content-section" id="how-it-works">
     <h2>How many calories do I need per day?</h2>
     <p>Your calorie needs depend on your <strong>Basal Metabolic Rate (BMR)</strong> — the energy your body burns at rest — multiplied by an <strong>activity factor</strong> that accounts for how much you move. This total is your TDEE.</p>
@@ -426,7 +398,6 @@
     </div>
   </div>
 
-  <!-- HOW TO USE RESULTS -->
   <div class="content-section" id="use-results">
     <h2>How to use your TDEE to lose weight or build muscle</h2>
 
@@ -439,7 +410,6 @@
     <h3>Maintenance</h3>
     <p>Eat at TDEE. If weight drifts unexpectedly after 2 weeks, adjust by ±150 kcal and reassess. Hit your <strong>protein target first</strong>, then fill remaining calories with carbs and fat to preference.</p>
 
-    <!-- Common mistakes -->
     <h3>Why your TDEE might look wrong — common mistakes</h3>
     <div class="mistakes-box">
       <h4>The 5 most common TDEE errors</h4>
@@ -451,7 +421,6 @@
     </div>
   </div>
 
-  <!-- FAQ -->
   <div class="content-section" id="faq">
     <h2>Frequently asked questions</h2>
 
@@ -477,7 +446,6 @@
     </div>
   </div>
 
-  <!-- Related calculators -->
   <div class="content-section">
     <h2>Related free calculators</h2>
     <div class="related-grid">
@@ -511,10 +479,32 @@
 </footer>
 
 <script>
-// State
 let unit = 'imperial';
 let sex = 'male';
 let goalDeficit = 0;
+
+const SAMPLE = { age: '30', weight: '165', heightFt: '5', heightIn: '10', heightCm: '178' };
+
+function markTouched(el) {
+  el.classList.remove('is-sample');
+}
+
+function resetToSample() {
+  document.getElementById('age').value = SAMPLE.age;
+  document.getElementById('weight').value = SAMPLE.weight;
+  document.getElementById('height-ft').value = SAMPLE.heightFt;
+  document.getElementById('height-in').value = SAMPLE.heightIn;
+  document.getElementById('height-cm').value = SAMPLE.heightCm;
+  document.getElementById('bodyfat').value = '';
+  ['age','weight','height-ft','height-in','height-cm'].forEach(id => document.getElementById(id).classList.add('is-sample'));
+  setUnit('imperial');
+  setSex('male');
+  document.getElementById('activity').value = '1.55';
+  document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.goal-btn[data-deficit="0"]').classList.add('active');
+  goalDeficit = 0;
+  calculate();
+}
 
 function setUnit(u) {
   unit = u;
@@ -524,29 +514,32 @@ function setUnit(u) {
   document.getElementById('height-cm').style.display = u === 'metric' ? 'block' : 'none';
   document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)';
   document.getElementById('height-label').textContent = u === 'imperial' ? 'Height (ft / in)' : 'Height (cm)';
-  document.getElementById('weight').placeholder = u === 'imperial' ? '165' : '75';
+  calculate();
 }
 
 function setSex(s) {
   sex = s;
   document.getElementById('sex-male').classList.toggle('active', s === 'male');
   document.getElementById('sex-female').classList.toggle('active', s === 'female');
+  calculate();
 }
 
 function setGoal(btn) {
   document.querySelectorAll('.goal-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   goalDeficit = parseInt(btn.dataset.deficit);
+  calculate();
 }
 
 function checkActivity() {
   const val = parseFloat(document.getElementById('activity').value);
   document.getElementById('activity-warn').classList.toggle('show', val >= 1.725);
+  calculate();
 }
 
-function calculate() {
-  const ageVal = parseFloat(document.getElementById('age').value);
-  const weightVal = parseFloat(document.getElementById('weight').value);
+function calculate(animate) {
+  const ageVal = parseFloat(document.getElementById('age').value) || 30;
+  const weightVal = parseFloat(document.getElementById('weight').value) || 165;
   const bfVal = parseFloat(document.getElementById('bodyfat').value);
   const actVal = parseFloat(document.getElementById('activity').value);
 
@@ -554,20 +547,14 @@ function calculate() {
 
   if (unit === 'imperial') {
     weightKg = weightVal * 0.453592;
-    const ft = parseFloat(document.getElementById('height-ft').value) || 0;
+    const ft = parseFloat(document.getElementById('height-ft').value) || 5;
     const inch = parseFloat(document.getElementById('height-in').value) || 0;
     heightCm = (ft * 30.48) + (inch * 2.54);
   } else {
     weightKg = weightVal;
-    heightCm = parseFloat(document.getElementById('height-cm').value);
+    heightCm = parseFloat(document.getElementById('height-cm').value) || 178;
   }
 
-  if (!ageVal || !weightKg || !heightCm || ageVal < 15 || ageVal > 100) {
-    alert('Please enter valid age, weight, and height.');
-    return;
-  }
-
-  // BMR
   let bmr;
   if (!isNaN(bfVal) && bfVal > 0 && bfVal < 70) {
     const lbm = weightKg * (1 - bfVal / 100);
@@ -582,13 +569,11 @@ function calculate() {
   const bmrR = Math.round(bmr);
   const goalCals = tdee + goalDeficit;
 
-  // BMI
   const heightM = heightCm / 100;
   const bmi = weightKg / (heightM * heightM);
   const bmiR = bmi.toFixed(1);
   let bmiCat = bmi < 18.5 ? 'Underweight' : bmi < 25 ? 'Normal weight' : bmi < 30 ? 'Overweight' : 'Obese';
 
-  // Ideal weight (Devine)
   let idealKg = sex === 'male'
     ? 50 + 2.3 * ((heightCm / 2.54) - 60)
     : 45.5 + 2.3 * ((heightCm / 2.54) - 60);
@@ -597,21 +582,18 @@ function calculate() {
     ? Math.round(idealKg * 2.20462) + ' lbs'
     : Math.round(idealKg) + ' kg';
 
-  // Macros
   const protein = Math.round(weightKg * (goalDeficit <= -500 ? 2.4 : goalDeficit >= 250 ? 2.0 : 2.0));
   const proteinCal = protein * 4;
   const fatCal = Math.round(goalCals * 0.25);
   const fat = Math.round(fatCal / 9);
   const carbs = Math.round((goalCals - proteinCal - fatCal) / 4);
 
-  // Render
   document.getElementById('r-tdee').textContent = tdee.toLocaleString();
   document.getElementById('r-bmr').textContent = bmrR.toLocaleString();
   document.getElementById('r-bmi').textContent = bmiR;
   document.getElementById('r-bmi-cat').textContent = bmiCat;
   document.getElementById('r-ideal').textContent = idealDisp;
 
-  // Weekly note
   const weeklyMaint = (tdee * 7).toLocaleString();
   const weeklyGoal = (goalCals * 7).toLocaleString();
   const weeklyEl = document.getElementById('weekly-note');
@@ -619,8 +601,6 @@ function calculate() {
     ? `Weekly calorie budget at maintenance: <strong>${weeklyMaint} kcal</strong>`
     : `Weekly calorie budget for your goal: <strong>${weeklyGoal} kcal</strong> (maintenance: ${weeklyMaint} kcal)`;
 
-  // Goal target block
-  const goalNames = {'-750':'Aggressive cut','−500':'Cut','0':'Maintain','250':'Lean bulk','500':'Bulk'};
   const allGoals = [-750, -500, 0, 250, 500];
   let tableRows = '';
   allGoals.forEach(d => {
@@ -638,7 +618,6 @@ function calculate() {
       </table>
     </div>`;
 
-  // Macros
   document.getElementById('macro-row').innerHTML = `
     <div class="macro-item protein"><div class="m-val">${protein}g</div><div class="m-label">Protein</div></div>
     <div class="macro-item carbs"><div class="m-val">${Math.max(carbs,0)}g</div><div class="m-label">Carbs</div></div>
@@ -650,7 +629,6 @@ function calculate() {
   const fPct = 100 - pPct - cPct;
   document.getElementById('macro-bar').innerHTML = `<div class="seg-p" style="width:${pPct}%"></div><div class="seg-c" style="width:${cPct}%"></div><div class="seg-f" style="width:${fPct}%"></div>`;
 
-  // Timeline
   let timelineHtml = '';
   if (goalDeficit !== 0) {
     const weeklyLossKg = (Math.abs(goalDeficit) * 7) / 7700;
@@ -664,7 +642,6 @@ function calculate() {
   }
   document.getElementById('timeline-block').innerHTML = timelineHtml;
 
-  // Activity table
   const levels = [
     ['Sedentary', 1.2], ['Lightly active', 1.375], ['Moderately active', 1.55],
     ['Very active', 1.725], ['Athlete', 1.9]
@@ -674,19 +651,13 @@ function calculate() {
   ).join('');
   document.getElementById('activity-tbody').innerHTML = actTbody;
 
-  // Show / animate
-  const resultsEl = document.getElementById('results');
-  resultsEl.classList.add('show');
-  document.getElementById('copy-btn').classList.add('show');
-
-  const topEl = document.getElementById('results-top');
-  topEl.classList.remove('result-pulse');
-  void topEl.offsetWidth;
-  topEl.classList.add('result-pulse');
-
-  setTimeout(() => {
-    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }, 80);
+  if (animate) {
+    const topEl = document.getElementById('results-top');
+    topEl.classList.remove('result-pulse');
+    void topEl.offsetWidth;
+    topEl.classList.add('result-pulse');
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function copyResults() {
@@ -704,6 +675,8 @@ function copyResults() {
     setTimeout(() => { btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy results'; }, 2000);
   });
 }
+
+calculate();
 </script>
 </body>
 </html>
