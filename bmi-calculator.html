@@ -20,6 +20,7 @@
   <meta name="twitter:description" content="Free BMI calculator. Healthy weight range, limitations explained.">
   <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/og-image.png">
 
+  <link rel="stylesheet" href="/ad-layout.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -43,7 +44,7 @@
     .nav-links a { color: rgba(255,255,255,.85); padding: 6px 10px; border-radius: var(--radius-sm); font-size: 14px; transition: background .15s; }
     .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,.18); color: #fff; text-decoration: none; }
 
-    main { max-width: var(--max); margin: 0 auto; padding: 0 20px 60px; }
+    main { padding: 0 20px 60px; }
 
     .hero { text-align: center; padding: 36px 0 24px; }
     .hero h1 { font-size: clamp(22px, 5vw, 32px); font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
@@ -188,6 +189,14 @@
   </div>
 </nav>
 
+<div class="page-wrapper">
+
+  <aside class="ad-sidebar-left" aria-label="Advertisement">
+    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
+      <!-- AdSense 160x600 LEFT — вставить код сюда после одобрения -->
+    </div>
+  </aside>
+
 <main>
   <div class="hero">
     <h1>Free <em>BMI Calculator</em> for Adults</h1>
@@ -289,6 +298,11 @@
         <span class="pl-arrow">›</span>
       </a>
     </div>
+  </div><!-- /calc-card -->
+
+  <!-- Рекламный блок после калькулятора (зона высокого внимания) -->
+  <div class="ad-slot ad-slot--inline ad-slot--placeholder" aria-label="Advertisement">
+    <!-- AdSense adaptive — вставить код сюда после одобрения -->
   </div>
 
   <!-- BMI CATEGORIES -->
@@ -425,6 +439,17 @@
     <p style="font-size:12px;color:var(--text-faint);margin-top:12px">Results are estimates based on validated formulas. Not medical advice.</p>
   </div>
 </main>
+
+  <aside class="ad-sidebar-right" aria-label="Advertisement">
+    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
+      <!-- AdSense 160x600 RIGHT TOP — вставить код сюда после одобрения -->
+    </div>
+    <div class="ad-slot ad-slot--placeholder" style="min-height:250px;margin-top:16px">
+      <!-- AdSense 160x250 RIGHT BOTTOM — вставить код сюда после одобрения -->
+    </div>
+  </aside>
+
+</div><!-- /.page-wrapper -->
 
 <footer>
   <div class="footer-inner">

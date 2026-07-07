@@ -1,0 +1,112 @@
+/*
+ * ad-layout.css
+ * Рекламная разметка для tdee-calculator-dad.pages.dev
+ *
+ * Как подключить: добавить в <head> каждой страницы:
+ * <link rel="stylesheet" href="/ad-layout.css">
+ *
+ * Как использовать: обернуть <main> в .page-wrapper (см. инструкцию в README ниже)
+ */
+
+/* ─── Внешняя обёртка — расширяет макет до 1280px ─── */
+.page-wrapper {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr) 160px;
+  grid-template-areas: "left-col main-col right-col";
+  gap: 0 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+  align-items: start;
+}
+
+/* Основная колонка — занимает центр */
+.page-wrapper > main {
+  grid-area: main-col;
+  min-width: 0;          /* важно для grid, предотвращает overflow */
+  padding: 0 0 60px;
+}
+
+/* ─── Боковые колонки ─── */
+.ad-sidebar-left,
+.ad-sidebar-right {
+  position: sticky;
+  top: 68px;             /* высота nav (52px) + небольшой отступ */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 24px;     /* выравнивание с началом контента */
+}
+
+.ad-sidebar-left  { grid-area: left-col;  }
+.ad-sidebar-right { grid-area: right-col; }
+
+/* ─── Контейнеры рекламных блоков ─── */
+.ad-slot {
+  width: 160px;
+  min-height: 90px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* Большой вертикальный блок — 160×600 */
+.ad-slot--skyscraper {
+  width: 160px;
+  min-height: 600px;
+}
+
+/* Горизонтальный блок внутри контента — responsive */
+.ad-slot--inline {
+  width: 100%;
+  min-height: 90px;
+  margin: 24px 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* ─── Визуальный плейсхолдер (пока AdSense не активен) ─── */
+/* Удали этот блок когда вставишь реальные коды AdSense */
+.ad-slot--placeholder::before {
+  content: "Ad";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  background: #f8f9fa;
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #9ca3af;
+  font-family: sans-serif;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* ─── Мобильный: боковые колонки скрываются ─── */
+@media (max-width: 1100px) {
+  .page-wrapper {
+    grid-template-columns: 1fr;
+    grid-template-areas: "main-col";
+    max-width: 820px;
+    padding: 0;
+  }
+
+  .ad-sidebar-left,
+  .ad-sidebar-right {
+    display: none;
+  }
+
+  /* Инлайн-блоки остаются — они внутри <main> */
+  .ad-slot--inline {
+    margin: 20px 0;
+  }
+}
+
+/* ─── Очень маленькие экраны — убираем даже инлайн ─── */
+@media (max-width: 360px) {
+  .ad-slot--inline {
+    display: none;
+  }
+}
