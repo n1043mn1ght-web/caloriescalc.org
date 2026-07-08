@@ -198,6 +198,7 @@
       <a href="/macro-calculator.html">Macros</a>
       <a href="/protein-calculator.html">Protein</a>
       <a href="/bmi-calculator.html">BMI</a>
+      <a href="/calorie-deficit-calculator.html">Deficit</a>
       <a href="/about.html">About</a>
     </div>
   </div>
@@ -301,6 +302,20 @@
       </div>
     </div>
 
+    <!-- Goal weight — optional -->
+    <div style="margin-bottom:18px">
+      <label style="font-size:13px;font-weight:500;color:var(--text-muted);display:block;margin-bottom:6px">
+        Goal weight <span style="font-weight:400;color:var(--text-faint)">(optional — shows your timeline)</span>
+      </label>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <input type="number" id="goal-weight" min="1" inputmode="decimal"
+               placeholder="e.g. 150" style="border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-size:15px;color:var(--text);background:var(--bg);width:140px;transition:border-color .15s"
+               oninput="calculate()" onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='var(--border)'">
+        <span id="goal-weight-unit" style="font-size:13px;color:var(--text-muted)">lbs</span>
+        <span style="font-size:12px;color:var(--text-faint)">Enter to see how many weeks to reach your goal</span>
+      </div>
+    </div>
+
     <button class="calc-btn" onclick="calculate(true)">Calculate My TDEE &amp; Macros</button>
 
     <!-- Results -->
@@ -352,10 +367,11 @@
       <h3 style="font-size:15px;font-weight:600;margin:16px 0 10px">TDEE at different activity levels</h3>
       <div style="overflow-x:auto">
         <table class="activity-table" id="activity-table">
-          <thead><tr><th>Activity level</th><th>Calories/day</th></tr></thead>
+          <thead><tr><th>Activity level</th><th>Typical day</th><th>Calories/day</th></tr></thead>
           <tbody id="activity-tbody"></tbody>
         </table>
       </div>
+      <p style="font-size:12px;color:var(--text-faint);margin-top:6px;margin-bottom:0">⚠ Most people overestimate their activity level by 1–2 steps. When in doubt, choose lower — you can always eat more if weight drops too fast.</p>
 
     </div><!-- /results -->
   </div><!-- /calc-card -->
@@ -371,6 +387,15 @@
     <p>BMR is calculated using the <strong>Mifflin–St Jeor equation</strong> — the most validated formula for the general population (±10% accuracy). When you provide body fat %, the calculator switches to <strong>Katch–McArdle</strong>, which is more accurate for athletes and lean individuals.</p>
 
     <div class="formula">Male: BMR = (10 × kg) + (6.25 × cm) − (5 × age) + 5<br>Female: BMR = (10 × kg) + (6.25 × cm) − (5 × age) − 161</div>
+
+    <h3>The three components of TDEE</h3>
+    <p>Your TDEE is actually the sum of three distinct energy costs — not just BMR and exercise:</p>
+    <ul>
+      <li><strong>BMR (60–70% of TDEE)</strong> — energy to keep you alive at rest: heart, brain, kidneys, liver, body temperature, cell repair. The largest single component.</li>
+      <li><strong>Physical activity — NEAT + exercise (20–30%)</strong> — every calorie burned through movement. This includes formal workouts <em>and</em> Non-Exercise Activity Thermogenesis (NEAT): fidgeting, walking to the kitchen, standing instead of sitting. NEAT varies by up to <strong>400 kcal/day</strong> between similar-sized people — this is why two people eating identically can have very different results.</li>
+      <li><strong>Thermic Effect of Food — TEF (~10%)</strong> — energy your body spends digesting and processing meals. Protein has the highest TEF (~25–30% of its calories), carbohydrates around 7%, and fat only 2–3%. A high-protein diet quietly raises your TDEE.</li>
+    </ul>
+    <p>The activity multiplier in this calculator captures both NEAT and exercise together. If you have a physically active job on top of gym sessions, choose a higher multiplier than you might expect.</p>
 
     <h3>Worked example — step by step</h3>
     <p>Here is exactly how the calculator arrives at a result, using a real set of inputs:</p>
@@ -468,6 +493,7 @@
       <a href="/macro-calculator.html" class="related-card"><div class="rc-name">Macros</div><div class="rc-desc">Protein, carbs &amp; fat</div></a>
       <a href="/protein-calculator.html" class="related-card"><div class="rc-name">Protein</div><div class="rc-desc">Daily protein target</div></a>
       <a href="/bmi-calculator.html" class="related-card"><div class="rc-name">BMI</div><div class="rc-desc">Body mass index</div></a>
+      <a href="/calorie-deficit-calculator.html" class="related-card"><div class="rc-name">Deficit</div><div class="rc-desc">Calorie deficit &amp; timeline</div></a>
       <a href="/about.html" class="related-card"><div class="rc-name">About</div><div class="rc-desc">Methodology &amp; sources</div></a>
     </div>
     <p style="font-size:12px;color:var(--text-faint);margin-top:12px">Results are estimates based on validated formulas. Not medical advice.</p>
@@ -539,6 +565,10 @@ function setUnit(u) {
   document.getElementById('height-cm').style.display = u === 'metric' ? 'block' : 'none';
   document.getElementById('weight-label').textContent = u === 'imperial' ? 'Weight (lbs)' : 'Weight (kg)';
   document.getElementById('height-label').textContent = u === 'imperial' ? 'Height (ft / in)' : 'Height (cm)';
+  const gwUnit = document.getElementById('goal-weight-unit');
+  if (gwUnit) gwUnit.textContent = u === 'imperial' ? 'lbs' : 'kg';
+  const gwInput = document.getElementById('goal-weight');
+  if (gwInput) gwInput.placeholder = u === 'imperial' ? 'e.g. 150' : 'e.g. 68';
   calculate();
 }
 
@@ -654,25 +684,80 @@ function calculate(animate) {
   const fPct = 100 - pPct - cPct;
   document.getElementById('macro-bar').innerHTML = `<div class="seg-p" style="width:${pPct}%"></div><div class="seg-c" style="width:${cPct}%"></div><div class="seg-f" style="width:${fPct}%"></div>`;
 
+  // ── Timeline & goal weight ───────────────────────────────────────────────
   let timelineHtml = '';
+  const goalWeightVal = parseFloat(document.getElementById('goal-weight')?.value);
+
   if (goalDeficit !== 0) {
     const weeklyLossKg = (Math.abs(goalDeficit) * 7) / 7700;
     const weeklyLossLbs = weeklyLossKg * 2.20462;
     const rate = unit === 'imperial'
       ? weeklyLossLbs.toFixed(1) + ' lbs/week'
       : weeklyLossKg.toFixed(2) + ' kg/week';
-    timelineHtml = `<div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:14px;color:var(--text-muted)">
-      Your timeline to goal: estimated rate <strong style="color:var(--text)">${rate}</strong>. Recalculate every 4–8 weeks as your weight changes.
-    </div>`;
+    const direction = goalDeficit < 0 ? 'loss' : 'gain';
+
+    // If goal weight is provided — calculate weeks and progress bar
+    if (!isNaN(goalWeightVal) && goalWeightVal > 0) {
+      const goalWeightKg = unit === 'imperial' ? goalWeightVal * 0.453592 : goalWeightVal;
+      const diffKg = goalWeightKg - weightKg;
+      const diffAbs = Math.abs(diffKg);
+
+      // Check direction makes sense
+      const sensible = (goalDeficit < 0 && diffKg < 0) || (goalDeficit > 0 && diffKg > 0);
+
+      if (sensible && diffAbs > 0.1) {
+        const weeksNeeded = Math.ceil(diffAbs / weeklyLossKg);
+        const months = (weeksNeeded / 4.33).toFixed(1);
+        const goalDisp = unit === 'imperial' ? Math.round(goalWeightVal) + ' lbs' : goalWeightVal.toFixed(1) + ' kg';
+        const currentDisp = unit === 'imperial' ? Math.round(weightVal) + ' lbs' : weightKg.toFixed(1) + ' kg';
+
+        // Progress: how far along (0 = goal not started, show from start to goal)
+        const progressPct = Math.min(0, 0); // starts at 0, user is at start
+
+        timelineHtml = `
+        <div style="background:var(--green-light);border:1px solid var(--green);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px">
+            <div style="font-size:14px;font-weight:600;color:var(--green-dark)">Your goal timeline</div>
+            <div style="font-size:13px;color:var(--green-dark)">~${weeksNeeded} weeks &nbsp;(${months} months)</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--green-dark);margin-bottom:4px">
+            <span>Now: ${currentDisp}</span><span>Goal: ${goalDisp}</span>
+          </div>
+          <div style="height:10px;background:rgba(45,106,79,.15);border-radius:5px;overflow:hidden;margin-bottom:10px">
+            <div style="height:100%;width:2%;background:var(--green);border-radius:5px;transition:width .4s"></div>
+          </div>
+          <div style="font-size:13px;color:var(--text-muted)">
+            Rate: <strong style="color:var(--text)">${rate}</strong> · Eat <strong style="color:var(--text)">${goalCals.toLocaleString()} kcal/day</strong> · Recalculate every 4–6 weeks as your weight changes.
+          </div>
+        </div>`;
+      } else if (!sensible) {
+        timelineHtml = `<div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:13px;color:#92400e">
+          ⚠ Your goal weight doesn't match your selected goal. Select Cut to lose weight or Bulk to gain.
+        </div>`;
+      }
+    } else {
+      // No goal weight — simple rate display
+      timelineHtml = `<div style="background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;margin-bottom:16px;font-size:14px;color:var(--text-muted)">
+        Estimated ${direction} rate: <strong style="color:var(--text)">${rate}</strong>.
+        Enter your <em>Goal weight</em> above to see your exact timeline. Recalculate every 4–8 weeks.
+      </div>`;
+    }
   }
   document.getElementById('timeline-block').innerHTML = timelineHtml;
 
   const levels = [
-    ['Sedentary', 1.2], ['Lightly active', 1.375], ['Moderately active', 1.55],
-    ['Very active', 1.725], ['Athlete', 1.9]
+    ['Sedentary ×1.2',       1.2,   'Desk job, car commute, less than 30 min walking/day'],
+    ['Lightly active ×1.375',1.375, '1–2 gym sessions/week or 30–60 min walking/day'],
+    ['Moderately active ×1.55',1.55,'3–5 hard gym sessions/week, active daily routine'],
+    ['Very active ×1.725',   1.725, '6–7 intense sessions/week or physical job + gym'],
+    ['Athlete ×1.9',         1.9,   'Twice-a-day training or very demanding physical labour'],
   ];
-  const actTbody = levels.map(([name, mult]) =>
-    `<tr${mult === actVal ? ' style="background:var(--green-light);font-weight:500"' : ''}><td>${name}</td><td>${Math.round(bmr * mult).toLocaleString()}</td></tr>`
+  const actTbody = levels.map(([name, mult, example]) =>
+    `<tr${mult === actVal ? ' style="background:var(--green-light);font-weight:500"' : ''}>
+      <td style="white-space:nowrap">${name}</td>
+      <td style="font-size:12px;color:var(--text-muted)">${example}</td>
+      <td style="white-space:nowrap">${Math.round(bmr * mult).toLocaleString()} kcal</td>
+    </tr>`
   ).join('');
   document.getElementById('activity-tbody').innerHTML = actTbody;
 
