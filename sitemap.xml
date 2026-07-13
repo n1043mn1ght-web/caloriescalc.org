@@ -1,99 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- ── Calculators ── -->
-  <url>
-    <loc>https://caloriescalc.org/</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>1.0</priority>
+</url>
 
-  <url>
-    <loc>https://caloriescalc.org/calorie-deficit-calculator.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/calorie-deficit-calculator.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.95</priority>
+</url>
 
-  <url>
-    <loc>https://caloriescalc.org/bmr-calculator.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/bmr-calculator.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
 
-  <url>
-    <loc>https://caloriescalc.org/macro-calculator.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/macro-calculator.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
 
-  <url>
-    <loc>https://caloriescalc.org/protein-calculator.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/protein-calculator.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
 
-  <url>
-    <loc>https://caloriescalc.org/bmi-calculator.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/bmi-calculator.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.9</priority>
+</url>
 
-  <!-- ── Foods (добавлять по мере создания страниц) ── -->
-  <!-- ПРИМЕР:
-  <url>
-    <loc>https://caloriescalc.org/foods/banana.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  -->
+<url>
+<loc>https://caloriescalc.org/about.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.5</priority>
+</url>
 
-  <!-- ── Recipes (добавлять по мере создания) ── -->
-  <!-- ПРИМЕР:
-  <url>
-    <loc>https://caloriescalc.org/recipes/chicken-salad.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  -->
+<url>
+<loc>https://caloriescalc.org/privacy.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.2</priority>
+</url>
 
-  <!-- ── Articles / Blog ── -->
-  <!-- ПРИМЕР:
-  <url>
-    <loc>https://caloriescalc.org/articles/how-to-lose-20-pounds.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  -->
-
-  <!-- ── Static pages ── -->
-  <url>
-    <loc>https://caloriescalc.org/about.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://caloriescalc.org/terms.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
-
-  <url>
-    <loc>https://caloriescalc.org/privacy.html</loc>
-    <lastmod>2026-07-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.2</priority>
-  </url>
+<url>
+<loc>https://caloriescalc.org/terms.html</loc>
+<lastmod>2026-07-13</lastmod>
+<changefreq>yearly</changefreq>
+<priority>0.2</priority>
+</url>
 
 </urlset>
