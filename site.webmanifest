@@ -1,7 +1,7 @@
 {
-  "name": "TDEE Calculator",
-  "short_name": "TDEE Calc",
-  "description": "Free TDEE, BMR, Macro, Protein and BMI calculators",
+  "name": "CaloriesCalc",
+  "short_name": "CaloriesCalc",
+  "description": "Free calorie, TDEE, BMR, macro, protein and BMI calculators",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

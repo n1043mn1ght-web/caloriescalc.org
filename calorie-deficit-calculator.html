@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Calorie Deficit Calculator — How Much to Eat to Lose Weight</title>
   <meta name="description" content="Free calorie deficit calculator. Enter your stats and goal weight to find your daily calorie target, weekly deficit and exact date you'll reach your goal. No sign-up.">
-  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/calorie-deficit-calculator.html">
+  <link rel="canonical" href="https://caloriescalc.org/calorie-deficit-calculator.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2d6a4f">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
@@ -15,15 +15,15 @@
   <link rel="stylesheet" href="/ad-layout.css">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/calorie-deficit-calculator.html">
+  <meta property="og:url" content="https://caloriescalc.org/calorie-deficit-calculator.html">
   <meta property="og:title" content="Calorie Deficit Calculator — How Much to Eat to Lose Weight">
   <meta property="og:description" content="Free calorie deficit calculator. Daily calorie target, timeline and weekly plan to reach your goal weight.">
-  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta property="og:image" content="https://caloriescalc.org/icon.png">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Calorie Deficit Calculator">
   <meta name="twitter:description" content="Find your daily calorie target and timeline to reach your goal weight.">
-  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta name="twitter:image" content="https://caloriescalc.org/icon.png">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -185,7 +185,7 @@
 
 <nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">tdeecalc</a>
+    <a href="/" class="nav-logo">CaloriesCalc</a>
     <div class="nav-links">
       <a href="/">TDEE</a>
       <a href="/bmr-calculator.html">BMR</a>
@@ -454,7 +454,7 @@
       <a href="/terms.html">Terms of Use</a>
       <a href="/privacy.html">Privacy Policy</a>
     </div>
-    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
+    <div class="footer-copy">© 2026 CaloriesCalc.org · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
@@ -665,7 +665,7 @@ function copyResults() {
   const vals  = [...stats.querySelectorAll('.stat-card')].map(c =>
     c.querySelector('.stat-label').textContent + ': ' + c.querySelector('.stat-val').textContent
   ).join('\n');
-  const text = `Calorie target: ${cals} kcal/day\n${sub}\n${vals}\nCalculated at tdee-calculator-dad.pages.dev/calorie-deficit-calculator.html`;
+  const text = `Calorie target: ${cals} kcal/day\n${sub}\n${vals}\nCalculated at caloriescalc.org/calorie-deficit-calculator.html`;
   navigator.clipboard.writeText(text).then(() => {
     const span = document.querySelector('#copy-btn .btn-text');
     span.textContent = '✓ Copied!';

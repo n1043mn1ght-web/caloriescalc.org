@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>TDEE Calculator — Daily Calories, Macros &amp; BMR | Free</title>
   <meta name="description" content="Free, instant results — no sign-up. Enter your stats to get your TDEE, BMR, BMI, exact macro targets and weeks-to-goal timeline in one calculation.">
-  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/">
+  <link rel="canonical" href="https://caloriescalc.org/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2d6a4f">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
@@ -14,15 +14,15 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/">
+  <meta property="og:url" content="https://caloriescalc.org/">
   <meta property="og:title" content="TDEE Calculator — Daily Calories, Macros &amp; BMR">
   <meta property="og:description" content="Free TDEE calculator. Get your daily calorie needs, macros, BMR and BMI in seconds. No sign-up required.">
-  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta property="og:image" content="https://caloriescalc.org/icon.png">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="TDEE Calculator — Daily Calories, Macros &amp; BMR">
   <meta name="twitter:description" content="Free TDEE calculator. Get your daily calorie needs, macros, BMR and BMI in seconds.">
-  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta name="twitter:image" content="https://caloriescalc.org/icon.png">
 
   <link rel="stylesheet" href="/ad-layout.css">
   <style>
@@ -195,7 +195,7 @@
 
 <nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">tdeecalc</a>
+    <a href="/" class="nav-logo">CaloriesCalc</a>
     <div class="nav-links">
       <a href="/" class="active">TDEE</a>
       <a href="/bmr-calculator.html">BMR</a>
@@ -529,7 +529,7 @@
       <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
     </div>
-    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
+    <div class="footer-copy">© 2026 CaloriesCalc.org · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
@@ -782,7 +782,7 @@ function copyResults() {
   const p = macros.querySelector('.protein .m-val')?.textContent || '—';
   const c = macros.querySelector('.carbs .m-val')?.textContent || '—';
   const f = macros.querySelector('.fat .m-val')?.textContent || '—';
-  const text = `TDEE: ${tdee} kcal/day\nBMR: ${bmr} kcal/day\nBMI: ${bmi}\nMacros: Protein ${p} | Carbs ${c} | Fat ${f}\nCalculated at tdee-calculator-dad.pages.dev`;
+  const text = `TDEE: ${tdee} kcal/day\nBMR: ${bmr} kcal/day\nBMI: ${bmi}\nMacros: Protein ${p} | Carbs ${c} | Fat ${f}\nCalculated at caloriescalc.org`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-btn');
     btn.textContent = '✓ Copied!';

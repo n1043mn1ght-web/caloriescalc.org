@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>BMR Calculator — Basal Metabolic Rate | Free, Instant Results</title>
   <meta name="description" content="Free, instant results — no sign-up. Calculate your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle. Imperial &amp; metric. See exactly how BMR is calculated.">
-  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/bmr-calculator.html">
+  <link rel="canonical" href="https://caloriescalc.org/bmr-calculator.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2d6a4f">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
@@ -14,15 +14,15 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/bmr-calculator.html">
+  <meta property="og:url" content="https://caloriescalc.org/bmr-calculator.html">
   <meta property="og:title" content="BMR Calculator — Basal Metabolic Rate">
   <meta property="og:description" content="Free BMR calculator. Find your Basal Metabolic Rate using Mifflin–St Jeor and Katch–McArdle equations.">
-  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta property="og:image" content="https://caloriescalc.org/icon.png">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BMR Calculator — Basal Metabolic Rate">
   <meta name="twitter:description" content="Free BMR calculator. Mifflin–St Jeor and Katch–McArdle. Imperial &amp; metric.">
-  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta name="twitter:image" content="https://caloriescalc.org/icon.png">
 
   <link rel="stylesheet" href="/ad-layout.css">
   <style>
@@ -152,7 +152,7 @@
 
 <nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">tdeecalc</a>
+    <a href="/" class="nav-logo">CaloriesCalc</a>
     <div class="nav-links">
       <a href="/">TDEE</a>
       <a href="/bmr-calculator.html" class="active">BMR</a>
@@ -459,7 +459,7 @@
       <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:n1043m.n1ght@gmail.com">Contact</a>
     </div>
-    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
+    <div class="footer-copy">© 2026 CaloriesCalc.org · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
@@ -595,7 +595,7 @@ function copyResults() {
   const harris  = document.getElementById('r-bmr-harris').textContent;
   const katch   = document.getElementById('r-bmr-katch').textContent;
   const tdee    = document.getElementById('r-tdee').textContent;
-  const text = `BMR (Mifflin–St Jeor): ${mifflin} kcal/day\nBMR (Harris–Benedict): ${harris} kcal/day\nBMR (Katch–McArdle): ${katch} kcal/day\nTDEE: ${tdee} kcal/day\nCalculated at tdee-calculator-dad.pages.dev/bmr-calculator.html`;
+  const text = `BMR (Mifflin–St Jeor): ${mifflin} kcal/day\nBMR (Harris–Benedict): ${harris} kcal/day\nBMR (Katch–McArdle): ${katch} kcal/day\nTDEE: ${tdee} kcal/day\nCalculated at caloriescalc.org/bmr-calculator.html`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-btn');
     btn.textContent = '✓ Copied!';

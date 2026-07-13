@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Protein Calculator — How Much Protein Do I Need Per Day?</title>
   <meta name="description" content="Free, instant results — no sign-up. Find your exact daily protein target in grams for fat loss, muscle gain or maintenance. Per-meal breakdown included.">
-  <link rel="canonical" href="https://tdee-calculator-dad.pages.dev/protein-calculator.html">
+  <link rel="canonical" href="https://caloriescalc.org/protein-calculator.html">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2d6a4f">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
@@ -14,15 +14,15 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tdee-calculator-dad.pages.dev/protein-calculator.html">
+  <meta property="og:url" content="https://caloriescalc.org/protein-calculator.html">
   <meta property="og:title" content="Protein Calculator — How Much Protein Per Day?">
   <meta property="og:description" content="Free protein calculator. Daily protein target in grams for fat loss, muscle gain or maintenance. Per-meal breakdown included.">
-  <meta property="og:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta property="og:image" content="https://caloriescalc.org/icon.png">
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Protein Calculator — How Much Protein Per Day?">
   <meta name="twitter:description" content="Free protein calculator with per-meal breakdown and food sources.">
-  <meta name="twitter:image" content="https://tdee-calculator-dad.pages.dev/icon.png">
+  <meta name="twitter:image" content="https://caloriescalc.org/icon.png">
 
   <link rel="stylesheet" href="/ad-layout.css">
   <style>
@@ -144,7 +144,7 @@
 
 <nav aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">tdeecalc</a>
+    <a href="/" class="nav-logo">CaloriesCalc</a>
     <div class="nav-links">
       <a href="/">TDEE</a>
       <a href="/bmr-calculator.html">BMR</a>
@@ -436,7 +436,7 @@
       <a href="/terms.html">Terms of Use</a>
       <a href="/privacy.html">Privacy Policy</a>
     </div>
-    <div class="footer-copy">© 2026 TDEE Calculator · Free tool · No sign-up · No data stored</div>
+    <div class="footer-copy">© 2026 CaloriesCalc.org · Free tool · No sign-up · No data stored</div>
   </div>
 </footer>
 
@@ -547,7 +547,7 @@ function calculate(animate) {
 function copyResults() {
   const protein = document.getElementById('r-protein').textContent;
   const gkg = document.getElementById('r-gkg').textContent;
-  const text = `Daily protein target: ${protein}g\n${gkg}\nCalculated at tdee-calculator-dad.pages.dev/protein-calculator.html`;
+  const text = `Daily protein target: ${protein}g\n${gkg}\nCalculated at caloriescalc.org/protein-calculator.html`;
   navigator.clipboard.writeText(text).then(() => {
     const btn = document.getElementById('copy-btn');
     btn.textContent = '✓ Copied!';
