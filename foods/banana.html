@@ -142,8 +142,12 @@
     .sc-label { font-size: 11px; color: var(--green-dark); margin-top: 1px; }
 
     /* Hero image */
-    .hero-img { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #fff; }
-    .hero-img img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .hero-img { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #fff; max-height: 300px; display: flex; align-items: center; justify-content: center; }
+    .hero-img img { width: 100%; height: auto; max-height: 300px; display: block; object-fit: contain; }
+    .nutrition-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 8px; margin-bottom: 20px; }
+    .nh-card { display: flex; align-items: center; gap: 10px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: var(--text); }
+    .nh-icon { font-size: 20px; flex-shrink: 0; }
+    .nh-text { line-height: 1.3; font-weight: 500; }
 
     /* AI Summary */
     .ai-summary { background: var(--green-light); border: 1px solid var(--green); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; font-size: 14px; color: var(--green-dark); line-height: 1.7; }
@@ -413,6 +417,16 @@
              decoding="async">
       </div>
     </div>
+  </div>
+
+  <!-- ═══ NUTRITION HIGHLIGHTS ═══ -->
+  <div class="nutrition-highlights">
+    <div class="nh-card"><span class="nh-icon">⚡</span><span class="nh-text">Good source of potassium</span></div>
+    <div class="nh-card"><span class="nh-icon">💪</span><span class="nh-text">Great pre-workout snack</span></div>
+    <div class="nh-card"><span class="nh-icon">❤️</span><span class="nh-text">Supports heart health</span></div>
+    <div class="nh-card"><span class="nh-icon">🌾</span><span class="nh-text">High in fiber</span></div>
+    <div class="nh-card"><span class="nh-icon">🥗</span><span class="nh-text">Naturally fat free</span></div>
+    <div class="nh-card"><span class="nh-icon">🧠</span><span class="nh-text">Rich in vitamin B6</span></div>
   </div>
 
   <!-- ═══ CALORIE CALCULATOR ═══ -->

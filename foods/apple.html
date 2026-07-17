@@ -130,8 +130,12 @@
     .sc-val { font-size: 19px; font-weight: 700; color: var(--green); }
     .sc-label { font-size: 11px; color: var(--green-dark); margin-top: 1px; }
 
-    .hero-img { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #fff; }
-    .hero-img img { width: 100%; height: auto; display: block; object-fit: contain; }
+    .hero-img { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #fff; max-height: 300px; display: flex; align-items: center; justify-content: center; }
+    .hero-img img { width: 100%; height: auto; max-height: 300px; display: block; object-fit: contain; }
+    .nutrition-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 8px; margin-bottom: 20px; }
+    .nh-card { display: flex; align-items: center; gap: 10px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px; font-size: 13px; color: var(--text); }
+    .nh-icon { font-size: 20px; flex-shrink: 0; }
+    .nh-text { line-height: 1.3; font-weight: 500; }
 
     .ai-summary { background: var(--green-light); border: 1px solid var(--green); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; font-size: 14px; color: var(--green-dark); line-height: 1.7; }
 
@@ -380,6 +384,16 @@
   </div>
 
   <!-- ═══ CALORIE CALCULATOR ═══ -->
+  <!-- ═══ NUTRITION HIGHLIGHTS ═══ -->
+  <div class="nutrition-highlights">
+    <div class="nh-card"><span class="nh-icon">🍃</span><span class="nh-text">Rich in antioxidants</span></div>
+    <div class="nh-card"><span class="nh-icon">🌾</span><span class="nh-text">High in fiber</span></div>
+    <div class="nh-card"><span class="nh-icon">❤️</span><span class="nh-text">Supports heart health</span></div>
+    <div class="nh-card"><span class="nh-icon">⚖️</span><span class="nh-text">Excellent for weight loss</span></div>
+    <div class="nh-card"><span class="nh-icon">🥗</span><span class="nh-text">Naturally fat free</span></div>
+    <div class="nh-card"><span class="nh-icon">🩸</span><span class="nh-text">Low glycemic index — 36</span></div>
+  </div>
+
   <div class="calc-box" id="calculator">
     <h2>🍎 Calculate Calories for Any Apple Weight</h2>
     <div class="slider-label">
