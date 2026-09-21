@@ -1021,6 +1021,392 @@ table{min-width:300px}
   padding:8px 12px;border-radius:0 6px 6px 0;
   margin:8px 0 12px;line-height:1.5;
 }
+
+
+/* ============================================================
+   CALORIESCALC — SHARED CONTAINER / HEADER RULE
+   Applied only to the requested container, macro-strip, and header.
+   ============================================================ */
+
+:root{
+  --site-container-max:1200px;
+  --site-gutter:20px;
+  --site-gutter-mobile:16px;
+  --site-header-green:#2d6a4f;
+}
+
+/* Desktop/tablet: all primary page blocks use the same content width
+   and horizontal edges as the Contents block. */
+.page-wrapper{
+  max-width:var(--site-container-max);
+  width:100%;
+  margin-inline:auto;
+}
+
+main{
+  width:100%;
+  max-width:none;
+  padding-left:var(--site-gutter);
+  padding-right:var(--site-gutter);
+}
+
+/* Mobile: every primary page block shares the same 16px screen gutter
+   as Nutrition Facts. */
+@media(max-width:768px){
+  main{
+    width:100%;
+    padding-left:var(--site-gutter-mobile);
+    padding-right:var(--site-gutter-mobile);
+  }
+
+  /* Keep all five headline nutrition values on one row. */
+  .macro-strip{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:4px;
+    width:100%;
+  }
+
+  .macro-strip .ms-item{
+    min-width:0;
+    padding:8px 2px;
+    overflow:hidden;
+  }
+
+  .macro-strip .ms-val{
+    font-size:16px !important;
+    line-height:1.05;
+    white-space:nowrap;
+  }
+
+  .macro-strip .ms-item.primary .ms-val{
+    font-size:19px !important;
+  }
+
+  .macro-strip .ms-unit{
+    font-size:9px;
+    white-space:nowrap;
+  }
+
+  .macro-strip .ms-label{
+    font-size:8px;
+    line-height:1.15;
+    overflow-wrap:anywhere;
+  }
+}
+
+/* Header: use the lighter green that is visible around the navigation
+   as the single header background color. */
+.main-nav,
+.nav-inner,
+.nav-drawer,
+.nav-drawer-l2{
+  background:var(--site-header-green) !important;
+}
+
+.nav-dd{
+  background:var(--site-header-green) !important;
+}
+
+
+/* ============================================================
+   CALORIESCALC — CONTENTS IS THE MASTER CONTAINER
+   Every main content block uses the same outer width, screen gutter,
+   inner horizontal padding, and base font as .toc (Contents).
+   ============================================================ */
+:root{
+  --contents-gutter-desktop:20px;
+  --contents-gutter-mobile:16px;
+  --contents-inner-x:16px;
+  --contents-inner-y:12px;
+  --contents-font-size:13px;
+  --contents-font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+
+/* The page frame is only responsible for centering the common content area. */
+.page-wrapper{
+  width:100%;
+  max-width:1200px;
+  margin-inline:auto;
+  padding:0;
+}
+
+/* One exact horizontal content rail for ALL primary containers. */
+main{
+  width:100%;
+  max-width:none;
+  min-width:0;
+  padding-left:var(--contents-gutter-desktop);
+  padding-right:var(--contents-gutter-desktop);
+  font-family:var(--contents-font-family);
+}
+
+/* Contents (.toc) defines the reference geometry. */
+main .toc,
+main .hero-wrap,
+main .nutrition-highlights,
+main .calc-box,
+main .ad-slot,
+main .nutrition-box,
+main .ai-summary,
+main .macro-chart,
+main .micro-grid,
+main .section,
+main > p,
+main > nav.breadcrumb{
+  width:100%;
+  max-width:none;
+  margin-left:0;
+  margin-right:0;
+  box-sizing:border-box;
+}
+
+/* Every container starts its actual content at the same 16px inset as Contents. */
+main .hero-wrap,
+main .nutrition-highlights,
+main .calc-box,
+main .ad-slot,
+main .nutrition-box,
+main .ai-summary,
+main .macro-chart,
+main .micro-grid,
+main .section{
+  padding-left:var(--contents-inner-x);
+  padding-right:var(--contents-inner-x);
+  font-family:var(--contents-font-family);
+}
+
+/* Keep Contents itself exactly as the reference: 12px 16px. */
+main .toc{
+  padding:var(--contents-inner-y) var(--contents-inner-x);
+  font-family:var(--contents-font-family);
+}
+
+/* All container text uses the same base font size as Contents links. */
+main .toc,
+main .hero-wrap,
+main .nutrition-highlights,
+main .calc-box,
+main .ad-slot,
+main .nutrition-box,
+main .ai-summary,
+main .macro-chart,
+main .micro-grid,
+main .section{
+  font-size:var(--contents-font-size);
+}
+
+/* Do not let old max-width/margin/padding rules create a second container. */
+main .nutrition-highlights,
+main .calc-box,
+main .nutrition-box,
+main .ai-summary,
+main .macro-chart,
+main .micro-grid,
+main .section,
+main .ad-slot{
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box;
+}
+
+/* Mobile uses the exact same screen gutter as the Contents block. */
+@media(max-width:768px){
+  main{
+    width:100%;
+    padding-left:var(--contents-gutter-mobile);
+    padding-right:var(--contents-gutter-mobile);
+  }
+
+  /* Five macro values must remain on one row. */
+  .macro-strip{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:4px;
+    width:100%;
+  }
+  .macro-strip .ms-item{
+    min-width:0;
+    padding:8px 2px;
+    overflow:hidden;
+  }
+  .macro-strip .ms-val{
+    font-size:16px !important;
+    line-height:1.05;
+    white-space:nowrap;
+  }
+  .macro-strip .ms-item.primary .ms-val{font-size:19px !important}
+  .macro-strip .ms-unit{font-size:9px;white-space:nowrap}
+  .macro-strip .ms-label{font-size:8px;line-height:1.15;overflow-wrap:anywhere}
+}
+
+
+/* ============================================================
+   CALORIESCALC — BELOW-HERO BLOCKS: EXACT CONTENTS MATCH
+   Reference = .toc (Contents).
+   Every block below the banana image uses the same:
+   1) outer width as Contents;
+   2) left/right position as Contents;
+   3) inner left/right content inset as Contents (16px);
+   4) base font family and size as Contents.
+   ============================================================ */
+main > .nutrition-highlights,
+main > .calc-box,
+main > .ad-slot,
+main > .nutrition-box,
+main > .ai-summary,
+main > .macro-chart,
+main > .micro-grid,
+main > .section,
+main > p{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box !important;
+  padding-left:var(--contents-inner-x) !important;
+  padding-right:var(--contents-inner-x) !important;
+  font-family:var(--contents-font-family) !important;
+  font-size:var(--contents-font-size) !important;
+}
+
+/* Contents itself is the exact visual reference: 16px inner inset. */
+main > .toc{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box !important;
+  padding-left:var(--contents-inner-x) !important;
+  padding-right:var(--contents-inner-x) !important;
+  font-family:var(--contents-font-family) !important;
+  font-size:var(--contents-font-size) !important;
+}
+
+/* Make the final text block follow the same visible text rail too. */
+main > p{
+  padding-top:0 !important;
+}
+
+@media(max-width:768px){
+  main > .nutrition-highlights,
+  main > .calc-box,
+  main > .ad-slot,
+  main > .nutrition-box,
+  main > .ai-summary,
+  main > .macro-chart,
+  main > .micro-grid,
+  main > .section,
+  main > p,
+  main > .toc{
+    width:100% !important;
+    max-width:none !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    box-sizing:border-box !important;
+    padding-left:var(--contents-inner-x) !important;
+    padding-right:var(--contents-inner-x) !important;
+  }
+}
+
+/* Header color requested previously. */
+.main-nav,
+.nav-inner,
+.nav-drawer,
+.nav-drawer-l2,
+.nav-dd{
+  background:#2d6a4f !important;
+}
+
+/* CALORIESCALC — FINAL: Contents is the single geometry reference for ALL CONTENT BLOCKS */
+/* The original HTML places blocks after the .page-wrapper as body-level elements.
+   Therefore the alignment must be applied to body-level content, not only main > ... */
+:root{
+  --cc-contents-inner-x:16px;
+  --cc-contents-inner-y:12px;
+  --cc-contents-font: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --cc-contents-font-size:13px;
+  --cc-content-max:1160px;
+}
+
+/* Desktop/tablet: exactly the same OUTER rectangle as Contents.
+   Contents sits inside a 1200px page rail with 20px main gutters = 1160px content width. */
+body > .nutrition-highlights,
+body > .calc-box,
+body > .ad-slot,
+body > .nutrition-box,
+body > .ai-summary,
+body > .section,
+body > .macro-chart,
+body > .micro-grid,
+body > .promo-box,
+body > p{
+  width:calc(100% - 40px) !important;
+  max-width:var(--cc-content-max) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  box-sizing:border-box !important;
+  font-family:var(--cc-contents-font) !important;
+  font-size:var(--cc-contents-font-size) !important;
+}
+
+/* EXACTLY the same inner horizontal inset as Contents. */
+body > .nutrition-highlights,
+body > .calc-box,
+body > .ad-slot,
+body > .nutrition-box,
+body > .ai-summary,
+body > .section,
+body > .macro-chart,
+body > .micro-grid,
+body > .promo-box{
+  padding-left:var(--cc-contents-inner-x) !important;
+  padding-right:var(--cc-contents-inner-x) !important;
+}
+
+/* Nested content must not create a second horizontal rail. */
+body > .nutrition-highlights > *,
+body > .calc-box > *,
+body > .ad-slot > *,
+body > .nutrition-box > *,
+body > .ai-summary > *,
+body > .section > *,
+body > .macro-chart > *,
+body > .micro-grid > *,
+body > .promo-box > *{
+  max-width:100%;
+}
+
+/* Mobile: Contents = 16px from each screen edge. Every lower block uses the same. */
+@media(max-width:768px){
+  body > .nutrition-highlights,
+  body > .calc-box,
+  body > .ad-slot,
+  body > .nutrition-box,
+  body > .ai-summary,
+  body > .section,
+  body > .macro-chart,
+  body > .micro-grid,
+  body > .promo-box,
+  body > p{
+    width:calc(100% - 32px) !important;
+    max-width:none !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+}
+
+/* Keep Contents itself unchanged as the reference block. */
+.page-wrapper main > .toc{
+  box-sizing:border-box !important;
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding:var(--cc-contents-inner-y) var(--cc-contents-inner-x) !important;
+  font-family:var(--cc-contents-font) !important;
+  font-size:var(--cc-contents-font-size) !important;
+}
+
 </style>
   <!-- Preconnect (нет внешних шрифтов, всё системное — уже оптимально) -->
   <meta name="theme-color" content="#2d6a4f" media="(prefers-color-scheme: light)">
