@@ -1407,11 +1407,183 @@ body > .promo-box > *{
   font-size:var(--cc-contents-font-size) !important;
 }
 
+
+/* ============================================================
+   CALORIESCALC — QUICK FACTS / DISCLAIMER / FOOTER FINAL FIX
+   ============================================================ */
+.quick-facts {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.qf-tag {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+
+.nutrition-disclaimer {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin: 0 0 20px !important;
+  padding: 0 !important;
+  overflow-wrap: anywhere !important;
+  word-break: normal !important;
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+}
+
+.footer-inner {
+  width: calc(100% - 40px) !important;
+  max-width: var(--max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media(max-width:768px){
+  .footer-inner {
+    width: calc(100% - 32px) !important;
+  }
+}
+
+/* ============================================================
+   CALORIESCALC — FINAL ALIGNMENT FOR HERO + BREADCRUMB
+   Reference: .toc (Contents). No content/text changes.
+   ============================================================ */
+
+/* The breadcrumb and hero use exactly the same OUTER content rail as Contents. */
+.page-wrapper main > .breadcrumb,
+.page-wrapper main > .hero-wrap{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box !important;
+}
+
+/* Same 16px inner horizontal content inset as Contents. */
+.page-wrapper main > .breadcrumb{
+  padding-left:var(--cc-contents-inner-x) !important;
+  padding-right:var(--cc-contents-inner-x) !important;
+  font-family:var(--cc-contents-font) !important;
+  font-size:var(--cc-contents-font-size) !important;
+}
+
+.page-wrapper main > .hero-wrap{
+  padding-left:var(--cc-contents-inner-x) !important;
+  padding-right:var(--cc-contents-inner-x) !important;
+  font-family:var(--cc-contents-font) !important;
+  font-size:var(--cc-contents-font-size) !important;
+}
+
+/* On mobile the breadcrumb must have the same screen-edge position as Contents
+   and every other content block. It must not acquire an extra nested gutter. */
+@media(max-width:768px){
+  .page-wrapper main > .breadcrumb,
+  .page-wrapper main > .hero-wrap{
+    width:100% !important;
+    max-width:none !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  .page-wrapper main > .breadcrumb{
+    padding-left:var(--cc-contents-inner-x) !important;
+    padding-right:var(--cc-contents-inner-x) !important;
+  }
+
+  .page-wrapper main > .hero-wrap{
+    padding-left:var(--cc-contents-inner-x) !important;
+    padding-right:var(--cc-contents-inner-x) !important;
+  }
+}
+
+
+
+/* ============================================================
+   CALORIESCALC — VERIFIED FINAL ALIGNMENT
+   ============================================================ */
+.page-wrapper main > .nutrition-disclaimer {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+footer .footer-inner {
+  width: 100% !important;
+  max-width: var(--cc-content-max) !important;
+  box-sizing: border-box !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+footer .footer-cols {
+  grid-template-columns: 1fr !important;
+}
+
 </style>
   <!-- Preconnect (нет внешних шрифтов, всё системное — уже оптимально) -->
   <meta name="theme-color" content="#2d6a4f" media="(prefers-color-scheme: light)">
   <meta name="color-scheme" content="light">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://caloriescalc.org/"},{"@type":"ListItem","position":2,"name":"Foods Database","item":"https://caloriescalc.org/foods/"},{"@type":"ListItem","position":3,"name":"a Banana — Nutrition Facts","item":"https://caloriescalc.org/foods/banana.html"}]}</script>
+
+<style id="caloriescalc-final-layout-fixes">
+/* CALORIESCALC — FINAL LAYOUT FIXES */
+.hero-wrap > .quick-facts {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+main > .nutrition-disclaimer {
+  width: 100% !important;
+  max-width: 1160px !important;
+  box-sizing: border-box !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+  overflow-wrap: anywhere !important;
+}
+
+@media (max-width: 768px) {
+  main > .nutrition-disclaimer {
+    width: calc(100% - 32px) !important;
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Keep the main navigation/header fixed at the top while scrolling. */
+nav.main-nav,
+.main-nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+}
+
+/* All Calculators keeps the navigation-style arrow. */
+.footer-inner .footer-col a[href="/calculators/"] {
+  display: inline-block;
+}
+</style>
 </head>
 <body>
 
@@ -1653,15 +1825,6 @@ body > .promo-box > *{
         <div class="sc"><div class="sc-val">121</div><div class="sc-label">kcal large (136g)</div></div>
       </div>
 
-      <!-- Quick facts -->
-      <div class="quick-facts">
-        <span class="qf-tag">✔ Naturally sweet</span>
-        <span class="qf-tag">✔ High in potassium</span>
-        <span class="qf-tag">✔ Great pre-workout</span>
-        <span class="qf-tag">✔ Fat free</span>
-        <span class="qf-tag">✔ Gluten free</span>
-        <span class="qf-tag">✔ Vegan</span>
-      </div>
     </div>
 
     <div class="hero-right">
@@ -1675,6 +1838,15 @@ body > .promo-box > *{
       <div class="hero-img-emoji" id="emoji-fb-banana" style="display:none" role="img" aria-label="banana illustration">🍌</div>
     </div>
     </div>
+
+    <!-- Quick facts: same full container width as the other content blocks -->
+    <div class="quick-facts">
+      <span class="qf-tag">⚡ <strong>Good source of potassium</strong></span>
+      <span class="qf-tag">💪 <strong>Great pre-workout snack</strong></span>
+      <span class="qf-tag">❤️ <strong>Supports heart health</strong></span>
+      <span class="qf-tag">🌾 <strong>High in fiber</strong></span>
+      <span class="qf-tag">🥗 <strong>Naturally fat free</strong></span>
+      <span class="qf-tag">🧠 <strong>Rich in vitamin B6</strong></span>
     </div>
   </div>
 
@@ -1999,7 +2171,7 @@ body > .promo-box > *{
     </ul>
   </div>
 
-  <p style="font-size:12px;color:var(--text-faint);margin-bottom:20px">
+  <p class="nutrition-disclaimer">
     Nutrition values sourced from USDA FoodData Central. Values are averages and may vary by variety and ripeness. Not medical advice.
   </p>
 
@@ -2019,17 +2191,11 @@ body > .promo-box > *{
         <a href="/">TDEE Calculator</a>
         <a href="/calorie-deficit-calculator.html">Calorie Deficit</a>
         <a href="/macro-calculator.html">Macro Calculator</a>
-        <a href="/protein-calculator.html">Protein Calculator</a>
+        <a href="/weight-loss-calculator.html">Weight Loss</a>
+        <a href="/weight-gain-calculator.html">Weight Gain</a>
         <a href="/bmi-calculator.html">BMI Calculator</a>
         <a href="/bmr-calculator.html">BMR Calculator</a>
-        <a href="/weight-loss-calculator.html">Weight Loss</a>
-        <a href="/body-fat-calculator.html">Body Fat %</a>
-        <a href="/ideal-weight-calculator.html">Ideal Weight</a>
-        <a href="/weight-gain-calculator.html">Weight Gain</a>
-        <a href="/keto-calculator.html">Keto Calculator</a>
-        <a href="/water-intake-calculator.html">Water Intake</a>
-        <a href="/running-calorie-calculator.html">Running Calories</a>
-        <a href="/calorie-burn-calculator.html">Calories Burned</a>
+        <a href="/calculators/">All Calculators →</a>
       </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 CaloriesCalc.org · Free calorie calculator · No sign-up · No data stored</div>
