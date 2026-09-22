@@ -1584,6 +1584,139 @@ nav.main-nav,
   display: inline-block;
 }
 </style>
+
+<style id="caloriescalc-final-user-width-alignment">
+/* Final geometry: desktop header is narrowed by one "Calories" word on each side. */
+@media (min-width: 769px) {
+  :root {
+    --calories-word-width: 68px;
+    --caloriescalc-layout-max: calc(1200px - (2 * var(--calories-word-width)));
+  }
+
+  .nav-inner,
+  .page-wrapper,
+  footer .footer-inner {
+    width: 100% !important;
+    max-width: var(--caloriescalc-layout-max) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Keep the body/content outer rail identical to the new header rail. */
+  .page-wrapper {
+    max-width: var(--caloriescalc-layout-max) !important;
+  }
+
+  footer .footer-inner {
+    max-width: var(--caloriescalc-layout-max) !important;
+  }
+
+  /* Lower body blocks use the same new outer width as the header. */
+  body > .nutrition-highlights,
+  body > .calc-box,
+  body > .ad-slot,
+  body > .nutrition-box,
+  body > .ai-summary,
+  body > .section,
+  body > .macro-chart,
+  body > .micro-grid,
+  body > .promo-box,
+  body > p {
+    max-width: var(--caloriescalc-layout-max) !important;
+  }
+}
+
+/* Disclaimer text starts on exactly the same text rail as the Sources block. */
+main > .nutrition-disclaimer {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+@media (max-width: 768px) {
+  main > .nutrition-disclaimer {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+</style>
+
+
+<style id="caloriescalc-final-user-spacing-grid-fixes">
+/* FINAL USER REQUEST — spacing, single-row desktop grids, mobile card grids */
+
+/* Desktop: Contents must stay on one line within the same header/content rail. */
+@media (min-width: 769px) {
+  .toc-links {
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .toc-links a {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    padding: 3px 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* Related Foods: all cards in one desktop row. */
+  .foods-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  /* Banana vs Other Foods: all comparison cards in one desktop row. */
+  .compare-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  /* Remove the excessive empty area before the footer. */
+  .nutrition-disclaimer {
+    margin-bottom: 8px !important;
+  }
+  footer {
+    margin-top: 0 !important;
+    padding-top: 12px !important;
+  }
+}
+
+/* Mobile: equal vertical breathing room around the banana image. */
+@media (max-width: 768px) {
+  .hero-right {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+  .hero-img {
+    margin-bottom: 0 !important;
+  }
+  .quick-facts {
+    margin-top: 0 !important;
+  }
+
+  /* Micronutrient Highlights: exactly 3 cards per row. */
+  .micro-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  /* Banana vs Other Foods: exactly 4 cards per row. */
+  .compare-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+}
+</style>
 </head>
 <body>
 
