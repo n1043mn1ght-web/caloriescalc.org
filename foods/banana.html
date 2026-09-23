@@ -1879,6 +1879,29 @@ nav.main-nav .nav-inner {
   }
 }
 
+/* Desktop hero image: keep the image inside the full height of the
+   left hero content, ending no lower than the bottom of the size cards. */
+@media (min-width: 769px) {
+  .hero-wrap > .hero-right {
+    align-self: stretch !important;
+    min-height: 0 !important;
+    display: flex !important;
+  }
+  .hero-wrap > .hero-right > .hero-img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .hero-wrap > .hero-right > .hero-img img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+}
+
 /* Below-the-fold content: allow the browser to defer rendering work until
    these blocks approach the viewport. This does not remove their content. */
 @media (min-width: 769px) {
