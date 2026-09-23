@@ -1832,6 +1832,74 @@ nav.main-nav .nav-inner {
 }
 </style>
 
+
+<style id="caloriescalc-user-final-fixes">
+/* Mobile: disclaimer must start on the same text rail as the Sources/Healthline link. */
+@media (max-width: 768px) {
+  main > .nutrition-disclaimer {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Mobile menu: the hamburger morphs into the visible white close X.
+   The separate close button inside the drawer is intentionally removed. */
+@media (max-width: 1023px) {
+  .nav-hamburger span {
+    background: #fff !important;
+    opacity: 1 !important;
+  }
+  .nav-hamburger.open span {
+    background: #fff !important;
+  }
+  .nav-drawer-close,
+  #nav-drawer-close {
+    display: none !important;
+  }
+}
+
+/* Desktop: let the banana image use the full width of its hero column
+   without distortion. The intrinsic aspect ratio is preserved. */
+@media (min-width: 769px) {
+  .hero-right .hero-img {
+    width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+  }
+  .hero-right .hero-img img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+}
+
+/* Below-the-fold content: allow the browser to defer rendering work until
+   these blocks approach the viewport. This does not remove their content. */
+@media (min-width: 769px) {
+  main > .section:nth-of-type(n+4),
+  main > .macro-chart,
+  main > .promo-box,
+  main > .ai-summary {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 520px;
+  }
+}
+
+/* Keep gram units visually attached to their numeric values. */
+.ms-inline-unit {
+  font-size: .62em;
+  font-weight: 600;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+</style>
+
 </head>
 <body>
 
@@ -1914,7 +1982,6 @@ nav.main-nav .nav-inner {
   <nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
     <div class="nav-drawer-head">
       <span class="nav-drawer-title">Menu</span>
-      <button id="nav-drawer-close" aria-label="Close menu">×</button>
     </div>
 
     <!-- L1 -->
@@ -2045,23 +2112,19 @@ nav.main-nav .nav-inner {
           <div class="ms-label">per 100g, raw, peeled</div>
         </div>
         <div class="ms-item">
-          <div class="ms-val">22.8</div>
-          <div class="ms-unit">g</div>
+          <div class="ms-val">22.8 <span class="ms-inline-unit">g</span></div>
           <div class="ms-label">Carbs</div>
         </div>
         <div class="ms-item">
-          <div class="ms-val">1.1</div>
-          <div class="ms-unit">g</div>
+          <div class="ms-val">1.1 <span class="ms-inline-unit">g</span></div>
           <div class="ms-label">Protein</div>
         </div>
         <div class="ms-item">
-          <div class="ms-val">0.3</div>
-          <div class="ms-unit">g</div>
+          <div class="ms-val">0.3 <span class="ms-inline-unit">g</span></div>
           <div class="ms-label">Fat</div>
         </div>
         <div class="ms-item">
-          <div class="ms-val">2.6</div>
-          <div class="ms-unit">g</div>
+          <div class="ms-val">2.6 <span class="ms-inline-unit">g</span></div>
           <div class="ms-label">Fiber</div>
         </div>
       </div>
@@ -2308,9 +2371,9 @@ nav.main-nav .nav-inner {
       <a href="/foods/grapes.html" class="compare-card"><div class="cc-emoji">🍇</div><div class="cc-name">Grapes</div><div class="cc-cal">69 kcal/100g</div><div class="cc-diff less">−20 kcal</div></a>
       <a href="/foods/mango.html" class="compare-card"><div class="cc-emoji">🥭</div><div class="cc-name">Mango</div><div class="cc-cal">60 kcal/100g</div><div class="cc-diff less">−29 kcal</div></a>
       <a href="/foods/avocado.html" class="compare-card"><div class="cc-emoji">🥑</div><div class="cc-name">Avocado</div><div class="cc-cal">160 kcal/100g</div><div class="cc-diff more">+71 kcal</div></a>
-      <a href="/foods/peach.html" class="compare-card"><div class="cc-emoji">🍑</div><div class="cc-name">Peach</div><div class="cc-cal">39 kcal/100g</div><div class="cc-diff more">+66 kcal</div></a>
+      <a href="/foods/peach.html" class="compare-card"><div class="cc-emoji">🍑</div><div class="cc-name">Peach</div><div class="cc-cal">39 kcal/100g</div><div class="cc-diff less">−50 kcal</div></a>
       <a href="/foods/pear.html" class="compare-card"><div class="cc-emoji">🌾</div><div class="cc-name">Oats</div><div class="cc-cal">389 kcal/100g</div><div class="cc-diff more">+300 kcal</div></a>
-      <a href="/foods/coconut.html" class="compare-card"><div class="cc-emoji">🍚</div><div class="cc-name">Rice</div><div class="cc-cal">354 kcal/100g</div><div class="cc-diff more">+41 kcal</div></a>
+      <a href="/foods/coconut.html" class="compare-card"><div class="cc-emoji">🍚</div><div class="cc-name">Rice</div><div class="cc-cal">354 kcal/100g</div><div class="cc-diff more">+265 kcal</div></a>
     </div>
   </div>
 
@@ -2630,6 +2693,7 @@ function _fbCopy(val,btn) {
     overlay && overlay.classList.add('open');
     hamburger.classList.add('open');
     hamburger.setAttribute('aria-expanded','true');
+    hamburger.setAttribute('aria-label','Close navigation menu');
     document.body.style.overflow='hidden';
     var first = drawer.querySelector('a,button');
     if(first) setTimeout(function(){first.focus();},50);
@@ -2639,6 +2703,7 @@ function _fbCopy(val,btn) {
     overlay && overlay.classList.remove('open');
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded','false');
+    hamburger.setAttribute('aria-label','Open navigation menu');
     document.body.style.overflow='';
     l2panels.forEach(function(p){p.classList.remove('open');});
     hamburger.focus();
