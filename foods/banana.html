@@ -1894,54 +1894,45 @@ nav.main-nav .nav-inner {
 
 
 <style>
-/* Hero image — match the same visual treatment as the Cherry food page.
-   Keep the image proportional and never stretch it beyond the standard 300px hero image height. */
-.hero-main {
+.hero-wrap {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
   align-items: start;
 }
-
-.hero-main .hero-left,
-.hero-main .hero-right {
+.hero-left,
+.hero-right {
   min-width: 0;
 }
-
-.hero-main .hero-right .hero-img {
+.hero-img {
   width: 100%;
   height: auto;
   max-height: 300px;
   overflow: hidden;
   box-sizing: border-box;
 }
-
-.hero-main .hero-right .hero-img img {
+.hero-img img {
   display: block;
   width: 100%;
   height: auto;
   max-height: 300px;
   object-fit: contain;
 }
-
 @media (max-width: 768px) {
-  .hero-main {
-    display: block;
+  .hero-wrap {
+    grid-template-columns: 1fr;
   }
-
-  .hero-main .hero-right {
+  .hero-right {
     width: 100%;
   }
-
-  .hero-main .hero-right .hero-img {
+  .hero-img {
     height: auto;
-    max-height: 300px;
+    max-height: 220px;
   }
-
-  .hero-main .hero-right .hero-img img {
+  .hero-img img {
     width: 100%;
     height: auto;
-    max-height: 300px;
+    max-height: 220px;
     object-fit: contain;
   }
 }
@@ -2128,50 +2119,21 @@ nav.main-nav .nav-inner {
 </div>
 <!-- ═══ HERO ═══ -->
 <div class="hero-wrap" id="calories">
-<div class="hero-main">
 <div class="hero-left">
 <h1>Calories in a Banana</h1>
-<div class="food-short-answer"><p>🍌 A medium banana (118g) contains approximately 105 kcal, 27g carbs and 3g fibre. Raw peeled banana provides 89 kcal per 100g.</p></div>
 <p class="hero-updated">Source: USDA FoodData Central · Raw, Peeled · Data verified by CaloriesCalc</p>
-<!-- Macro strip — первое что видит пользователь -->
 <div class="macro-strip">
-<div class="ms-item primary">
-<div class="ms-val">89</div>
-<div class="ms-unit">kcal</div>
-<div class="ms-label">per 100g, raw, peeled</div>
+<div class="ms-item primary"><div class="ms-val">89</div><div class="ms-unit">kcal</div><div class="ms-label">per 100g, raw, peeled</div></div>
+<div class="ms-item"><div class="ms-val">22.8 <span class="ms-inline-unit">g</span></div><div class="ms-label">Carbs</div></div>
+<div class="ms-item"><div class="ms-val">1.1 <span class="ms-inline-unit">g</span></div><div class="ms-label">Protein</div></div>
+<div class="ms-item"><div class="ms-val">0.3 <span class="ms-inline-unit">g</span></div><div class="ms-label">Fat</div></div>
+<div class="ms-item"><div class="ms-val">2.6 <span class="ms-inline-unit">g</span></div><div class="ms-label">Fiber</div></div>
 </div>
-<div class="ms-item">
-<div class="ms-val">22.8 <span class="ms-inline-unit">g</span></div>
-<div class="ms-label">Carbs</div>
-</div>
-<div class="ms-item">
-<div class="ms-val">1.1 <span class="ms-inline-unit">g</span></div>
-<div class="ms-label">Protein</div>
-</div>
-<div class="ms-item">
-<div class="ms-val">0.3 <span class="ms-inline-unit">g</span></div>
-<div class="ms-label">Fat</div>
-</div>
-<div class="ms-item">
-<div class="ms-val">2.6 <span class="ms-inline-unit">g</span></div>
-<div class="ms-label">Fiber</div>
-</div>
-</div>
-<!-- Size cards -->
 <div class="size-cards" style="margin-bottom:12px">
 <div class="sc"><div class="sc-val">72</div><div class="sc-label">kcal small (81g)</div></div>
 <div class="sc"><div class="sc-val">105</div><div class="sc-label">kcal medium (118g)</div></div>
 <div class="sc"><div class="sc-val">121</div><div class="sc-label">kcal large (136g)</div></div>
 </div>
-</div>
-<div class="hero-right">
-<div class="hero-img">
-<img alt="Calories in a Banana" decoding="async" height="400" loading="eager" onerror="this.style.display='none';document.getElementById('emoji-fb-banana').style.display='flex'" src="/foods/banana.png" width="400"/>
-<div aria-label="banana illustration" class="hero-img-emoji" id="emoji-fb-banana" role="img" style="display:none">🍌</div>
-</div>
-</div>
-</div>
-<!-- Quick facts: same full container width as the other content blocks -->
 <div class="quick-facts">
 <span class="qf-tag">⚡ <strong>Good source of potassium</strong></span>
 <span class="qf-tag">💪 <strong>Great pre-workout snack</strong></span>
@@ -2180,6 +2142,16 @@ nav.main-nav .nav-inner {
 <span class="qf-tag">🥗 <strong>Naturally fat free</strong></span>
 <span class="qf-tag">🧠 <strong>Rich in vitamin B6</strong></span>
 </div>
+</div>
+<div class="hero-right"><div class="hero-img">
+<img src="/foods/banana.png"
+     alt="Calories in a Banana"
+     width="400" height="400"
+     loading="eager"
+     decoding="async"
+     onerror="this.style.display='none';document.getElementById('emoji-fb-banana').style.display='flex'">
+<div class="hero-img-emoji" id="emoji-fb-banana" style="display:none" role="img" aria-label="banana illustration">🍌</div>
+</div></div>
 </div>
 <!-- ═══ NUTRITION HIGHLIGHTS ═══ -->
 <div class="nutrition-highlights">
