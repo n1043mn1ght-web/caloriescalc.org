@@ -1894,21 +1894,56 @@ nav.main-nav .nav-inner {
 
 
 <style>
-/* Hero image: never exceed the height of the Calories in a Banana block.
-   Preserve the original aspect ratio; rendering smaller is allowed, larger is not. */
-@media (min-width: 769px) {
-  .hero-main { position: relative !important; display: block !important; }
-  .hero-main .hero-left { width: calc(50% - 12px) !important; min-width: 0 !important; }
-  .hero-main .hero-right { position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; width: calc(50% - 12px) !important; min-width: 0 !important; overflow: hidden !important; }
-  .hero-main .hero-right .hero-img { width: 100% !important; height: 100% !important; max-height: none !important; overflow: hidden !important; box-sizing: border-box !important; }
-  .hero-main .hero-right .hero-img img { width: 100% !important; height: 100% !important; max-width: 100% !important; max-height: 100% !important; object-fit: contain !important; object-position: center center !important; }
+/* Hero image — match the same visual treatment as the Cherry food page.
+   Keep the image proportional and never stretch it beyond the standard 300px hero image height. */
+.hero-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
 }
+
+.hero-main .hero-left,
+.hero-main .hero-right {
+  min-width: 0;
+}
+
+.hero-main .hero-right .hero-img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero-main .hero-right .hero-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+}
+
 @media (max-width: 768px) {
-  .hero-main { position: static !important; display: block !important; }
-  .hero-main .hero-left, .hero-main .hero-right { width: 100% !important; }
-  .hero-main .hero-right { position: static !important; height: auto !important; overflow: visible !important; }
-  .hero-main .hero-right .hero-img { height: auto !important; max-height: none !important; overflow: hidden !important; }
-  .hero-main .hero-right .hero-img img { width: 100% !important; height: auto !important; max-width: 100% !important; max-height: none !important; object-fit: contain !important; }
+  .hero-main {
+    display: block;
+  }
+
+  .hero-main .hero-right {
+    width: 100%;
+  }
+
+  .hero-main .hero-right .hero-img {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .hero-main .hero-right .hero-img img {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: contain;
+  }
 }
 </style></head>
 <body>
