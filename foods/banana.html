@@ -891,7 +891,7 @@ table{min-width:300px}
   /* Overlay */
   .nav-overlay{
     display:none;
-    position:fixed;inset:0;
+    position:fixed;top:52px;right:0;bottom:0;left:0;
     background:rgba(0,0,0,.5);
     z-index:490;
   }
@@ -1820,6 +1820,7 @@ nav.main-nav .nav-inner {
     z-index: 99998 !important;
   }
   .nav-overlay {
+    top: 52px !important;
     z-index: 99997 !important;
   }
 }
@@ -1989,15 +1990,15 @@ main > .nutrition-disclaimer {
 </div>
 <!-- L1 -->
 <div class="nav-drawer-l1">
-<button aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-calcs">
+<button aria-expanded="false" aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-calcs">
         Calculators <span class="nav-drawer-arrow">›</span>
 </button>
-<button aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-foods">
+<button aria-expanded="false" aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-foods">
         Foods <span class="nav-drawer-arrow">›</span>
 </button>
 <a href="/recipes/">Recipes</a>
 <a href="/compare/">Compare</a>
-<button aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-goals">
+<button aria-expanded="false" aria-haspopup="true" class="nav-drawer-cat" data-panel="l2-goals">
         Goals <span class="nav-drawer-arrow">›</span>
 </button>
 <a href="/about.html">About</a>
@@ -2007,7 +2008,7 @@ main > .nutrition-disclaimer {
 <a href="/foods/">🍎 Food Database</a>
 </div>
 <!-- L2: Calculators -->
-<div aria-label="Calculators" class="nav-drawer-l2" id="l2-calcs" role="dialog">
+<div aria-hidden="true" aria-label="Calculators" class="nav-drawer-l2" id="l2-calcs" role="dialog">
 <div class="nav-drawer-l2-head">
 <button aria-label="Back to menu" class="nav-drawer-back">‹</button>
 <span class="nav-drawer-l2-title">Calculators</span>
@@ -2036,7 +2037,7 @@ main > .nutrition-disclaimer {
 <a href="/one-rep-max-calculator.html">One Rep Max</a>
 </div>
 <!-- L2: Foods -->
-<div aria-label="Foods" class="nav-drawer-l2" id="l2-foods" role="dialog">
+<div aria-hidden="true" aria-label="Foods" class="nav-drawer-l2" id="l2-foods" role="dialog">
 <div class="nav-drawer-l2-head">
 <button aria-label="Back to menu" class="nav-drawer-back">‹</button>
 <span class="nav-drawer-l2-title">Foods</span>
@@ -2054,7 +2055,7 @@ main > .nutrition-disclaimer {
 <a href="/foods/#cat-desserts">🍪 Snacks &amp; Sweets</a>
 </div>
 <!-- L2: Goals -->
-<div aria-label="Goals" class="nav-drawer-l2" id="l2-goals" role="dialog">
+<div aria-hidden="true" aria-label="Goals" class="nav-drawer-l2" id="l2-goals" role="dialog">
 <div class="nav-drawer-l2-head">
 <button aria-label="Back to menu" class="nav-drawer-back">‹</button>
 <span class="nav-drawer-l2-title">Goals</span>
@@ -2612,8 +2613,12 @@ function _fbCopy(val,btn) {
     hamburger.classList.add('open');
     hamburger.setAttribute('aria-expanded','true');
     hamburger.setAttribute('aria-label','Close navigation menu');
+    drawer.setAttribute('aria-hidden','false');
+    if(overlay) overlay.setAttribute('aria-hidden','false');
+    catBtns.forEach(function(btn){btn.setAttribute('aria-expanded','false');});
+    l2panels.forEach(function(p){p.setAttribute('aria-hidden','true');});
     document.body.style.overflow='hidden';
-    var first = drawer.querySelector('a,button');
+    var first = drawer.querySelector('.nav-drawer-l1 a, .nav-drawer-l1 button');
     if(first) setTimeout(function(){first.focus();},50);
   }
   function closeDrawer(){
@@ -2622,21 +2627,27 @@ function _fbCopy(val,btn) {
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded','false');
     hamburger.setAttribute('aria-label','Open navigation menu');
+    drawer.setAttribute('aria-hidden','true');
+    if(overlay) overlay.setAttribute('aria-hidden','true');
     document.body.style.overflow='';
-    l2panels.forEach(function(p){p.classList.remove('open');});
+    l2panels.forEach(function(p){p.classList.remove('open');p.setAttribute('aria-hidden','true');});
+    catBtns.forEach(function(btn){btn.setAttribute('aria-expanded','false');});
     hamburger.focus();
   }
   function openL2(id){
-    l2panels.forEach(function(p){p.classList.remove('open');});
+    l2panels.forEach(function(p){p.classList.remove('open');p.setAttribute('aria-hidden','true');});
+    catBtns.forEach(function(btn){btn.setAttribute('aria-expanded', btn.dataset.panel === id ? 'true' : 'false');});
     var panel = document.getElementById(id);
     if(panel){
       panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
       var first = panel.querySelector('a,button');
       if(first) setTimeout(function(){first.focus();},50);
     }
   }
   function closeL2(){
-    l2panels.forEach(function(p){p.classList.remove('open');});
+    l2panels.forEach(function(p){p.classList.remove('open');p.setAttribute('aria-hidden','true');});
+    catBtns.forEach(function(btn){btn.setAttribute('aria-expanded','false');});
   }
 
   hamburger.addEventListener('click', openDrawer);
