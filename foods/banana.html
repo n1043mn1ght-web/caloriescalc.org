@@ -1856,20 +1856,6 @@ nav.main-nav .nav-inner {
 
 /* Desktop: let the banana image use the full width of its hero column
    without distortion. The intrinsic aspect ratio is preserved. */
-@media (min-width: 769px) {
-  .hero-right .hero-img {
-    width: 100% !important;
-    max-height: none !important;
-    height: auto !important;
-  }
-  .hero-right .hero-img img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    object-fit: contain !important;
-  }
-}
-
 /* Below-the-fold content: allow the browser to defer rendering work until
    these blocks approach the viewport. This does not remove their content. */
 @media (min-width: 769px) {
@@ -1893,50 +1879,28 @@ nav.main-nav .nav-inner {
 
 
 
-<style>
-.hero-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-items: start;
-}
-.hero-left,
-.hero-right {
-  min-width: 0;
-}
-.hero-img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.hero-img img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: contain;
+
+<style id="caloriescalc-disclaimer-text-rail-final">
+/* Disclaimer uses the same inner text rail as the Sources / Related Foods blocks. */
+main > .nutrition-disclaimer {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 @media (max-width: 768px) {
-  .hero-wrap {
-    grid-template-columns: 1fr;
-  }
-  .hero-right {
-    width: 100%;
-  }
-  .hero-img {
-    height: auto;
-    max-height: 220px;
-  }
-  .hero-img img {
-    width: 100%;
-    height: auto;
-    max-height: 220px;
-    object-fit: contain;
+  main > .nutrition-disclaimer {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
-</style></head>
+</style>
+</head>
 <body>
 <nav aria-label="Main navigation" class="main-nav">
 <div class="nav-inner">
@@ -2429,8 +2393,8 @@ nav.main-nav .nav-inner {
 <a class="food-card" href="/foods/peach.html"><div class="fc-emoji">🍑</div><div class="fc-name">Peach</div><div class="fc-cal">39 kcal/100g</div></a>
 <a class="food-card" href="/foods/mango.html"><div class="fc-emoji">🥭</div><div class="fc-name">Mango</div><div class="fc-cal">60 kcal/100g</div></a>
 </div>
-</div>
 <a href="/foods/" style="display:inline-block;margin-top:12px;font-size:13px;color:var(--green);font-weight:600;text-decoration:none">View all 135 foods →</a>
+</div>
 <!-- ═══ SOURCES ═══ -->
 <div class="section">
 <h2>Sources</h2>
