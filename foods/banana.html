@@ -39,7 +39,7 @@
     "name": "Calories in a Banana",
     "description": "Full nutrition facts for bananas — calories per 100g, per medium banana, vitamin table, and calorie calculator.",
     "url": "https://caloriescalc.org/foods/banana.html",
-    "dateModified": "2026-07-14",
+    "dateModified": "2026-09-24",
     "author": { "@type": "Organization", "name": "CaloriesCalc" },
     "image": "https://caloriescalc.org/foods/banana.png",
     "mainEntity": {
@@ -1854,6 +1854,17 @@ nav.main-nav .nav-inner {
   }
 }
 
+/* Keep the mobile hamburger/close X above the drawer overlay so the white X remains fully visible. */
+@media (max-width: 1023px) {
+  nav.main-nav {
+    z-index: 600;
+  }
+  .nav-hamburger {
+    position: relative;
+    z-index: 610;
+  }
+}
+
 /* Desktop: let the banana image use the full width of its hero column
    without distortion. The intrinsic aspect ratio is preserved. */
 /* Below-the-fold content: allow the browser to defer rendering work until
@@ -2103,7 +2114,7 @@ main > .nutrition-disclaimer {
 <span class="qf-tag">💪 <strong>Great pre-workout snack</strong></span>
 <span class="qf-tag">❤️ <strong>Supports heart health</strong></span>
 <span class="qf-tag">🌾 <strong>High in fiber</strong></span>
-<span class="qf-tag">🥗 <strong>Naturally fat free</strong></span>
+<span class="qf-tag">🥗 <strong>Naturally low in fat</strong></span>
 <span class="qf-tag">🧠 <strong>Rich in vitamin B6</strong></span>
 </div>
 </div>
@@ -2116,15 +2127,6 @@ main > .nutrition-disclaimer {
      onerror="this.style.display='none';document.getElementById('emoji-fb-banana').style.display='flex'">
 <div class="hero-img-emoji" id="emoji-fb-banana" style="display:none" role="img" aria-label="banana illustration">🍌</div>
 </div></div>
-</div>
-<!-- ═══ NUTRITION HIGHLIGHTS ═══ -->
-<div class="nutrition-highlights">
-<div class="nh-card"><span class="nh-icon">⚡</span><span class="nh-text">Good source of potassium</span></div>
-<div class="nh-card"><span class="nh-icon">💪</span><span class="nh-text">Great pre-workout snack</span></div>
-<div class="nh-card"><span class="nh-icon">❤️</span><span class="nh-text">Supports heart health</span></div>
-<div class="nh-card"><span class="nh-icon">🌾</span><span class="nh-text">High in fiber</span></div>
-<div class="nh-card"><span class="nh-icon">🥗</span><span class="nh-text">Naturally fat free</span></div>
-<div class="nh-card"><span class="nh-icon">🧠</span><span class="nh-text">Rich in vitamin B6</span></div>
 </div>
 <!-- ═══ CALORIE CALCULATOR ═══ -->
 <div class="calc-box" id="calculator">
