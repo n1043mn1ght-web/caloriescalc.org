@@ -1920,6 +1920,33 @@ main > .nutrition-disclaimer {
   }
 }
 </style>
+
+<style id="caloriescalc-mobile-menu-click-fix">
+/* Mobile menu final click fix: the header/X must sit above the drawer,
+   and the hamburger must toggle open/closed instead of reopening. */
+@media (max-width: 1023px) {
+  nav.main-nav {
+    z-index: 100001 !important;
+    pointer-events: auto !important;
+  }
+  nav.main-nav .nav-inner {
+    position: relative !important;
+    z-index: 100002 !important;
+  }
+  .nav-hamburger {
+    position: relative !important;
+    z-index: 100003 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+  }
+  .nav-drawer {
+    z-index: 99998 !important;
+  }
+  .nav-overlay {
+    z-index: 99997 !important;
+  }
+}
+</style>
 </head>
 <body>
 <nav aria-label="Main navigation" class="main-nav">
@@ -2658,7 +2685,10 @@ function _fbCopy(val,btn) {
     catBtns.forEach(function(btn){btn.setAttribute('aria-expanded','false');});
   }
 
-  hamburger.addEventListener('click', openDrawer);
+  hamburger.addEventListener('click',function(){
+    if(drawer.classList.contains('open')){ closeDrawer(); }
+    else { openDrawer(); }
+  });
   overlay  && overlay.addEventListener('click', closeDrawer);
   closeBtn && closeBtn.addEventListener('click', closeDrawer);
 
