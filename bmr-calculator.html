@@ -16,7 +16,7 @@
   <meta name="description" content="Free BMR calculator. Find your Basal Metabolic Rate using the Mifflin-St Jeor equation. Enter age, gender, weight and height to get your result.">
   <link rel="canonical" href="https://caloriescalc.org/bmr-calculator.html">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#2d6a4f">
+  <meta name="theme-color" content="#1b4332">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/icon.png">
   <link rel="apple-touch-icon" href="/icon.png">
@@ -869,8 +869,33 @@ table{min-width:300px}
   }
   </script>
   <!-- Preconnect (нет внешних шрифтов, всё системное — уже оптимально) -->
-  <meta name="theme-color" content="#2d6a4f" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1b4332" media="(prefers-color-scheme: light)">
   <meta name="color-scheme" content="light">
+<style id="caloriescalc-banana-parity">
+/* Verified against foods/banana.html (fetched fresh from the repo) — NAV v4 / site-container rules */
+:root{--nav-bg:#1b4332}
+.main-nav{
+  background:var(--nav-bg) !important;
+  position:sticky !important;top:0 !important;z-index:300 !important;width:100% !important;
+}
+.nav-inner{
+  width:calc(100% - 32px) !important;max-width:1200px !important;margin-inline:auto !important;
+  box-sizing:border-box !important;
+}
+.page-wrapper,footer .footer-inner{
+  width:calc(100% - 32px) !important;max-width:1200px !important;margin-inline:auto !important;
+  box-sizing:border-box !important;
+}
+@media(min-width:1024px){
+  .page-wrapper > main{width:100% !important;padding-left:0 !important;padding-right:0 !important}
+}
+.nav-hamburger span{background:#fff !important;opacity:1 !important}
+/* Restore the footer/body gap: a pre-existing mobile rule (main{padding:0 16px}) zeroes out
+   the base 60px bottom padding on <=768px, leaving no space before <footer>. Restore it. */
+@media(max-width:768px){
+  main{padding-bottom:40px !important}
+}
+</style>
 </head>
 <body>
 
@@ -955,7 +980,6 @@ table{min-width:300px}
   <nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
     <div class="nav-drawer-head">
       <span class="nav-drawer-title">Menu</span>
-      <button id="nav-drawer-close" aria-label="Close menu">×</button>
     </div>
 
     <!-- L1 -->
@@ -1041,13 +1065,7 @@ table{min-width:300px}
   </nav>
 </nav><div class="page-wrapper">
 
-  <aside class="ad-sidebar-left" aria-label="Advertisement">
-    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
-      <!-- AdSense 160x600 LEFT — вставить код сюда после одобрения -->
-    </div>
-  </aside>
-
-<main>
+  <main>
   <div class="hero">
     <h1>Free <em>BMR Calculator</em> — Basal Metabolic Rate</h1>
     <p>Find your BMR using Mifflin–St Jeor and Katch–McArdle side by side. See exactly how many calories your body burns at rest.</p>
@@ -1123,17 +1141,7 @@ table{min-width:300px}
       <div class="divider"></div>
 
       <button class="copy-btn" id="copy-btn" onclick="copyResults()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-<div class="share-result-block" id="share-bar">
-  <div class="share-result-inner">
-    <span class="share-result-label">🔗 Share your result:</span>
-    <input type="text" class="share-result-url" id="share-url-text" readonly>
-    <button class="share-result-btn" id="share-copy-btn" onclick="copyShareURL()">📋 Copy link</button>
-    <button class="share-native-btn" id="share-native-btn">📤 Share</button>
-  </div>
-</div>
-</div>
-><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
         Copy results
       </button>
 
@@ -1171,9 +1179,6 @@ table{min-width:300px}
   </div><!-- /calc-card -->
 
   <!-- Рекламный блок после калькулятора (зона высокого внимания) -->
-  <div class="ad-slot ad-slot--inline ad-slot--placeholder" aria-label="Advertisement">
-    <!-- AdSense adaptive — вставить код сюда после одобрения -->
-  </div>
 
   <div class="content-section" id="formulas">
     <h2>BMR formulas compared — which one should you use?</h2>
@@ -1319,16 +1324,7 @@ table{min-width:300px}
   </div>
 </main>
 
-  <aside class="ad-sidebar-right" aria-label="Advertisement">
-    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
-      <!-- AdSense 160x600 RIGHT TOP — вставить код сюда после одобрения -->
-    </div>
-    <div class="ad-slot ad-slot--placeholder" style="min-height:250px;margin-top:16px">
-      <!-- AdSense 160x250 RIGHT BOTTOM — вставить код сюда после одобрения -->
-    </div>
-  </aside>
-
-</div><!-- /.page-wrapper -->
+  </div><!-- /.page-wrapper -->
 
 <footer>
   <div class="footer-inner">
@@ -1350,6 +1346,7 @@ table{min-width:300px}
         <a href="/running-calorie-calculator.html">Running Calories</a>
         <a href="/calorie-burn-calculator.html">Calories Burned</a>
       </div>
+    </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 CaloriesCalc.org · Free calorie calculator · No sign-up · No data stored</div>
       <div class="footer-tagline">Nutrition data from USDA FoodData Central</div>
@@ -1514,68 +1511,7 @@ calculate();
 <script>
 
 // ── Share Result ──────────────────────────────────────
-function updateShareURL(params) {
-  var url = new URL(window.location.href);
-  url.search = '';
-  if (params) {
-    Object.keys(params).forEach(function(k){
-      if (params[k] !== undefined && params[k] !== null && String(params[k]) !== '') {
-        url.searchParams.set(k, String(params[k]));
-      }
-    });
-  }
-  try { history.replaceState(null, '', url.toString()); } catch(e){}
-
-  var bar = document.getElementById('share-bar');
-  var inp = document.getElementById('share-url-text');
-  var nativeBtn = document.getElementById('share-native-btn');
-  var copyBtn  = document.getElementById('share-copy-btn');
-
-  if (!bar) return;
-  bar.style.display = 'block';
-  if (inp) inp.value = url.toString();
-
-  // Web Share API — мобильные браузеры
-  if (nativeBtn && navigator.share) {
-    nativeBtn.style.display = 'block';
-    if (copyBtn) copyBtn.style.display = 'none';
-    if (inp) inp.style.display = 'none';
-    nativeBtn.onclick = function(){
-      navigator.share({
-        title: document.title,
-        text: 'My result on CaloriesCalc',
-        url: url.toString()
-      }).catch(function(){});
-    };
-  }
-
-  setTimeout(function(){
-    if (bar) bar.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }, 150);
-}
-
-function copyShareURL() {
-  var inp = document.getElementById('share-url-text');
-  var btn = document.getElementById('share-copy-btn');
-  if (!inp) return;
-  var val = inp.value;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(val).then(function(){
-      if(btn){btn.textContent='✓ Copied!';btn.classList.add('copied');
-        setTimeout(function(){btn.textContent='📋 Copy link';btn.classList.remove('copied');},2500);}
-    }).catch(function(){_fbCopy(val,btn);});
-  } else { _fbCopy(val,btn); }
-}
-function _fbCopy(val,btn) {
-  var ta = document.createElement('textarea');
-  ta.value=val; ta.style.cssText='position:fixed;opacity:0;top:0;left:0;';
-  document.body.appendChild(ta); ta.focus(); ta.select();
-  try { document.execCommand('copy');
-    if(btn){btn.textContent='✓ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy link';btn.classList.remove('copied');},2500);}
-  } catch(e){}
-  document.body.removeChild(ta);
-}
+function updateShareURL(){ /* share feature removed */ }
 
 
 
@@ -1627,7 +1563,9 @@ function _fbCopy(val,btn) {
     l2panels.forEach(function(p){p.classList.remove('open');});
   }
 
-  hamburger.addEventListener('click', openDrawer);
+  hamburger.addEventListener('click',function(){
+    if(drawer.classList.contains('open')){ closeDrawer(); } else { openDrawer(); }
+  });
   overlay  && overlay.addEventListener('click', closeDrawer);
   closeBtn && closeBtn.addEventListener('click', closeDrawer);
 

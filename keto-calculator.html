@@ -16,7 +16,7 @@
   <meta name="description" content="Free keto macro calculator. Calculate your exact carb, fat and protein targets for a ketogenic diet based on your TDEE and goals. Standard, strict and cyclical keto.">
   <link rel="canonical" href="https://caloriescalc.org/keto-calculator.html">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#2d6a4f">
+  <meta name="theme-color" content="#1b4332">
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png">
   <link rel="apple-touch-icon" href="/icon.png">
   <link rel="manifest" href="/site.webmanifest">
@@ -922,6 +922,31 @@ table{min-width:300px}
 .bf-table tr:nth-child(even){background:#f8f9fa}
 .gauge-wrap{position:relative;width:180px;margin:0 auto 12px}
 </style>
+<style id="caloriescalc-banana-parity">
+/* Verified against foods/banana.html (fetched fresh from the repo) — NAV v4 / site-container rules */
+:root{--nav-bg:#1b4332}
+.main-nav{
+  background:var(--nav-bg) !important;
+  position:sticky !important;top:0 !important;z-index:300 !important;width:100% !important;
+}
+.nav-inner{
+  width:calc(100% - 32px) !important;max-width:1200px !important;margin-inline:auto !important;
+  box-sizing:border-box !important;
+}
+.page-wrapper,footer .footer-inner{
+  width:calc(100% - 32px) !important;max-width:1200px !important;margin-inline:auto !important;
+  box-sizing:border-box !important;
+}
+@media(min-width:1024px){
+  .page-wrapper > main{width:100% !important;padding-left:0 !important;padding-right:0 !important}
+}
+.nav-hamburger span{background:#fff !important;opacity:1 !important}
+/* Restore the footer/body gap: a pre-existing mobile rule (main{padding:0 16px}) zeroes out
+   the base 60px bottom padding on <=768px, leaving no space before <footer>. Restore it. */
+@media(max-width:768px){
+  main{padding-bottom:40px !important}
+}
+</style>
 </head>
 <body>
 <nav class="main-nav" aria-label="Main navigation">
@@ -1003,7 +1028,6 @@ table{min-width:300px}
   <nav id="nav-drawer" class="nav-drawer" aria-label="Mobile navigation" aria-hidden="true">
     <div class="nav-drawer-head">
       <span class="nav-drawer-title">Menu</span>
-      <button id="nav-drawer-close" aria-label="Close menu">×</button>
     </div>
 
     <!-- L1 -->
@@ -1088,17 +1112,11 @@ table{min-width:300px}
     </div>
   </nav>
 </nav><div class="page-wrapper">
-<aside class="ad-sidebar-left" aria-label="Advertisement">
-    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
-      <!-- AdSense 160x600 LEFT — вставить код сюда после одобрения -->
-    </div>
-  </aside>
 <main>
   <div class="calc-hero">
     <h1>Keto Calculator — Ketogenic Diet Macros</h1>
     <p>Calculate your exact keto macros: net carbs, protein and fat targets based on your calorie needs and ketogenic goals.</p>
   </div>
-  <div class="ad-slot ad-slot--inline ad-slot--placeholder" aria-label="Advertisement"></div>
   
 <div class="calc-box">
   <div class="form-grid">
@@ -1153,17 +1171,9 @@ table{min-width:300px}
     </div>
     <div class="info-box" id="keto-info">💡 To stay in ketosis, keep net carbs under your daily limit. Net carbs = total carbs − fiber − sugar alcohols.</div>
   </div>
-  <div class="share-result-block" id="share-bar">
-  <div class="share-result-inner">
-    <span class="share-result-label">🔗 Share your result:</span>
-    <input type="text" class="share-result-url" id="share-url-text" readonly>
-    <button class="share-result-btn" id="share-copy-btn" onclick="copyShareURL()">📋 Copy link</button>
-    <button class="share-native-btn" id="share-native-btn">📤 Share</button>
   </div>
-</div>
-  </div>
-</div>
-</div>
+
+
 <div class="next-step">
   <h3>🥑 Next steps for your keto diet</h3>
   <div class="next-step-grid">
@@ -1222,14 +1232,6 @@ Fat = remaining calories ÷ 9 kcal/g
 </div>
   </div>
 </main>
-<aside class="ad-sidebar-right" aria-label="Advertisement">
-    <div class="ad-slot ad-slot--skyscraper ad-slot--placeholder">
-      <!-- AdSense 160x600 RIGHT TOP — вставить код сюда после одобрения -->
-    </div>
-    <div class="ad-slot ad-slot--placeholder" style="min-height:250px;margin-top:16px">
-      <!-- AdSense 160x250 RIGHT BOTTOM — вставить код сюда после одобрения -->
-    </div>
-  </aside>
 </div>
 <footer>
   <div class="footer-inner">
@@ -1251,6 +1253,7 @@ Fat = remaining calories ÷ 9 kcal/g
         <a href="/running-calorie-calculator.html">Running Calories</a>
         <a href="/calorie-burn-calculator.html">Calories Burned</a>
       </div>
+    </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 CaloriesCalc.org · Free calorie calculator · No sign-up · No data stored</div>
       <div class="footer-tagline">Nutrition data from USDA FoodData Central</div>
@@ -1268,6 +1271,8 @@ function calcKeto(){
   var weight=parseFloat(document.getElementById('keto-weight').value);
   var type=document.getElementById('keto-type').value;
   var proteinPerKg=parseFloat(document.getElementById('keto-protein').value);
+  if(!(tdee>0)){ alert('Please enter a daily calorie target (TDEE) greater than 0.'); return; }
+  if(!(weight>0)){ alert('Please enter a body weight greater than 0.'); return; }
   var goalMultiplier={deficit:0.80,maintain:1.0,surplus:1.10}[goal];
   var targetCals=Math.round(tdee*goalMultiplier);
   var carbPct={standard:0.05,strict:0.04,moderate:0.10}[type];
@@ -1278,6 +1283,10 @@ function calcKeto(){
   if(type==='strict') carbG=Math.min(carbG,20);
   carbCals=carbG*4;
   var fatCals=targetCals-proteinCals-carbCals;
+  if(fatCals<0){
+    alert('Your protein target plus carb allowance exceeds your calorie target. Please increase TDEE/calories or choose a lower protein level.');
+    return;
+  }
   var fatG=Math.round(fatCals/9);
   var totalCals=carbCals+proteinCals+fatCals;
   var goalLabels={deficit:'Goal: Weight Loss (20% calorie deficit)',maintain:'Goal: Maintain Weight',surplus:'Goal: Weight Gain (10% calorie surplus)'};
@@ -1292,16 +1301,9 @@ function calcKeto(){
   var infoText=type==='strict'?'⚠️ Strict keto: max 20g net carbs/day. This is the fastest route to ketosis but hardest to maintain long-term.':type==='moderate'?'ℹ️ Moderate low-carb (10% carbs): easier to sustain. May not achieve ketosis for everyone.':'💡 Standard keto (5% carbs): the classic ketogenic ratio. Most people reach ketosis within 2–4 days.';
   document.getElementById('keto-info').textContent=infoText;
   document.getElementById('keto-result').classList.add('show');
+  document.getElementById('keto-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateShareURL({'tdee':document.getElementById('keto-tdee')?.value});
 }
-  });
-  history.replaceState(null, '', url.toString());
-  var bar = document.getElementById('share-bar');
-  if (bar) {
-    document.getElementById('share-url-text').textContent = url.toString();
-    bar.style.display = 'flex';
-  }
-}
 </script>
 <script>
 
@@ -1315,74 +1317,7 @@ function calcKeto(){
 
 </script>
 <script>
-
-// ── Share Result ──────────────────────────────────────
-function updateShareURL(params) {
-  var url = new URL(window.location.href);
-  url.search = '';
-  if (params) {
-    Object.keys(params).forEach(function(k){
-      if (params[k] !== undefined && params[k] !== null && String(params[k]) !== '') {
-        url.searchParams.set(k, String(params[k]));
-      }
-    });
-  }
-  try { history.replaceState(null, '', url.toString()); } catch(e){}
-
-  var bar = document.getElementById('share-bar');
-  var inp = document.getElementById('share-url-text');
-  var nativeBtn = document.getElementById('share-native-btn');
-  var copyBtn  = document.getElementById('share-copy-btn');
-
-  if (!bar) return;
-  bar.style.display = 'block';
-  if (inp) inp.value = url.toString();
-
-  // Web Share API — мобильные браузеры
-  if (nativeBtn && navigator.share) {
-    nativeBtn.style.display = 'block';
-    if (copyBtn) copyBtn.style.display = 'none';
-    if (inp) inp.style.display = 'none';
-    nativeBtn.onclick = function(){
-      navigator.share({
-        title: document.title,
-        text: 'My result on CaloriesCalc',
-        url: url.toString()
-      }).catch(function(){});
-    };
-  }
-
-  setTimeout(function(){
-    if (bar) bar.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }, 150);
-}
-
-function copyShareURL() {
-  var inp = document.getElementById('share-url-text');
-  var btn = document.getElementById('share-copy-btn');
-  if (!inp) return;
-  var val = inp.value;
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(val).then(function(){
-      if(btn){btn.textContent='✓ Copied!';btn.classList.add('copied');
-        setTimeout(function(){btn.textContent='📋 Copy link';btn.classList.remove('copied');},2500);}
-    }).catch(function(){_fbCopy(val,btn);});
-  } else { _fbCopy(val,btn); }
-}
-function _fbCopy(val,btn) {
-  var ta = document.createElement('textarea');
-  ta.value=val; ta.style.cssText='position:fixed;opacity:0;top:0;left:0;';
-  document.body.appendChild(ta); ta.focus(); ta.select();
-  try { document.execCommand('copy');
-    if(btn){btn.textContent='✓ Copied!';btn.classList.add('copied');
-      setTimeout(function(){btn.textContent='📋 Copy link';btn.classList.remove('copied');},2500);}
-  } catch(e){}
-  document.body.removeChild(ta);
-}
-
-
-
-
+function updateShareURL(){ /* share feature removed */ }
 </script>
 <script>
 
@@ -1430,7 +1365,9 @@ function _fbCopy(val,btn) {
     l2panels.forEach(function(p){p.classList.remove('open');});
   }
 
-  hamburger.addEventListener('click', openDrawer);
+  hamburger.addEventListener('click',function(){
+    if(drawer.classList.contains('open')){ closeDrawer(); } else { openDrawer(); }
+  });
   overlay  && overlay.addEventListener('click', closeDrawer);
   closeBtn && closeBtn.addEventListener('click', closeDrawer);
 
